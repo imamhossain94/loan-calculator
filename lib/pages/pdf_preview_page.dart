@@ -266,9 +266,10 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
     //print('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
 
     await Directory(path).create(recursive: true);
-    File file =
-        File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+    File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
     file.writeAsBytesSync(pdf.save());
+
+    await prefs.setInt('file_number', counter);
 
     setState(() {
       filePath = '$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf';
