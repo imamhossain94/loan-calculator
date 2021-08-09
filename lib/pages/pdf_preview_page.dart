@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
@@ -54,6 +55,7 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset : true,
         appBar: AppBar(
           centerTitle: true,
           elevation: 1,
@@ -73,32 +75,34 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                   color: Colors.black,
                 ),
                 tooltip: 'Mail',
-                onPressed: () async {
-                  await sendEmail('${AppConstants.appName} Calculation Result', '');
-                })
+                onPressed: filePath != null?() async =>
+                  await sendEmail('${AppConstants.appName} Calculation Result', '') : null
+                )
           ],
         ),
         body: filePath != null
             ? PDFView(
-                filePath: filePath,
-                enableSwipe: true,
-                swipeHorizontal: false,
-                autoSpacing: false,
-                pageFling: false,
-                onRender: (_pages) {
-                },
-                onError: (error) {
-                  print(error.toString());
-                },
-                onPageError: (page, error) {
-                  print('$page: ${error.toString()}');
-                },
-                onViewCreated: (PDFViewController pdfViewController) {
-                },
-                onPageChanged: (int page, int total) {
-                  print('page change: $page/$total');
-                },
-              )
+              key: GlobalKey<ScaffoldState>(),
+              filePath: filePath,
+              enableSwipe: true,
+              swipeHorizontal: false,
+              autoSpacing: false,
+              pageFling: false,
+              onRender: (_pages) {
+              },
+              onError: (error) {
+                print(error.toString());
+              },
+              onPageError: (page, error) {
+                print('$page: ${error.toString()}');
+              },
+              onViewCreated: (PDFViewController pdfViewController) {
+
+              },
+              onPageChanged: (int page, int total) {
+                print('page change: $page/$total');
+              },
+            )
             : Center(
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -265,12 +269,27 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
                 ? '0'
                 : '';
 
-    String path = "/storage/emulated/0/Mortgage Calculator/PDF";
+    String path;
+    var platform = const MethodChannel('flutter.native/helper');
+    try {
 
-    File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
-    await file.writeAsBytes(await pdf.save());
+      if(await platform.invokeMethod('graterThenQ')) {
+        path = "/storage/emulated/0/Mortgage Calculator/PDF";
+        File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+        await file.writeAsBytes(await pdf.save());
+        await prefs.setInt('file_number', counter);
+      }else{
+        path = '/storage/emulated/0/${AppConstants.appNameNoSpace}/PDF';
+        await Directory(path).create(recursive: true);
+        File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+        await file.writeAsBytes(await pdf.save());
+      }
+    } on PlatformException catch (e) {
+      print("Failed to Invoke: '${e.message}'.");
+    }
 
-    await prefs.setInt('file_number', counter);
+
+
 
     setState(() {
       filePath = '$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf';
@@ -284,15 +303,13 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
       recipients: ['example@gmail.com'],
       attachmentPaths: [filePath],
     );
-    print("-------------------------- $filePath");
+
     try {
       await FlutterEmailSender.send(email);
-      //Success
-      print("-------------------------- sending");
     } catch (error) {
-      print("-------------------------- ${error.toString()}");
+      print(error);
     }
-    if (!mounted) return;
+    //if (!mounted) return;
   }
 }
 
