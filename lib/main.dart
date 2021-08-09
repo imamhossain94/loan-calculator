@@ -13,6 +13,7 @@ import 'package:mortgage_calculator/pages/pdf_preview_page.dart';
 import 'package:mortgage_calculator/pages/result_page.dart';
 import 'package:mortgage_calculator/pages/splash_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:mortgage_calculator/service/google_ad_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -28,6 +29,7 @@ Future main() async{
   //await Hive.openBox('history');
   await dotenv.load(fileName: ".env");
   MobileAds.instance.initialize();
+  await GoogleAdService().init();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.white,

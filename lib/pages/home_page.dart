@@ -46,13 +46,8 @@ class _HomePageState extends State<HomePage> {
   bool showPmi;
 
 
-  GoogleAdService _googleAdService = GoogleAdService();
-
-
   @override
   void initState() {
-
-    _googleAdService.initRewardedAd();
 
     _downPaymentSymbol = '\$';
     homeValueController.text = '300000';
@@ -68,6 +63,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
+
     homeValueController.dispose();
     downPaymentController.dispose();
     loanAmountController.dispose();
@@ -76,7 +72,8 @@ class _HomePageState extends State<HomePage> {
     interestController.dispose();
     pmiController.dispose();
     Hive.close();
-    _googleAdService.disposeReword();
+    disposeReword();
+
     super.dispose();
   }
 
@@ -348,10 +345,10 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int counter = (prefs.getInt('calculate_button_click') ?? 0);
 
-    if(counter >= 2){
+    if(counter >= 100){
 
-      bool x = await _googleAdService.showRewardedAd();
-      if(x){
+      if(await showRewardedAd()){
+        await prefs.setInt('calculate_button_click', 0);
         Navigator.pushNamed(context, '/result',
             arguments: {
               'data': history,
@@ -370,7 +367,6 @@ class _HomePageState extends State<HomePage> {
           }
       );
     }
-    print(counter);
 
   }
 
