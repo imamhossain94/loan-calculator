@@ -284,11 +284,13 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
       recipients: ['example@gmail.com'],
       attachmentPaths: [filePath],
     );
+    print("-------------------------- $filePath");
     try {
       await FlutterEmailSender.send(email);
       //Success
+      print("-------------------------- sending");
     } catch (error) {
-      //Failed
+      print("-------------------------- ${error.toString()}");
     }
     if (!mounted) return;
   }
