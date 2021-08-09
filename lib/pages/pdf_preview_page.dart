@@ -48,10 +48,6 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
     generateResultPdf();
   }
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     ScreenConfig().init(context);
@@ -268,51 +264,18 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
             : counter.toString().length == 3
                 ? '0'
                 : '';
-    String path;
-    // //print('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
-    //
-    // await Directory(path).create(recursive: true);
-    // File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
-    // await file.writeAsBytes(await pdf.save());
 
-    Directory appDocDirectory = await getApplicationDocumentsDirectory();
+    String path = "/storage/emulated/0/Mortgage Calculator/PDF";
 
-    new Directory(appDocDirectory.path+'/'+'${AppConstants.appNameNoSpace}/PDF').create(recursive: true).then((Directory directory) async{
-      print('Path of New Dir: '+directory.path);
-
-      path = directory.path;
-      File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
-      await file.writeAsBytes(await pdf.save());
-
-    });
-
-
+    File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+    await file.writeAsBytes(await pdf.save());
 
     await prefs.setInt('file_number', counter);
 
     setState(() {
       filePath = '$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf';
-      print("-------------------------------"+filePath);
     });
   }
-
-  //
-  // Future makeappprojectsdir() async {
-  //
-  //   Directory appDocDirectory = await getExternalStorageDirectory();
-  //   final String _appDocDir = appDocDirectory + "/mobilegameengine";
-  //
-  //   final Directory _appDocDirFolder = Directory('$_appDocDir/projects');
-  //   if (await _appDocDirFolder.exists()) {
-  //     return;
-  //   }
-  //
-  //   final Directory _appDocDirNewFolder =
-  //   await _appDocDirFolder.create(recursive: true);
-  //
-  //   return _appDocDirNewFolder.path;
-  // }
-
 
   Future<void> sendEmail(String subject, String body) async {
     final Email email = Email(
