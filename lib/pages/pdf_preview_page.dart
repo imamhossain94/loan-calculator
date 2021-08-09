@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:mortgage_calculator/models/history.dart';
 import 'package:mortgage_calculator/models/mortgage_data.dart';
@@ -17,6 +18,7 @@ class PdfPreviewPage extends StatefulWidget {
 }
 
 class _PdfPreviewPageState extends State<PdfPreviewPage> {
+
   History history;
   MortgageData mortgageData;
   ResultData resultData;
@@ -45,6 +47,10 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
 
     generateResultPdf();
   }
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -262,19 +268,51 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
             : counter.toString().length == 3
                 ? '0'
                 : '';
-    String path = '/storage/emulated/0/${AppConstants.appNameNoSpace}/PDF';
-    //print('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+    String path;
+    // //print('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+    //
+    // await Directory(path).create(recursive: true);
+    // File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+    // await file.writeAsBytes(await pdf.save());
 
-    await Directory(path).create(recursive: true);
-    File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
-    await file.writeAsBytes(await pdf.save());
+    Directory appDocDirectory = await getApplicationDocumentsDirectory();
+
+    new Directory(appDocDirectory.path+'/'+'${AppConstants.appNameNoSpace}/PDF').create(recursive: true).then((Directory directory) async{
+      print('Path of New Dir: '+directory.path);
+
+      path = directory.path;
+      File file = File('$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf');
+      await file.writeAsBytes(await pdf.save());
+
+    });
+
+
 
     await prefs.setInt('file_number', counter);
 
     setState(() {
       filePath = '$path/${AppConstants.appNameNoSpace}_$prefix$counter.pdf';
+      print("-------------------------------"+filePath);
     });
   }
+
+  //
+  // Future makeappprojectsdir() async {
+  //
+  //   Directory appDocDirectory = await getExternalStorageDirectory();
+  //   final String _appDocDir = appDocDirectory + "/mobilegameengine";
+  //
+  //   final Directory _appDocDirFolder = Directory('$_appDocDir/projects');
+  //   if (await _appDocDirFolder.exists()) {
+  //     return;
+  //   }
+  //
+  //   final Directory _appDocDirNewFolder =
+  //   await _appDocDirFolder.create(recursive: true);
+  //
+  //   return _appDocDirNewFolder.path;
+  // }
+
 
   Future<void> sendEmail(String subject, String body) async {
     final Email email = Email(
@@ -292,3 +330,4 @@ class _PdfPreviewPageState extends State<PdfPreviewPage> {
     if (!mounted) return;
   }
 }
+

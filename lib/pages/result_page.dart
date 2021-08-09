@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mortgage_calculator/utils/app_constants.dart';
 import 'package:mortgage_calculator/utils/extentsons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:mortgage_calculator/models/history.dart';
@@ -23,20 +25,6 @@ class _ResultPageState extends State<ResultPage> {
   List<RowData> _rowData;
 
 
-
-  Future<bool> handleStoragePermission() async{
-    var status = await Permission.storage.status;
-    if(!status.isGranted){
-      var _status = await Permission.storage.request();
-      if(_status.isGranted){
-        return true;
-      }else{
-        return false;
-      }
-    } else{
-      return true;
-    }
-  }
 
   Future<bool> handleBackPress() async{
 
@@ -101,12 +89,7 @@ class _ResultPageState extends State<ResultPage> {
                   tooltip: 'Save',
                   onPressed: () async{
 
-                    bool isGranted = await handleStoragePermission();
-                    if(isGranted){
-                      navigatePage();
-                    }else{
-                      showMessage(context, 'Permission Denied', 'To save pdf file we need the storage permission.');
-                    }
+                    navigatePage();
 
                   }
               )
@@ -225,12 +208,27 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   void navigatePage() async{
-    Navigator.pushNamed(context, '/pdf',
-        arguments: {
-          'data': history,
-          'tableData': _rowData,
-        }
-    );
+
+    await Permission.storage.request();
+    await Permission.manageExternalStorage.request();
+
+    var platform = const MethodChannel('flutter.native/helper');
+    try {
+      var data = {
+        "dirName": "${AppConstants.appName}/PDF",
+      };
+      await platform.invokeMethod('askStoragePermission', data).then((value) =>
+          Navigator.pushNamed(context, '/pdf',
+              arguments: {
+                'data': history,
+                'tableData': _rowData,
+              }
+          )
+      );
+    } on PlatformException catch (e) {
+      print("Failed to Invoke: '${e.message}'.");
+    }
+
   }
 
 }
