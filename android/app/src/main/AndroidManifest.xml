@@ -85,4 +85,16 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+
+
+
+    <!--Added queries for android 11-->
+    <queries>
+        <!-- If your app emails -->
+        <intent>
+            <action android:name="android.intent.action.SEND" />
+            <data android:mimeType="*/*" />
+        </intent>
+    </queries>
+
 </manifest>

@@ -22,11 +22,8 @@ fun checkFolder(context: Context, folderName: String):Boolean {
 
     return if (!file.exists()) {
         file.mkdirs()
-
-        Log.d("Tag--------------------", file.toString());
         true
     }else{
-        showToast(context, "Failed to create directories")
         false
     }
 }
