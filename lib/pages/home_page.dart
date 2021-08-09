@@ -1,4 +1,3 @@
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +11,7 @@ import 'package:mortgage_calculator/models/history.dart';
 import 'package:mortgage_calculator/models/mortgage_data.dart';
 import 'package:mortgage_calculator/models/result_data.dart';
 import 'package:mortgage_calculator/models/row_data.dart';
+import 'package:mortgage_calculator/service/google_ad_service.dart';
 import 'package:mortgage_calculator/utils/app_constants.dart';
 import 'package:mortgage_calculator/utils/extentsons.dart';
 import 'dart:math';
@@ -25,7 +25,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _key = new GlobalKey<ScaffoldState>();
-  AdmobInterstitial interstitialAd;
   bool isLoading = false;
   //home value
   TextEditingController homeValueController = TextEditingController();
@@ -46,17 +45,14 @@ class _HomePageState extends State<HomePage> {
   String _downPaymentSymbol;
   bool showPmi;
 
+
+  GoogleAdService _googleAdService = GoogleAdService();
+
+
   @override
   void initState() {
 
-    interstitialAd = AdmobInterstitial(
-      adUnitId: env['INTERSTITIAL_AD_UNIT_ID'],
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        if (event == AdmobAdEvent.closed) interstitialAd.load();
-        handleEvent(event, args, 'Interstitial');
-      },
-    );
-    interstitialAd.load();
+    _googleAdService.initRewardedAd();
 
     _downPaymentSymbol = '\$';
     homeValueController.text = '300000';
@@ -80,8 +76,7 @@ class _HomePageState extends State<HomePage> {
     interestController.dispose();
     pmiController.dispose();
     Hive.close();
-
-    interstitialAd.dispose();
+    _googleAdService.disposeReword();
     super.dispose();
   }
 
@@ -354,33 +349,17 @@ class _HomePageState extends State<HomePage> {
     int counter = (prefs.getInt('calculate_button_click') ?? 0);
 
     if(counter >= 2){
-      setState(() {
-        isLoading = true;
-      });
-      bool adsLoaded = await interstitialAd.isLoaded;
-      if (adsLoaded) {
-        interstitialAd.show();
-        await prefs.setInt('calculate_button_click', 0);
-        setState(() {
-          isLoading = false;
-        });
+
+      bool x = await _googleAdService.showRewardedAd();
+      if(x){
         Navigator.pushNamed(context, '/result',
             arguments: {
               'data': history,
               'tableData': data['tableData']
             }
         );
-      }else{
-        setState(() {
-          isLoading = false;
-        });
-        Navigator.pushNamed(context, '/result',
-          arguments: {
-            'data': history,
-            'tableData': data['tableData']
-          }
-        );
       }
+
     }else{
       counter++;
       await prefs.setInt('calculate_button_click', counter);
@@ -655,39 +634,6 @@ class _HomePageState extends State<HomePage> {
       'resultData': _resultData,
       'tableData': _rowData
     };
-  }
-
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.loaded:
-        //showSnackBar('New Admob $adType Ad loaded!');
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.opened:
-        //showSnackBar('Admob $adType Ad opened!');
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.closed:
-        //showSnackBar('Admob $adType Ad closed!');
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.failedToLoad:
-        //showSnackBar('Admob $adType failed to load. :(');
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      default:
-        setState(() {
-          isLoading = false;
-        });
-    }
   }
 
 

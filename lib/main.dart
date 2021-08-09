@@ -1,5 +1,3 @@
-
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -14,8 +12,9 @@ import 'package:mortgage_calculator/pages/home_page.dart';
 import 'package:mortgage_calculator/pages/pdf_preview_page.dart';
 import 'package:mortgage_calculator/pages/result_page.dart';
 import 'package:mortgage_calculator/pages/splash_page.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,8 +26,8 @@ Future main() async{
     ..registerAdapter(ResultDataAdapter());
 
   //await Hive.openBox('history');
-  await DotEnv.load(fileName: ".env");
-  Admob.initialize();
+  await dotenv.load(fileName: ".env");
+  MobileAds.instance.initialize();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.white,

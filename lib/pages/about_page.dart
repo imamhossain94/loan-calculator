@@ -120,11 +120,11 @@ class _AboutPageState extends State<AboutPage> {
                           ),
                         ),
                         buildHeader('Development'),
-                        buildDescription('Android Engineering', env['APP_DEVELOPER_NAME']),
-                        buildDescription('UI Design', env['APP_UI_DESIGNER']),
+                        buildDescription('Android Engineering', dotenv.env['APP_DEVELOPER_NAME']),
+                        buildDescription('UI Design', dotenv.env['APP_UI_DESIGNER']),
                         //buildHeader('Reference'),
                         buildHeaderClickable('More App', () async{
-                          String url = env['OTHER_APPS_LINK'];
+                          String url = dotenv.env['OTHER_APPS_LINK'];
 
                           if (await canLaunch(url)) {
                             await launch(url);
@@ -135,8 +135,8 @@ class _AboutPageState extends State<AboutPage> {
                         SizedBox(height: 5,),
                         //buildDescription('Other App', env['OTHER_APPS_LINK']),
                         //buildDescription('Operation Followed', env['APP_OPERATION_FOLLOWED']),
-                        buildHeaderClickable('${AppConstants.appName}: ${env['APP_VERSION']}', () async{
-                          String url = env['RATE_THE_APP_LINK'];
+                        buildHeaderClickable('${AppConstants.appName}: ${dotenv.env['APP_VERSION']}', () async{
+                          String url = dotenv.env['RATE_THE_APP_LINK'];
 
                           if (await canLaunch(url)) {
                             await launch(url);

@@ -19,7 +19,7 @@ class BuildRatingValue extends StatelessWidget {
             Navigator.pushNamed(context, '/feedback');
           } else if (value <= 5) {
             Navigator.pop(context);
-            String url = env['RATE_THE_APP_LINK'];
+            String url = dotenv.env['RATE_THE_APP_LINK'];
 
             if (await canLaunch(url)) {
               await launch(url);

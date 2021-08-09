@@ -49,7 +49,7 @@ class FeedbackPage extends StatelessWidget {
                 CupertinoButton(
                   color: Colors.blueAccent.withOpacity(0.8),
                   onPressed: () async {
-                    String url = env['FEEDBACK_MAIL'];
+                    String url = dotenv.env['FEEDBACK_MAIL'];
 
                     if (await canLaunch(url)) {
                       await launch(url);
