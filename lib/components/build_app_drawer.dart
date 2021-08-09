@@ -95,14 +95,14 @@ class _BuildAppDrawerState extends State<BuildAppDrawer> {
                 text: 'Share',
                 onTap: () {
                   Share.share(
-                      'Hey check out this android app ${env['SHARE_APP_LINK']}');
+                      'Hey check out this android app ${dotenv.env['SHARE_APP_LINK']}');
                 }),
             Divider(),
             BuildDrawerBodyItem(
                 icon: Icons.android_rounded,
                 text: 'Other Apps',
                 onTap: () async {
-                  String url = env['OTHER_APPS_LINK'];
+                  String url = dotenv.env['OTHER_APPS_LINK'];
 
                   if (await canLaunch(url)) {
                     await launch(url);
@@ -114,7 +114,7 @@ class _BuildAppDrawerState extends State<BuildAppDrawer> {
                 icon: Icons.contact_mail,
                 text: 'Contact',
                 onTap: () async {
-                  String url = env['CONTACT_MAIL'];
+                  String url = dotenv.env['CONTACT_MAIL'];
 
                   if (await canLaunch(url)) {
                     await launch(url);

@@ -1,6 +1,4 @@
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mortgage_calculator/utils/extentsons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:mortgage_calculator/models/history.dart';
@@ -24,21 +22,7 @@ class _ResultPageState extends State<ResultPage> {
   ResultData resultData;
   List<RowData> _rowData;
 
-  AdmobInterstitial interstitialAd;
-  bool isLoading = false;
 
-  @override
-  void initState() {
-    interstitialAd = AdmobInterstitial(
-      adUnitId: env['INTERSTITIAL_AD_UNIT_ID'],
-      listener: (AdmobAdEvent event, Map<String, dynamic> args) {
-        if (event == AdmobAdEvent.closed) interstitialAd.load();
-        handleEvent(event, args, 'Interstitial');
-      },
-    );
-    interstitialAd.load();
-    super.initState();
-  }
 
   Future<bool> handleStoragePermission() async{
     var status = await Permission.storage.status;
@@ -87,10 +71,7 @@ class _ResultPageState extends State<ResultPage> {
       onWillPop: () async {
         return await handleBackPress();
       },
-      child: isLoading?Center(
-        child: CircularProgressIndicator(),
-      ):
-      SafeArea(
+      child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
@@ -244,61 +225,12 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   void navigatePage() async{
-    setState(() {
-      isLoading = true;
-    });
-    bool adsLoaded = await interstitialAd.isLoaded;
-    if (adsLoaded) {
-      interstitialAd.show();
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.pushNamed(context, '/pdf',
-          arguments: {
-            'data': history,
-            'tableData': _rowData,
-          }
-      );
-    }else{
-      setState(() {
-        isLoading = false;
-      });
-      Navigator.pushNamed(context, '/pdf',
-          arguments: {
-            'data': history,
-            'tableData': _rowData,
-          }
-      );
-    }
-  }
-
-  void handleEvent(AdmobAdEvent event, Map<String, dynamic> args, String adType) {
-    switch (event) {
-      case AdmobAdEvent.loaded:
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.opened:
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.closed:
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      case AdmobAdEvent.failedToLoad:
-        setState(() {
-          isLoading = false;
-        });
-        break;
-      default:
-        setState(() {
-          isLoading = false;
-        });
-    }
+    Navigator.pushNamed(context, '/pdf',
+        arguments: {
+          'data': history,
+          'tableData': _rowData,
+        }
+    );
   }
 
 }
