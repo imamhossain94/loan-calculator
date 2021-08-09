@@ -345,10 +345,17 @@ class _HomePageState extends State<HomePage> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int counter = (prefs.getInt('calculate_button_click') ?? 0);
 
-    if(counter >= 100){
+    if(counter >= 2){
 
       if(await showRewardedAd()){
         await prefs.setInt('calculate_button_click', 0);
+        Navigator.pushNamed(context, '/result',
+            arguments: {
+              'data': history,
+              'tableData': data['tableData']
+            }
+        );
+      }else{
         Navigator.pushNamed(context, '/result',
             arguments: {
               'data': history,

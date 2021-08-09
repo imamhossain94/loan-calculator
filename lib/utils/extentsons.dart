@@ -361,3 +361,116 @@ Future<bool> onDeletePressed(BuildContext context) async {
   ).then((value) => value == null?false:value);
 
 }
+
+
+
+Future<bool> onSavePdf(BuildContext context) async {
+  return showDialog(
+    barrierColor: Colors.white54,
+    context: context,
+    builder: (context) {
+      return Center(
+        child: Wrap(children: [
+          Container(
+            clipBehavior: Clip.none,
+            margin: EdgeInsets.all(8),
+            padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                //border: Border.all(width: 0.5, color: Colors.black12),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      blurRadius: 3,
+                      spreadRadius: 3,
+                      offset: Offset.zero)
+                ]),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Icon(
+                      Icons.save,
+                      size: 30,
+                      color: Colors.redAccent,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Save Pdf',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontFamily: 'Audiowide',
+                        fontSize: 20,
+                        decoration: TextDecoration.none,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ],
+                ),
+                Divider(
+                  thickness: 1,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'To generate pdf WAIT and WATCH',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                    fontSize: 16,
+                    //fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.none,
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: 30,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: CupertinoButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false);
+                          },
+                          padding: EdgeInsets.zero,
+                          color: Colors.blueAccent,
+                          child: Text('Cancel'),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: CupertinoButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
+                          padding: EdgeInsets.zero,
+                          color: Colors.redAccent,
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.only(left: 30, right: 30),
+                            child: Text('Continue'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ]),
+      );
+    },
+  ).then((value) => value == null?false:value);
+
+}

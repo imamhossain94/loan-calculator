@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mortgage_calculator/service/google_ad_service.dart';
 import 'package:mortgage_calculator/utils/app_constants.dart';
 import 'package:mortgage_calculator/utils/extentsons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -217,14 +218,17 @@ class _ResultPageState extends State<ResultPage> {
       var data = {
         "dirName": "${AppConstants.appName}/PDF",
       };
-      await platform.invokeMethod('askStoragePermission', data).then((value) =>
+      await platform.invokeMethod('createDirectory', data).then((value) async{
+
+        if(await onSavePdf(context) && await showRewardedAd()){
           Navigator.pushNamed(context, '/pdf',
               arguments: {
                 'data': history,
                 'tableData': _rowData,
               }
-          )
-      );
+          );
+        }
+      });
     } on PlatformException catch (e) {
       print("Failed to Invoke: '${e.message}'.");
     }
