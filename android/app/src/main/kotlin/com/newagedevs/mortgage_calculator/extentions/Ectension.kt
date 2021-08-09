@@ -3,6 +3,7 @@ package com.newagedevs.mortgage_calculator.extentions
 import android.content.Context
 import android.os.Build
 import android.os.Environment
+import android.util.Log
 import android.widget.Toast
 import java.io.File
 
@@ -21,6 +22,8 @@ fun checkFolder(context: Context, folderName: String):Boolean {
 
     return if (!file.exists()) {
         file.mkdirs()
+
+        Log.d("Tag--------------------", file.toString());
         true
     }else{
         showToast(context, "Failed to create directories")
