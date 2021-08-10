@@ -241,15 +241,17 @@ class _ResultPageState extends State<ResultPage> {
 
         });
       }else{
-        if(await showRewardedAd()){
-          Navigator.pushNamed(context, '/pdf',
-              arguments: {
-                'data': history,
-                'tableData': _rowData,
-              }
-          );
-        }else{
-          showMessage(context, "Try Again", "Failed to load an ads");
+        if(await onSavePdf(context)){
+          if(await showRewardedAd()){
+            Navigator.pushNamed(context, '/pdf',
+                arguments: {
+                  'data': history,
+                  'tableData': _rowData,
+                }
+            );
+          }else{
+            showMessage(context, "Try Again", "Failed to load an ads");
+          }
         }
       }
 

@@ -78,7 +78,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 Expanded(
-                  flex: 3,
+                  //flex: 3,
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Column(
@@ -173,17 +173,34 @@ class _AboutPageState extends State<AboutPage> {
     return Container(
       height: responsiveHeight(50),
       color: Colors.grey.withOpacity(0.12),
-      child: CupertinoButton(
-        onPressed: () {
-          onPressed();
-        },
-        child: Text(
-          title,
-          style: TextStyle(
-            color: Colors.black.withOpacity(0.7),
-              fontSize: responsiveText(18), fontWeight: FontWeight.bold),
+      child: SizedBox(
+        height: 50,
+        child: CupertinoButton(
+          padding: EdgeInsets.all(0),
+          //color: Color(0xff383838),
+          onPressed: onPressed,
+          child: Text(
+            title,
+            style: TextStyle(
+                color: Colors.black.withOpacity(0.7),
+                fontSize: responsiveText(18), fontWeight: FontWeight.bold),
+          ),
         ),
       ),
+      //
+      // CupertinoButton(
+      //   onPressed: () {
+      //     onPressed();
+      //   },
+      //   child: Text(
+      //     title,
+      //     style: TextStyle(
+      //       color: Colors.black.withOpacity(0.7),
+      //         fontSize: responsiveText(18), fontWeight: FontWeight.bold),
+      //   ),
+      // ),
+      //
+
     );
   }
 
