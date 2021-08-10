@@ -23,7 +23,5 @@ fun checkFolder(context: Context, folderName: String):Boolean {
     return if (!file.exists() && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
         file.mkdirs()
         true
-    }else{
-        false
-    }
+    }else file.exists() && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q
 }
