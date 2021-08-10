@@ -439,6 +439,7 @@ Future<bool> onSavePdf(BuildContext context) async {
                         child: CupertinoButton(
                           onPressed: () {
                             Navigator.of(context).pop(false);
+                            showMessage(context, "Operation Canceled", "You must WAIT and WATCH to generate pdf");
                           },
                           padding: EdgeInsets.zero,
                           color: Colors.blueAccent,

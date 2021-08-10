@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SplashPage extends StatefulWidget {
 
@@ -20,6 +21,7 @@ class _SplashPageState extends State<SplashPage> {
       Navigator.pushReplacementNamed(context, '/home');
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
