@@ -20,7 +20,7 @@ fun checkFolder(context: Context, folderName: String):Boolean {
         File(Environment.getExternalStorageDirectory().absolutePath + "/$folderName")
     }
 
-    return if (!file.exists()) {
+    return if (!file.exists() && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
         file.mkdirs()
         true
     }else{

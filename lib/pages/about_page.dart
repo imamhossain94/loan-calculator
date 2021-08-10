@@ -51,7 +51,7 @@ class _AboutPageState extends State<AboutPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Expanded(
-                  flex: 48,
+                  flex: 1,
                   child: Row(
                     // crossAxisAlignment : CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -78,7 +78,7 @@ class _AboutPageState extends State<AboutPage> {
                   ),
                 ),
                 Expanded(
-                  flex: 41,
+                  flex: 3,
                   child: SingleChildScrollView(
                     physics: BouncingScrollPhysics(),
                     child: Column(

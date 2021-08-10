@@ -218,17 +218,42 @@ class _ResultPageState extends State<ResultPage> {
       var data = {
         "dirName": "${AppConstants.appName}/PDF",
       };
-      await platform.invokeMethod('createDirectory', data).then((value) async{
 
-        if(await onSavePdf(context) && await showRewardedAd()){
+      if(await platform.invokeMethod('graterThenQ')) {
+        await platform.invokeMethod('createDirectory', data).then((value) async{
+
+          if(value){
+            if(await onSavePdf(context)){
+              if(await showRewardedAd()){
+                Navigator.pushNamed(context, '/pdf',
+                    arguments: {
+                      'data': history,
+                      'tableData': _rowData,
+                    }
+                );
+              }else{
+                showMessage(context, "Try Again", "Failed to load an ads");
+              }
+            }
+          }else{
+            showMessage(context, "Permission Required", "Without external storage permission you can't save file.");
+          }
+
+        });
+      }else{
+        if(await showRewardedAd()){
           Navigator.pushNamed(context, '/pdf',
               arguments: {
                 'data': history,
                 'tableData': _rowData,
               }
           );
+        }else{
+          showMessage(context, "Try Again", "Failed to load an ads");
         }
-      });
+      }
+
+
     } on PlatformException catch (e) {
       print("Failed to Invoke: '${e.message}'.");
     }

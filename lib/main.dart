@@ -28,7 +28,7 @@ Future main() async{
 
   //await Hive.openBox('history');
   await dotenv.load(fileName: ".env");
-  MobileAds.instance.initialize();
+  await MobileAds.instance.initialize();
   await GoogleAdService().init();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
