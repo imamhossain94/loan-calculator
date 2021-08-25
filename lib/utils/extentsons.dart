@@ -1,8 +1,8 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mortgage_calculator/components/build_rating_view.dart';
-import 'package:mortgage_calculator/pages/home_page.dart';
+import 'package:loan_calculator/components/build_rating_view.dart';
+import 'package:loan_calculator/pages/home_page.dart';
 
 
 void resetHome(BuildContext context) {

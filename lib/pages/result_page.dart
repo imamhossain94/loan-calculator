@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mortgage_calculator/service/google_ad_service.dart';
-import 'package:mortgage_calculator/utils/app_constants.dart';
-import 'package:mortgage_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
+import 'package:loan_calculator/utils/app_constants.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:mortgage_calculator/models/history.dart';
+import 'package:loan_calculator/models/history.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:mortgage_calculator/components/build_result_item.dart';
-import 'package:mortgage_calculator/components/build_table_header.dart';
-import 'package:mortgage_calculator/models/result_data.dart';
-import 'package:mortgage_calculator/models/row_data.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/components/build_result_item.dart';
+import 'package:loan_calculator/components/build_table_header.dart';
+import 'package:loan_calculator/models/result_data.dart';
+import 'package:loan_calculator/models/row_data.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 
 

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
-import 'package:mortgage_calculator/components/build_history_card.dart';
-import 'package:mortgage_calculator/models/history.dart';
-import 'package:mortgage_calculator/utils/extentsons.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/components/build_history_card.dart';
+import 'package:loan_calculator/models/history.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class HistoryPage extends StatefulWidget {
   @override

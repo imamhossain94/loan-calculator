@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:mortgage_calculator/models/mortgage_data.dart';
-import 'package:mortgage_calculator/models/result_data.dart';
+import 'package:loan_calculator/models/mortgage_data.dart';
+import 'package:loan_calculator/models/result_data.dart';
 
 part 'history.g.dart';
 

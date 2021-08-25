@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mortgage_calculator/models/history.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/models/history.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class BuildHistoryCard extends StatelessWidget {
   final History history;
