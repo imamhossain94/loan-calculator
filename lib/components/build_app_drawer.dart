@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mortgage_calculator/components/build_drawer_body_item.dart';
-import 'package:mortgage_calculator/utils/app_constants.dart';
-import 'package:mortgage_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/components/build_drawer_body_item.dart';
+import 'package:loan_calculator/utils/app_constants.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 

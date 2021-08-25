@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FeedbackPage extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mortgage_calculator/models/row_data.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/models/row_data.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class BuildTableHeader extends StatelessWidget {
 

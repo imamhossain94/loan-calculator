@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mortgage_calculator/components/build_qna.dart';
-import 'package:mortgage_calculator/components/build_rich_text.dart';
-import 'package:mortgage_calculator/utils/app_constants.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/components/build_qna.dart';
+import 'package:loan_calculator/components/build_rich_text.dart';
+import 'package:loan_calculator/utils/app_constants.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class HelpPage extends StatelessWidget {
   @override

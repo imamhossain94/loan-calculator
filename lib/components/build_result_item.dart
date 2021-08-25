@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mortgage_calculator/utils/screen_config.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class BuildResultItem extends StatelessWidget {
   const BuildResultItem({
