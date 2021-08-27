@@ -11,7 +11,6 @@ import 'package:loan_calculator/pages/history_page.dart';
 import 'package:loan_calculator/pages/home_page.dart';
 import 'package:loan_calculator/pages/pdf_preview_page.dart';
 import 'package:loan_calculator/pages/result_page.dart';
-import 'package:loan_calculator/pages/splash_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:path_provider/path_provider.dart';
@@ -39,9 +38,8 @@ Future main() async{
   ));
 
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: '/home',
     routes: {
-      '/': (context) => SplashPage(),
       '/home': (context) => HomePage(),
       '/result': (context) => ResultPage(),
       '/pdf': (context) => PdfPreviewPage(),
