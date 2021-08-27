@@ -29,30 +29,24 @@ dependencies:
   shared_preferences: ^2.0.6
   cupertino_icons: ^1.0.0
   flutter_native_splash: ^1.2.1
+  font_awesome_flutter: ^9.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   hive_generator: ^1.1.0
   build_runner: ^2.1.0
 
 
 flutter:
-
   uses-material-design: true
-
   assets:
     - .env
     - assets/images/
-
   fonts:
     - family: Audiowide
       fonts:
         - asset: fonts/Audiowide-Regular.ttf
-
-
-
 flutter_native_splash:
   color: "#E3EBEC"
   image: assets/images/ic_launcher.png
