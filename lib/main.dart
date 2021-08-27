@@ -14,6 +14,7 @@ import 'package:loan_calculator/pages/result_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loan_calculator/screens/home_screen.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
+import 'package:loan_calculator/service/pref_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -30,6 +31,7 @@ Future main() async{
   await dotenv.load(fileName: ".env");
   await MobileAds.instance.initialize();
   await GoogleAdService().init();
+  await PrefService().init();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.white,
