@@ -24,13 +24,13 @@ class _HomeScreenState extends State<HomeScreen> {
             elevation: 0.0,
             backgroundColor: Colors.white,
             flexibleSpace: Container(
-              margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
+              margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0),
               child: Row(
                 children: [
                   Text(
                     "Loan\nCalculator",
                     style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 24.0,
                       fontWeight: FontWeight.bold
                     ),
                   ),
@@ -42,8 +42,8 @@ class _HomeScreenState extends State<HomeScreen> {
             actions: [
               Container(
                 //height: 40,
-                width: 40,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                width: 50,
+                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                 decoration: BoxDecoration(
                     color: Theme.of(context).backgroundColor,
                     borderRadius: BorderRadius.circular(8.0)),
