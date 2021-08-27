@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:smart_notice_bubt_client/services/pref_service.dart';
-import 'package:smart_notice_bubt_client/utils/constant.dart';
+import 'package:loan_calculator/service/pref_service.dart';
+import 'package:loan_calculator/utils/constant.dart';
 
 class AppBannerAds extends StatefulWidget {
   @override

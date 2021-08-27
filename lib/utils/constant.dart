@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const String appName = 'Smart Routine';
+const String appName = 'Loan Routine';
 const String appVersion = 'app_version';
 
 const String developerName = 'Md. Imam Hossain';
@@ -13,15 +13,9 @@ const String appLink = 'https://play.google.com/store/apps/details?id=com.newage
 const String storeLink = 'https://play.google.com/store/apps/developer?id=NewAgeDevs';
 
 // Ads unit id
-const String bannerAdUnit = "ca-app-pub-4061500537427923/5015235649"; //ca-app-pub-3940256099942544/6300978111
-const String interstitialAdUnit = "ca-app-pub-4061500537427923/7066683914"; //ca-app-pub-3940256099942544/1033173712
-const String rewardAdUnit = "ca-app-pub-4061500537427923/1622785546"; //ca-app-pub-3940256099942544/5224354917
-
-
-// Bubt website link
-const String bubtNoticeUrl = "https://www.bubt.edu.bd/Home/all_notice";
-const String bubtEventsUrl = "https://www.bubt.edu.bd/home/all_events";
-const int rewardTime = 86400; //86400;
+const String bannerAdUnit = "ca-app-pub-3940256099942544/6300978111"; //ca-app-pub-3940256099942544/6300978111
+const String interstitialAdUnit = "ca-app-pub-3940256099942544/1033173712"; //ca-app-pub-3940256099942544/1033173712
+const String rewardAdUnit = "ca-app-pub-3940256099942544/5224354917"; //ca-app-pub-3940256099942544/5224354917
 
 
 const String appTheme = "Theme";
