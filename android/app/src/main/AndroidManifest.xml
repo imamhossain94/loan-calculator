@@ -16,7 +16,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="mortgage_calculator"
+        android:label="Loan Calculator"
         android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:supportsRtl="true"
