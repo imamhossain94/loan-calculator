@@ -3,7 +3,6 @@ description: A new Flutter application.
 
 publish_to: 'none'
 
-
 version: 1.0.2
 
 environment:
@@ -51,3 +50,13 @@ flutter:
     - family: Audiowide
       fonts:
         - asset: fonts/Audiowide-Regular.ttf
+
+
+
+flutter_native_splash:
+  color: "#E3EBEC"
+  image: images/ic_launcher.png
+  color_dark: "#212230"
+  image_dark: images/ic_launcher.png
+  android_gravity: center
+  fullscreen: true
