@@ -1,9 +1,8 @@
-package com.newagedevs.mortgage_calculator.extentions
+package com.newagedevs.loan_calculator.extentions
 
 import android.content.Context
 import android.os.Build
 import android.os.Environment
-import android.util.Log
 import android.widget.Toast
 import java.io.File
 
