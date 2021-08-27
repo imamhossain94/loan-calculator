@@ -1,14 +1,12 @@
-package com.newagedevs.mortgage_calculator
+package com.newagedevs.loan_calculator
 
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import com.newagedevs.mortgage_calculator.extentions.checkFolder
+import com.newagedevs.loan_calculator.extentions.checkFolder
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.util.GeneratedPluginRegister
 import io.flutter.plugin.common.MethodChannel
-import java.io.File
 
 
 class MainActivity: FlutterActivity() {
