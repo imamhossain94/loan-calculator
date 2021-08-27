@@ -12,6 +12,7 @@ import 'package:loan_calculator/pages/home_page.dart';
 import 'package:loan_calculator/pages/pdf_preview_page.dart';
 import 'package:loan_calculator/pages/result_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:loan_calculator/screens/home_screen.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -38,8 +39,9 @@ Future main() async{
   ));
 
   runApp(MaterialApp(
-    initialRoute: '/home',
+    initialRoute: '/',
     routes: {
+      '/': (context) => HomeScreen(),
       '/home': (context) => HomePage(),
       '/result': (context) => ResultPage(),
       '/pdf': (context) => PdfPreviewPage(),
@@ -52,13 +54,5 @@ Future main() async{
   ));
 
 }
-
-
-// void confirmPurchase() async{
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//  // bool isAdsPurchased = await SharedPreferences.getInstance().then((value) => value.getBool('ads_purchase_status') ?? false);
-//   bool isAdsPurchased = prefs.getBool('ads_purchase_status') ?? false;
-//   await prefs.setBool('ads_purchase_status', true);
-// }
 
 
