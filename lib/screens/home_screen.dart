@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loan_calculator/components/app_banner_ads.dart';
+import 'package:loan_calculator/components/calculator_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -87,91 +87,37 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Row(
                       children: [
-                        Container(
-                          height: 120,
-                          width: MediaQuery.of(context).size.width/2 - 15,
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: <Color>[
-                                  // Colors.red,
-                                  // Colors.blue,
-                                  Color(0xffF96CD3),
-                                  Color(0xffC76CF8),
-                                ]
-                            ),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.home,
+                            color: Color(0xffF96CD3),
                           ),
-
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(color: Theme.of(context).backgroundColor, borderRadius: BorderRadius.circular(8.0)),
-                                child: FaIcon(
-                                  FontAwesomeIcons.home,
-                                  color: Color(0xffF96CD3),
-                                ),
-                              ),
-                              Text(
-                                "Simple Loan",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                ),
-                              ),
-                            ],
+                          title: 'Simple Loan',
+                          onPressed: () {  },
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: <Color>[
+                                Color(0xffF96CD3),
+                                Color(0xffC76CF8),
+                              ]
                           ),
                         ),
                         SizedBox(width: 10.0,),
-                        Container(
-                          height: 120,
-                          width: MediaQuery.of(context).size.width/2 - 15,
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: <Color>[
-                                  // Colors.red,
-                                  // Colors.blue,
-                                  Color(0xff00EFFB),
-                                  Color(0xff42B1FF),
-                                ]
-                            ),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.handHoldingUsd,
+                            color: Color(0xff42B1FF),
                           ),
-
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(color: Theme.of(context).backgroundColor, borderRadius: BorderRadius.circular(8.0)),
-                                child: FaIcon(
-                                  FontAwesomeIcons.handHoldingUsd,
-                                  color: Color(0xff42B1FF),
-                                ),
-                              ),
-                              Text(
-                                "Advanced Loan",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18.0,
-                                ),
-                              ),
-                            ],
+                          title: 'Advanced',
+                          onPressed: () {  },
+                          gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                              colors: <Color>[
+                                Color(0xff00EFFB),
+                                Color(0xff42B1FF),
+                              ]
                           ),
                         ),
                       ],
@@ -271,6 +217,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                   ),
+
+
+
+
+
                 ],
               ),
             ),
