@@ -11,6 +11,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     //ThemesMode().init(context);
@@ -37,8 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.bold
                     ),
                   ),
-
-
                 ],
               ),
             ),
@@ -53,21 +54,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: IconButton(
                     onPressed: () async {
 
-
                     },
                     icon: FaIcon(
                       FontAwesomeIcons.shareAlt,
                       color: Theme.of(context).textTheme.headline1.color,
                     )),
-              )
+              ),
             ],
           ),
           body: Container(
             alignment: Alignment.center,
-            child: AppBannerAds(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  //AppBannerAds(),
+
+
+                ],
+              ),
+            ),
            ),
         )
       )
     );
   }
+
+
 }
