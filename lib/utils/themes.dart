@@ -45,7 +45,6 @@ class AppTheme {
 
   ThemeData lightTheme() {
     //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundLight,
       backgroundColor: backgroundLight,
@@ -75,9 +74,9 @@ class AppTheme {
       appBarTheme: AppBarTheme(
         brightness: Brightness.light,
           elevation: 0,
-          color: appBarColorLight,
+          color: Colors.transparent,//appBarColorLight,
           titleTextStyle: TextStyle(
-              color: Colors.black54
+              color: primaryColorLight, //Colors.black54,
           )
       ),
     );
