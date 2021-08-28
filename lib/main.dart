@@ -39,28 +39,19 @@ Future main() async{
   await GoogleAdService().init();
   await PrefService().init();
 
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //   statusBarColor: Colors.white,
-  //   statusBarIconBrightness: Brightness.dark,
-  //   systemNavigationBarColor: Colors.white,
-  //   systemNavigationBarIconBrightness: Brightness.dark,
-  // ));
-  //
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+  ));
+
 
 
 
   return runApp(MultiProvider(
       providers: [
-        ChangeNotifierProvider<ThemeNotifier> (
-          create: (_) {
-            String theme = getAPPTheme();
-            if (theme == null || theme == "" || theme == systemDefault) {
-              setAPPTheme(systemDefault);
-              return ThemeNotifier(ThemeMode.system);
-            }
-            return ThemeNotifier(theme == dark ? ThemeMode.dark : ThemeMode.light);
-          },
-        ),
+
       ],
       child: MyApp()//OurApp()//MyApp(),
   ));
@@ -88,7 +79,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     ThemesMode().init(context);
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
@@ -97,8 +87,6 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       theme: AppTheme().lightTheme(),
-      darkTheme: AppTheme().darkTheme(),
-      themeMode: themeNotifier.getThemeMode(),
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
