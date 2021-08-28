@@ -17,12 +17,9 @@ import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/themes.dart';
-import 'package:loan_calculator/utils/themes_mode.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:provider/provider.dart';
 
-import 'provider/theme_provider.dart';
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,22 +36,23 @@ Future main() async{
   await GoogleAdService().init();
   await PrefService().init();
 
+
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.white,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.white,
+    systemNavigationBarColor: scaffoldBackgroundLight,
     systemNavigationBarIconBrightness: Brightness.dark,
+    statusBarColor: scaffoldBackgroundLight,//appBarColorLight,
+    statusBarBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.dark,
   ));
 
+  // return runApp(MultiProvider(
+  //     providers: [
+  //
+  //     ],
+  //     child: MyApp()//OurApp()//MyApp(),
+  // ));
 
-
-
-  return runApp(MultiProvider(
-      providers: [
-
-      ],
-      child: MyApp()//OurApp()//MyApp(),
-  ));
+  return runApp(MyApp());
 }
 
 
@@ -78,7 +76,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    ThemesMode().init(context);
 
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
