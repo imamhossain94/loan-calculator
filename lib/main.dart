@@ -45,7 +45,7 @@ Future main() async{
   //   systemNavigationBarColor: Colors.white,
   //   systemNavigationBarIconBrightness: Brightness.dark,
   // ));
-
+  //
 
 
 
@@ -53,17 +53,12 @@ Future main() async{
       providers: [
         ChangeNotifierProvider<ThemeNotifier> (
           create: (_) {
-            if(getAppPurchase()){
-              String theme = getAPPTheme();
-              if (theme == null || theme == "" || theme == systemDefault) {
-                setAPPTheme(systemDefault);
-                return ThemeNotifier(ThemeMode.system);
-              }
-              return ThemeNotifier(theme == dark ? ThemeMode.dark : ThemeMode.light);
-            }else{
-              setAPPTheme(light);
-              return ThemeNotifier(ThemeMode.light);
+            String theme = getAPPTheme();
+            if (theme == null || theme == "" || theme == systemDefault) {
+              setAPPTheme(systemDefault);
+              return ThemeNotifier(ThemeMode.system);
             }
+            return ThemeNotifier(theme == dark ? ThemeMode.dark : ThemeMode.light);
           },
         ),
       ],

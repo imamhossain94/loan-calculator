@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'constant.dart';
 
 class AppTheme {
 
   ThemeData darkTheme() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundDark,
       backgroundColor: backgroundDark, //050505
@@ -45,7 +44,7 @@ class AppTheme {
   }
 
   ThemeData lightTheme() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     return ThemeData(
       scaffoldBackgroundColor: scaffoldBackgroundLight,
@@ -83,5 +82,4 @@ class AppTheme {
       ),
     );
   }
-
 }

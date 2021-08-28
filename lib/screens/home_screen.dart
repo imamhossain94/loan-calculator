@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/components/app_banner_ads.dart';
+import 'package:loan_calculator/utils/themes_mode.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -12,6 +13,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    //ThemesMode().init(context);
+
+
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pop();
@@ -22,8 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             toolbarHeight: 65,
             automaticallyImplyLeading: false,
-            elevation: 0.0,
-            backgroundColor: Colors.white,
             flexibleSpace: Container(
               margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 20.0),
               child: Row(
