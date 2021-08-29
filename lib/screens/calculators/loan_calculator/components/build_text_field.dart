@@ -2,19 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BuildTextField extends StatelessWidget {
-  final String title, hint;
+  final String title, hint, symbol;
   final TextEditingController textController;
-  final VoidCallback onPressedAction;
-  final bool isEnabled;
-  final Widget widget;
 
-  const BuildTextField(
-      {@required this.title,
-      @required this.hint,
-      @required this.widget,
-      @required this.textController,
-      @required this.onPressedAction,
-      @required this.isEnabled});
+  const BuildTextField({
+    @required this.title,
+    @required this.hint,
+    @required this.textController,
+    @required this.symbol,});
 
   @override
   Widget build(BuildContext context) {
@@ -59,22 +54,33 @@ class BuildTextField extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(5),
                 ),
-                child: TextField(
-                    enabled: isEnabled,
-                    controller: textController,
-                    textAlign: TextAlign.right,
-                    decoration: InputDecoration(
-                      prefix: SizedBox(
-                        width: 10,
-                      ),
-                      border: InputBorder.none,
-                      hintText: hint,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                          enabled: true,
+                          controller: textController,
+                          textAlign: TextAlign.right,
+                          decoration: InputDecoration(
+                            prefix: SizedBox(
+                              width: 10,
+                            ),
+                            border: InputBorder.none,
+                            hintText: hint,
+                          ),
+                          keyboardType: TextInputType.number,
+                          textInputAction: TextInputAction.done,
+                          autocorrect: false,
+                          obscureText: false,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    autocorrect: false,
-                    obscureText: false,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(width: 5,),
+                    Text(
+                      symbol,
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

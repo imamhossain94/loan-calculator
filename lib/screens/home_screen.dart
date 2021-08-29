@@ -5,7 +5,6 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
 
-import 'calculators/loan_calculator/loan_calc_page.dart';
 import 'calculators/simple_loan.dart';
 
 class HomeScreen extends StatefulWidget {
