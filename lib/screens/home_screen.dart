@@ -5,7 +5,8 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
 
-import 'calculators/simple_loan.dart';
+import 'calculators/loan_calculator/advanced_loan_calculator.dart';
+import 'calculators/loan_calculator/simple_loan.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String idScreen = "HomeScreen";
@@ -27,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async {
         Navigator.of(context).pop();
-        return false;
+        return true;
       },
       child: SafeArea(
         child: Scaffold(
@@ -54,9 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           title: 'Simple Loan',
-                          onPressed: () {
-                            Navigator.pushNamed(context, SimpleLoan.idScreen);
-                          },
+                          onPressed: ()=>Navigator.pushNamed(context, SimpleLoan.idScreen),
                           color: Color(0xff1f577d),
                         ),
                         SizedBox(width: 10.0,),
@@ -66,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           title: 'Advanced Loan',
-                          onPressed: () {  },
+                          onPressed: ()=> Navigator.pushNamed(context, AdvancedLoanCalculator.idScreen),
                           color: Color(0xff1eb384),
                         ),
                       ],

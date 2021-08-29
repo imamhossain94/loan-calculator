@@ -12,7 +12,8 @@ import 'package:loan_calculator/pages/home_page.dart';
 import 'package:loan_calculator/pages/pdf_preview_page.dart';
 import 'package:loan_calculator/pages/result_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:loan_calculator/screens/calculators/simple_loan.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
 import 'package:loan_calculator/screens/home_screen.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/service/pref_service.dart';
@@ -89,6 +90,7 @@ class _MyAppState extends State<MyApp> {
       routes: {
         HomeScreen.idScreen: (context) => HomeScreen(),
         SimpleLoan.idScreen: (context) => SimpleLoan(),
+        AdvancedLoanCalculator.idScreen: (context) => AdvancedLoanCalculator(),
         '/home': (context) => HomePage(),
         '/result': (context) => ResultPage(),
         '/pdf': (context) => PdfPreviewPage(),
