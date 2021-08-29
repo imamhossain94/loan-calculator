@@ -21,8 +21,6 @@ import 'package:loan_calculator/utils/themes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'screens/calculators/loan_calculator/loan_calc_page.dart';
-
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,7 +89,6 @@ class _MyAppState extends State<MyApp> {
       routes: {
         HomeScreen.idScreen: (context) => HomeScreen(),
         SimpleLoan.idScreen: (context) => SimpleLoan(),
-        '/simple_loan': (context) => LoanCalcPage(),
         '/home': (context) => HomePage(),
         '/result': (context) => ResultPage(),
         '/pdf': (context) => PdfPreviewPage(),

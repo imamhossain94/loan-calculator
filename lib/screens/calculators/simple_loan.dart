@@ -24,7 +24,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
   TextEditingController interestRateController = TextEditingController();
   TextEditingController periodController = TextEditingController();
 
-  String mortgageAmount, monthlyPayment, interestRate, period, mortgageType;
+  String mortgageAmount = "", monthlyPayment = "", interestRate = "", period = "", loanType;
   double totalCostResult, monthlyPaymentResult, youCouldBorrow;
 
 
@@ -33,7 +33,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
     totalCostResult = 0.0;
     monthlyPaymentResult = 0.0;
     youCouldBorrow = 0.0;
-    mortgageType = 'Monthly Cost';
+    loanType = 'Monthly Cost';
     calculateLoan();
     super.initState();
   }
@@ -76,12 +76,12 @@ class _SimpleLoanState extends State<SimpleLoan> {
       int months = int.tryParse(period)??0;
 
       _interestRate = _interestRate / 100 / 12;
-      months = months * 12;
+      //months = months * 12;
 
       double monthlyTop = _interestRate * pow((1 + _interestRate), months);
       double monthlyBottom = pow(1 + _interestRate, months) - 1;
 
-      if(mortgageType == 'Monthly Cost'){
+      if(loanType == 'Monthly Cost'){
 
         double monthlyRate = _mortgageAmount * (monthlyTop / monthlyBottom);
         double totalPayment = monthlyRate * months;
@@ -89,7 +89,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
         totalCostResult = totalPayment;
         monthlyPaymentResult = monthlyRate;
 
-      }else if(mortgageType == 'Maximum Loan'){
+      }else if(loanType == 'Maximum Loan'){
 
         double borrowAmount = _monthlyPayment / (monthlyTop / monthlyBottom);
         double totalPayment = _monthlyPayment * months;
@@ -132,84 +132,35 @@ class _SimpleLoanState extends State<SimpleLoan> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-
                     LoanTypePicker(
                       title: 'Loan Type',
                       valueChanged: (String value) {
                         setState(() {
                           print(value);
-                          mortgageType = value;
+                          loanType = value;
                           updateResult();
                         });
                       },
                     ),
-
-                    resultCard(),
-
-
-                    Container(
-                      // margin: EdgeInsets.all(10),
-                      // padding: EdgeInsets.all(5),
-                      // decoration: BoxDecoration(
-                      //     color: Colors.white,
-                      //     borderRadius: BorderRadius.circular(5),
-                      //     boxShadow: [
-                      //       BoxShadow(
-                      //           color: Colors.grey.withOpacity(0.9),
-                      //           blurRadius: 0.5,
-                      //           spreadRadius: 0.5,
-                      //           offset: Offset.zero
-                      //       )
-                      //     ]
-                      // ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          // LoanTypePicker(
-                          //   title: 'Mortgage Type',
-                          //   valueChanged: (String value) {
-                          //     setState(() {
-                          //       print(value);
-                          //       mortgageType = value;
-                          //       updateResult();
-                          //     });
-                          //   },
-                          // ),
-                          BuildTextField(
-                            title: mortgageType == 'Monthly Cost'?'Mortgage Amount (\$)':'Monthly Payment (\$)',
-                            hint: '0.0',
-                            isEnabled: true,
-                            textController: mortgageType == 'Monthly Cost'?mortgageAmountController:monthlyPaymentController,
-                            onPressedAction: null,
-                            widget: Text('\$', style: TextStyle(fontWeight: FontWeight.bold, fontSize: (16)),),),
-                          BuildTextField(
-                            title: 'Interest Rate',
-                            hint: '0.0',
-                            isEnabled: true,
-                            textController: interestRateController,
-                            onPressedAction: null,
-                            widget: Text('%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: (16)),),),
-
-                          BuildTextField(
-                            title: 'Period',
-                            hint: '0',
-                            isEnabled: true,
-                            textController: periodController,
-                            onPressedAction: null,
-                            widget: Text('yrs', style: TextStyle(fontWeight: FontWeight.bold, fontSize: (16)),),),
-                        ],
-                      ),
+                    loanResultCard(),
+                    BuildTextField(
+                      title: loanType == 'Monthly Cost'?'Loan Amount':'Monthly Payment',
+                      hint: '0.0',
+                      symbol: '\$',
+                      textController: loanType == 'Monthly Cost'?mortgageAmountController:monthlyPaymentController,
                     ),
-
-                    Row(
-                      children: [
-                        BuildResultCard(title: 'Total Cost', value: totalCostResult.toStringAsFixed(2),),
-                        mortgageType == 'Monthly Cost'?
-                        BuildResultCard(title: 'Monthly Payments', value: monthlyPaymentResult.toStringAsFixed(2),):
-                        BuildResultCard(title: 'You Could Borrow', value: youCouldBorrow.toStringAsFixed(2),),
-                      ],
+                    BuildTextField(
+                      title: 'Interest Rate',
+                      hint: '0.0',
+                      symbol: '%',
+                      textController: interestRateController,
                     ),
-
+                    BuildTextField(
+                      title: 'Period',
+                      hint: '0',
+                      symbol: 'm',
+                      textController: periodController,
+                    ),
                   ],
                 ),
               ),
@@ -223,8 +174,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
 
 
 
-  Widget resultCard() {
-
+  Widget loanResultCard() {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
       padding: EdgeInsets.all(15),
@@ -244,7 +194,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               ),
               Spacer(),
               Text(
-                "Monthly Cost",
+                loanType,
                 style: TextStyle(
                     fontSize: 16,),
               ),
@@ -260,7 +210,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               ),
               Spacer(),
               Text(
-                "5000 \$",
+                "${mortgageAmount.length == 0?0:mortgageAmount} \$",
                 style: TextStyle(
                     fontSize: 16,),
               ),
@@ -276,7 +226,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               ),
               Spacer(),
               Text(
-                "5 %",
+                "${interestRate.length == 0?0:interestRate} %",
                 style: TextStyle(
                     fontSize: 16, ),
               ),
@@ -292,7 +242,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               ),
               Spacer(),
               Text(
-                "12 years",
+                "${period.length == 0?0:period } m",
                 style: TextStyle(
                     fontSize: 16, ),
               ),
@@ -311,7 +261,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               ),
               Spacer(),
               Text(
-                "500 \$",
+                "${totalCostResult.toStringAsFixed(2)} \$",
                 style: TextStyle(
                   fontSize: 16, fontWeight: FontWeight.bold),
               ),
@@ -321,13 +271,13 @@ class _SimpleLoanState extends State<SimpleLoan> {
           Row(
             children: [
               Text(
-                "Monthly Payment",
+                loanType == 'Monthly Cost'?"Monthly Payment":"You Can Borrow",
                 style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.bold),
               ),
               Spacer(),
               Text(
-                "100 \$",
+                "${loanType == 'Monthly Cost'?monthlyPaymentResult.toStringAsFixed(2): youCouldBorrow.toStringAsFixed(2)} \$",
                 style: TextStyle(
                   fontSize: 16, fontWeight: FontWeight.bold),
               ),
