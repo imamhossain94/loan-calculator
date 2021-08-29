@@ -12,6 +12,7 @@ import 'package:loan_calculator/pages/home_page.dart';
 import 'package:loan_calculator/pages/pdf_preview_page.dart';
 import 'package:loan_calculator/pages/result_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:loan_calculator/screens/calculators/simple_loan.dart';
 import 'package:loan_calculator/screens/home_screen.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/service/pref_service.dart';
@@ -19,6 +20,8 @@ import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/themes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+
+import 'screens/calculators/loan_calculator/loan_calc_page.dart';
 
 
 Future main() async{
@@ -84,9 +87,11 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
       theme: AppTheme().lightTheme(),
-      initialRoute: '/',
+      initialRoute: HomeScreen.idScreen,
       routes: {
-        '/': (context) => HomeScreen(),
+        HomeScreen.idScreen: (context) => HomeScreen(),
+        SimpleLoan.idScreen: (context) => SimpleLoan(),
+        '/simple_loan': (context) => LoanCalcPage(),
         '/home': (context) => HomePage(),
         '/result': (context) => ResultPage(),
         '/pdf': (context) => PdfPreviewPage(),
