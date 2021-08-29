@@ -1,8 +1,15 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
+import 'package:loan_calculator/components/home_app_bar.dart';
+
+import 'calculators/loan_calculator/loan_calc_page.dart';
+import 'calculators/simple_loan.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const String idScreen = "HomeScreen";
   const HomeScreen({Key key}) : super(key: key);
 
   @override
@@ -25,198 +32,206 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: SafeArea(
         child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 65,
-            automaticallyImplyLeading: false,
-            flexibleSpace: Container(
-              margin: EdgeInsets.symmetric(vertical: 10.0,horizontal: 10.0),
-              child: Row(
-                children: [
-                  Text(
-                    "Loan\nCalculator",
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              Container(
-                //height: 40,
-                width: 50,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 0),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: IconButton(
-                    onPressed: () async {
-
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.cog,
-                      color: Theme.of(context).textTheme.headline1.color,
-                    )),
-              ),
-              Container(
-                //height: 40,
-                width: 50,
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                decoration: BoxDecoration(
-                    color: Theme.of(context).backgroundColor,
-                    borderRadius: BorderRadius.circular(8.0)),
-                child: IconButton(
-                    onPressed: () async {
-
-                    },
-                    icon: FaIcon(
-                      FontAwesomeIcons.shareAlt,
-                      color: Theme.of(context).textTheme.headline1.color,
-                    )),
-              ),
-            ],
+          appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(55),
+              child: HomeAppBar()
           ),
           body: Container(
-            alignment: Alignment.topCenter,
+            //alignment: Alignment.topCenter,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   //AppBannerAds(),
+                  SizedBox(height: 15,),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Row(
                       children: [
                         CalculatorCard(
                           icon: FaIcon(
                             FontAwesomeIcons.home,
-                            color: Color(0xffF96CD3),
+                            color: Colors.white,
                           ),
                           title: 'Simple Loan',
-                          onPressed: () {  },
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: <Color>[
-                                Color(0xffF96CD3),
-                                Color(0xffC76CF8),
-                              ]
-                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(context, SimpleLoan.idScreen);
+                          },
+                          color: Color(0xff1f577d),
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
                           icon: FaIcon(
                             FontAwesomeIcons.handHoldingUsd,
-                            color: Color(0xff42B1FF),
+                            color: Colors.white,
                           ),
-                          title: 'Advanced',
+                          title: 'Advanced Loan',
                           onPressed: () {  },
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: <Color>[
-                                Color(0xff00EFFB),
-                                Color(0xff42B1FF),
-                              ]
+                          color: Color(0xff1eb384),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.piggyBank,
+                            color: Colors.white,
                           ),
+                          title: 'Savings Calculator',
+                          onPressed: () {  },
+                          color: Color(0xff1689FC),
+                        ),
+                        SizedBox(width: 10.0,),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.fileInvoiceDollar,
+                            color: Colors.white,
+                          ),
+                          title: 'Tax Calculator',
+                          onPressed: () {  },
+                          color: Color(0xff01B4A9),
                         ),
                       ],
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Row(
                       children: [
-                        Container(
-                          height: 120,
-                          width: MediaQuery.of(context).size.width/2 - 15,
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: <Color>[
-                                  // Colors.red,
-                                  // Colors.blue,
-                                  Color(0xff00E5A7),
-                                  Color(0xff8BE454),
-                                ]
-                            ),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.tags,
+                            color: Colors.white,
                           ),
-
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(color: Theme.of(context).backgroundColor, borderRadius: BorderRadius.circular(8.0)),
-                                child: FaIcon(
-                                  FontAwesomeIcons.piggyBank,
-                                  color: Color(0xff00E5A7),
-                                ),
-                              ),
-                              Text(
-                                "Savings Calculator",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ],
-                          ),
+                          title: 'Discount Calculator',
+                          onPressed: () {  },
+                          color: Color(0xffFF758A),
                         ),
                         SizedBox(width: 10.0,),
-                        Container(
-                          height: 120,
-                          width: MediaQuery.of(context).size.width/2 - 15,
-                          alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.0),
-                            gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: <Color>[
-                                  // Colors.red,
-                                  // Colors.blue,
-                                  Color(0xffFF7BB0),
-                                  Color(0xffFF758A),
-                                ]
-                            ),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.wallet,
+                            color: Colors.white,
                           ),
-
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                height: 50,
-                                width: 50,
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(color: Theme.of(context).backgroundColor, borderRadius: BorderRadius.circular(8.0)),
-                                child: FaIcon(
-                                  FontAwesomeIcons.fileInvoiceDollar,
-                                  color: Color(0xffFF758A),
-                                ),
-                              ),
-                              Text(
-                                "Tax Calculator",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18.0,
-                                ),
-                              ),
-                            ],
-                          ),
+                          title: 'Tip Calculator',
+                          onPressed: () {  },
+                          color: Color(0xffC76CF8),
                         ),
                       ],
                     ),
                   ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.balanceScale,
+                            color: Colors.white,
+                          ),
+                          title: 'Unit Price Calculator',
+                          onPressed: () {  },
+                          color: Color(0xff055f90),
+                        ),
+                        SizedBox(width: 10.0,),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.notEqual,
+                            color: Colors.white,
+                          ),
+                          title: 'Compare Loan',
+                          onPressed: () {  },
+                          color: Color(0xff1689FC),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 30,
+                    child: Divider(),
+                  ),
+
+                  // About section
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.comments,
+                            color: Colors.white,
+                          ),
+                          title: 'Feedback',
+                          onPressed: () {  },
+                          color: Colors.indigo,
+                        ),
+                        SizedBox(width: 10.0,),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.solidStar,
+                            color: Colors.white,
+                          ),
+                          title: 'Rate The App',
+                          onPressed: () {  },
+                          color: Colors.redAccent,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.googlePlay,
+                            color: Colors.white,
+                          ),
+                          title: 'Other Apps',
+                          onPressed: () {  },
+                          color: Colors.orange,
+                        ),
+                        SizedBox(width: 10.0,),
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.freeCodeCamp,
+                            color: Colors.white,
+                          ),
+                          title: 'About Development',
+                          onPressed: () {  },
+                          color: Colors.pinkAccent,
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
+                    child: Row(
+                      children: [
+                        CalculatorCard(
+                          icon: FaIcon(
+                            FontAwesomeIcons.codeBranch,
+                            color: Colors.white,
+                          ),
+                          title: 'Version',
+                          onPressed: () {  },
+                          color: Colors.blueAccent,
+                        ),
+
+                      ],
+                    ),
+                  ),
+
+                  //AppBannerAds()
+
 
 
 

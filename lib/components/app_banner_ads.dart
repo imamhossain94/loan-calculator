@@ -34,7 +34,7 @@ class _AppBannerAdsState extends State<AppBannerAds> {
     _bannerAd = BannerAd(
       adUnitId: bannerAdUnit,
       request: AdRequest(),
-      size: AdSize.mediumRectangle,
+      size: AdSize.fullBanner,
       listener: BannerAdListener(
         onAdLoaded: (Ad ad) {
           print('$BannerAd loaded.');
