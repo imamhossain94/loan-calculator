@@ -7,6 +7,7 @@ import 'package:loan_calculator/screens/calculators/loan_calculator/components/b
 import 'package:url_launcher/url_launcher.dart';
 
 import 'components/build_result_card.dart';
+import 'components/calculator_action_button.dart';
 import 'components/loan_type_picker.dart';
 
 
@@ -168,7 +169,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                         children: [
                           Expanded(
                             flex: 2,
-                            child: calculationButton(
+                            child: CalculatorActionButton(
                               title: "Save Calculation",
                               onPressed: (){
 
@@ -178,7 +179,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                           SizedBox(width: 10,),
                           Expanded(
                             flex: 1,
-                            child: calculationButton(
+                            child: CalculatorActionButton(
                                 title: "Reset",
                                 onPressed: (){
 
@@ -314,34 +315,4 @@ class _SimpleLoanState extends State<SimpleLoan> {
 
   }
 
-  Widget calculationButton({VoidCallback onPressed, String title}) {
-    return Container(
-      decoration: BoxDecoration(
-        color: title == "Reset"? Colors.redAccent:Colors.green,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(5),
-          highlightColor: Colors.blueAccent,
-          onTap: onPressed,
-          child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              height: 50,
-              width: 55,
-              alignment: Alignment.center,
-              child: Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white
-                  )
-              )
-          ),
-        ),
-      ),
-    );
-  }
 }

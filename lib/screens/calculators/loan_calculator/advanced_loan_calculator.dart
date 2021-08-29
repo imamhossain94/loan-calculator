@@ -19,6 +19,8 @@ import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'components/calculator_action_button.dart';
+
 class AdvancedLoanCalculator extends StatefulWidget {
   static const String idScreen = "AdvancedLoanCalculator";
   @override
@@ -242,56 +244,38 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                       textController: pmiController,
                     ),
 
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: CalculatorActionButton(
+                                  title: "Save Calculation",
+                                  onPressed: (){
+                                    startCalculation();
+                                  }
+                              )
+                          ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                              flex: 1,
+                              child: CalculatorActionButton(
+                                  title: "Reset",
+                                  onPressed: (){
+                                    resetHome(context);
+                                  }
+                              )
+                          ),
+                        ],
+                      ),
+                    ),
 
                   ],
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  //border: Border.all(width: 0.5, color: Colors.black12),
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        blurRadius: 0.5,
-                        spreadRadius: 0.5,
-                        offset: Offset.zero)
-                  ]),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(
-                    height: 40,
-                    child: CupertinoButton(
-                      onPressed: () {
-                        startCalculation();
-                      },
-                      padding: EdgeInsets.zero,
-                      color: Colors.blue,
-                      child: Text('Calculate'),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  SizedBox(
-                    height: 40,
-                    child: CupertinoButton(
-                      onPressed: () {
-                        resetHome(context);
-                      },
-                      padding: EdgeInsets.zero,
-                      color: Colors.redAccent,
-                      child: Text('Reset'),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+
           ],
         ),
         // This trailing comma makes auto-formatting nicer for build methods.
