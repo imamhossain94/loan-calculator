@@ -68,27 +68,48 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
         ),
 
         body: filePath != null
-            ? PDFView(
-              key: GlobalKey<ScaffoldState>(),
-              filePath: filePath,
-              enableSwipe: true,
-              swipeHorizontal: false,
-              autoSpacing: false,
-              pageFling: false,
-              onRender: (_pages) {
-              },
-              onError: (error) {
-                print(error.toString());
-              },
-              onPageError: (page, error) {
-                print('$page: ${error.toString()}');
-              },
-              onViewCreated: (PDFViewController pdfViewController) {
+            ? Padding(
+              padding: const EdgeInsets.only(top: 15),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.8),
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Expanded(
+                      child: PDFView(
+                        key: GlobalKey<ScaffoldState>(),
+                        filePath: filePath,
+                        enableSwipe: true,
+                        swipeHorizontal: false,
+                        autoSpacing: false,
+                        pageFling: false,
+                        onRender: (_pages) {
+                        },
+                        onError: (error) {
+                          print(error.toString());
+                        },
+                        onPageError: (page, error) {
+                          print('$page: ${error.toString()}');
+                        },
+                        onViewCreated: (PDFViewController pdfViewController) {
 
-              },
-              onPageChanged: (int page, int total) {
-                print('page change: $page/$total');
-              },
+                        },
+                        onPageChanged: (int page, int total) {
+                          print('page change: $page/$total');
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                  ],
+                ),
+              ),
             )
             : Center(
                 child: Column(
