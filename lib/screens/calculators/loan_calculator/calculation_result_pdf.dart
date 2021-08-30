@@ -71,15 +71,21 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
             ? Padding(
               padding: const EdgeInsets.only(top: 15),
               child: Container(
+                margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.8),
-                  borderRadius: BorderRadius.circular(10)
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
                 ),
+                child: Container(
+                  margin: EdgeInsets.all(5),
+                  //padding: EdgeInsets.all(15),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 15,
-                    ),
                     Expanded(
                       child: PDFView(
                         key: GlobalKey<ScaffoldState>(),
@@ -104,13 +110,10 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 15,
-                    ),
                   ],
                 ),
               ),
-            )
+            ))
             : Center(
                 child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
