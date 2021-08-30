@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 class BuildActionTextField extends StatelessWidget {
   final String title, hint, symbol;
   final TextEditingController textController;
+  final VoidCallback onActionPressed;
 
   const BuildActionTextField({
     @required this.title,
     @required this.hint,
     @required this.textController,
-    @required this.symbol,});
+    @required this.symbol,
+    @required this.onActionPressed,});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class BuildActionTextField extends StatelessWidget {
               flex: 2,
               child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                padding: EdgeInsets.only(left: 20),
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(5),
@@ -75,9 +77,34 @@ class BuildActionTextField extends StatelessWidget {
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                     ),
                     SizedBox(width: 5,),
-                    Text(
-                      symbol,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(0, 5, 5, 5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(5),
+                          highlightColor: Colors.blueAccent,
+                          onTap: onActionPressed,
+                          child: Container(
+                              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+                              height: 50,
+                              width: 20,
+                              alignment: Alignment.center,
+                              child: Text(
+                                  symbol,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                  )
+                              )
+                          ),
+                        ),
+                      ),
                     ),
                   ],
                 ),

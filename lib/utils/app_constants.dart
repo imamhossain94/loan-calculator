@@ -1,5 +1,5 @@
 class AppConstants {
-  static const String appName = 'Mortgage Calculator';
+  static const String appName = 'Loan Calculator';
   static const String appNameNewLine = 'Mortgage\nCalculator';
   static const String appNameNoSpace = 'MortgageCalculator';
 

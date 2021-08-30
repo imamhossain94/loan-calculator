@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pop();
         return true;
       },
       child: SafeArea(

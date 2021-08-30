@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loan_calculator/components/build_rating_view.dart';
 import 'package:loan_calculator/pages/home_page.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
 
 
 void resetHome(BuildContext context) {
@@ -10,7 +11,17 @@ void resetHome(BuildContext context) {
     context,
     PageRouteBuilder(
       transitionDuration: Duration.zero,
-      pageBuilder: (_, __, ___) => HomePage(),
+      pageBuilder: (_, __, ___) => AdvancedLoanCalculator(),
+    ),
+  );
+}
+
+void resetPage(BuildContext context, Widget widget) {
+  Navigator.pushReplacement(
+    context,
+    PageRouteBuilder(
+      transitionDuration: Duration.zero,
+      pageBuilder: (_, __, ___) => widget,
     ),
   );
 }

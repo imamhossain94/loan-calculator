@@ -19,6 +19,9 @@ import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'calculation_history.dart';
+import 'calculation_result.dart';
+import 'components/build_action_text_field.dart';
 import 'components/calculator_action_button.dart';
 
 class AdvancedLoanCalculator extends StatefulWidget {
@@ -92,8 +95,43 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
             preferredSize: const Size.fromHeight(55),
             child: CalculatorAppBar(
               title: "Advanced\nLoan",
-              historyButtonClick: () {  },
-              saveButtonClick: () {  },
+              historyButtonClick: () async{
+                dynamic result = await Navigator.pushNamed(context, CalculationHistory.idScreen);
+                if (result != null) {
+                  History history = result['data'];
+
+                  Flushbar(
+                    flushbarPosition: FlushbarPosition.BOTTOM,
+                    borderRadius: 10,
+                    margin: EdgeInsets.all(10),
+                    title: "Edit Calculation",
+                    message: "Data loaded successfully",
+                    duration: Duration(seconds: 3),
+                  )..show(context);
+
+                  print('All ok');
+                  setState(() {
+                    homeValueController.text =
+                        history.mortgageData.homeValue.toString();
+                    downPaymentController.text =
+                        history.mortgageData.downPayment.toString();
+                    loanAmountController.text =
+                        history.mortgageData.loanAmount.toString();
+                    homeInsController.text =
+                        history.mortgageData.homeIns.toString();
+                    propertyTaxController.text =
+                        history.mortgageData.propertyTax.toString();
+                    interestController.text =
+                        history.mortgageData.interest.toString();
+                    pmiController.text =
+                        history.mortgageData.pmi.toString();
+                  });
+                } else {
+                  print('No action needed');
+                }
+              },
+              saveButtonClick: null,
+              deleteButtonClick: null,
             )
         ),
         // appBar: AppBar(
@@ -165,19 +203,39 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
         //
         body: Column(
           children: [
+            SizedBox(height: 15,),
             Expanded(
               child: Container(
                 //margin: EdgeInsets.all(8),
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   children: [
+
                     BuildTextField(
                       title: 'Home Value/ Property Price',
                       hint: '${homeValueController.text}',
                       symbol: '\$',
                       textController: homeValueController,
                     ),
-                    //-----
+
+                    BuildActionTextField(
+                      title: 'Money Down/ Equity',
+                      hint: downPaymentController.text,
+                      symbol: _downPaymentSymbol,
+                      textController: downPaymentController,
+                      onActionPressed: () {
+                        setState(() {
+                          if (_downPaymentSymbol == '\$') {
+                            loanAmountController.text = '0';
+                            _downPaymentSymbol = '%';
+                          } else {
+                            loanAmountController.text = '240000';
+                            _downPaymentSymbol = '\$';
+                          }
+                        });
+                        print(_downPaymentSymbol);
+                      }
+                    ),
 
                     BuildTextField(
                       title: 'Loan Amount',
@@ -187,27 +245,6 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                       symbol: '\$',
                       textController: loanAmountController,
                     ),
-
-                    // BuildTextField(
-                    //   inputType: TextInputType.number,
-                    //   height: 40,
-                    //   title: 'Money Down/Equity',
-                    //   hint: '${downPaymentController.text}',
-                    //   symbol: _downPaymentSymbol,
-                    //   textController: downPaymentController,
-                    //   onActionPress: () {
-                    //     setState(() {
-                    //       if (_downPaymentSymbol == '\$') {
-                    //         loanAmountController.text = '0';
-                    //         _downPaymentSymbol = '%';
-                    //       } else {
-                    //         loanAmountController.text = '240000';
-                    //         _downPaymentSymbol = '\$';
-                    //       }
-                    //     });
-                    //     print(_downPaymentSymbol);
-                    //   },
-                    // ),
 
                     BuildTextField(
                       title: 'Interest Rate',
@@ -251,10 +288,8 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                           Expanded(
                               flex: 2,
                               child: CalculatorActionButton(
-                                  title: "Save Calculation",
-                                  onPressed: (){
-                                    startCalculation();
-                                  }
+                                  title: "Calculate",
+                                  onPressed: startCalculation
                               )
                           ),
                           SizedBox(width: 10,),
@@ -262,15 +297,12 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                               flex: 1,
                               child: CalculatorActionButton(
                                   title: "Reset",
-                                  onPressed: (){
-                                    resetHome(context);
-                                  }
+                                  onPressed: () => resetPage(context, AdvancedLoanCalculator())
                               )
                           ),
                         ],
                       ),
                     ),
-
                   ],
                 ),
               ),
@@ -307,14 +339,14 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
 
       if(await showRewardedAd()){
         await prefs.setInt('calculate_button_click', 0);
-        Navigator.pushNamed(context, '/result',
+        Navigator.pushNamed(context, CalculationResult.idScreen,
             arguments: {
               'data': history,
               'tableData': data['tableData']
             }
         );
       }else{
-        Navigator.pushNamed(context, '/result',
+        Navigator.pushNamed(context, CalculationResult.idScreen,
             arguments: {
               'data': history,
               'tableData': data['tableData']
@@ -325,7 +357,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     }else{
       counter++;
       await prefs.setInt('calculate_button_click', counter);
-      Navigator.pushNamed(context, '/result',
+      Navigator.pushNamed(context, CalculationResult.idScreen,
           arguments: {
             'data': history,
             'tableData': data['tableData']
