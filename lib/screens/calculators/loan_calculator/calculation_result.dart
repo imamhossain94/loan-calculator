@@ -77,7 +77,7 @@ class _CalculationResultState extends State<CalculationResult> {
           ),
 
           body: Container(
-            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5),
