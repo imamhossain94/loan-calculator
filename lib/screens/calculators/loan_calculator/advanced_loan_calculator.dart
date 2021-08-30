@@ -3,9 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
-import 'package:loan_calculator/components/build_app_drawer.dart';
-import 'package:loan_calculator/components/build_slider.dart';
-//import 'package:loan_calculator/components/build_textfield.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/models/history.dart';
 import 'package:loan_calculator/models/mortgage_data.dart';
@@ -13,7 +10,6 @@ import 'package:loan_calculator/models/result_data.dart';
 import 'package:loan_calculator/models/row_data.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
-import 'package:loan_calculator/utils/app_constants.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'dart:math';
 

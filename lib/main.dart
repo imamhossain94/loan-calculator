@@ -4,13 +4,6 @@ import 'package:hive/hive.dart';
 import 'package:loan_calculator/models/history.dart';
 import 'package:loan_calculator/models/mortgage_data.dart';
 import 'package:loan_calculator/models/result_data.dart';
-import 'package:loan_calculator/pages/about_page.dart';
-import 'package:loan_calculator/pages/feedback_page.dart';
-import 'package:loan_calculator/pages/help_page.dart';
-import 'package:loan_calculator/pages/history_page.dart';
-import 'package:loan_calculator/pages/home_page.dart';
-import 'package:loan_calculator/pages/pdf_preview_page.dart';
-import 'package:loan_calculator/pages/result_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_history.dart';
@@ -97,13 +90,7 @@ class _MyAppState extends State<MyApp> {
         CalculationHistory.idScreen: (context) => CalculationHistory(),
         CalculationResult.idScreen: (context) => CalculationResult(),
         CalculationResultPreview.idScreen: (context) => CalculationResultPreview(),
-        '/home': (context) => HomePage(),
-        '/result': (context) => ResultPage(),
-        '/pdf': (context) => PdfPreviewPage(),
-        '/history': (context) => HistoryPage(),
-        '/help': (context) => HelpPage(),
-        '/feedback': (context) => FeedbackPage(),
-        '/about': (context) => AboutPage(),
+
       },
       // builder: (BuildContext context, Widget child) {
       //   return FlutterSmartDialog(child: child);
