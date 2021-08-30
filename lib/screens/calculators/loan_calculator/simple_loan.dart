@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'components/build_result_card.dart';
@@ -120,8 +121,9 @@ class _SimpleLoanState extends State<SimpleLoan> {
           preferredSize: const Size.fromHeight(55),
             child: CalculatorAppBar(
               title: "Simple\nLoan",
-              historyButtonClick: () {  },
+              historyButtonClick: null,
               saveButtonClick: () {  },
+              deleteButtonClick: null,
             )
         ),
         body: Column(
@@ -170,10 +172,8 @@ class _SimpleLoanState extends State<SimpleLoan> {
                           Expanded(
                             flex: 2,
                             child: CalculatorActionButton(
-                              title: "Save Calculation",
-                              onPressed: (){
-
-                              }
+                              title: "Calculate",
+                              onPressed: updateResult
                             )
                           ),
                           SizedBox(width: 10,),
@@ -181,9 +181,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                             flex: 1,
                             child: CalculatorActionButton(
                                 title: "Reset",
-                                onPressed: (){
-
-                                }
+                                onPressed: () => resetPage(context, SimpleLoan())
                             )
                           ),
                         ],

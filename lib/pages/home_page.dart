@@ -127,8 +127,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   tooltip: 'History',
                   onPressed: () async {
-                    dynamic result =
-                    await Navigator.pushNamed(context, '/history');
+                    dynamic result = await Navigator.pushNamed(context, '/history');
                     if (result != null) {
                       History history = result['data'];
 
