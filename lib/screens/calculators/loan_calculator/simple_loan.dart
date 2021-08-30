@@ -310,7 +310,6 @@ class _SimpleLoanState extends State<SimpleLoan> {
         ],
       ),
     );
-
   }
 
 }
