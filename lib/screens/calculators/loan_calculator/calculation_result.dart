@@ -77,120 +77,132 @@ class _CalculationResultState extends State<CalculationResult> {
           ),
 
           body: Container(
-            margin: EdgeInsets.symmetric(vertical: 15, horizontal: 0),
+            margin: EdgeInsets.fromLTRB(10, 15, 10, 20),
+            alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5),
             ),
-            child: Column(
-              children: [
-                SizedBox(height: 10,),
-                Container(
-                  color: Colors.blueAccent.withOpacity(0.3),
-                  padding: EdgeInsets.all(5),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Column(
-                          children: [
-                            BuildResultItem(
-                              title: 'Monthly payment (PITI)',
-                              value: resultData.monthlyPayment,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Loan payoff date',
-                              value: resultData.lastPayment,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Total interest',
-                              value: resultData.totalInterest,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Monthly property tax',
-                              value: resultData.monthlyTax,
-                            ),
-                            !resultData.monthlyPmi.contains('\$ 0')
-                                ? Divider(color: Colors.black12)
-                                : SizedBox(),
-                            !resultData.monthlyPmi.contains('\$ 0')
-                                ? BuildResultItem(
-                              title: 'Monthly PMI',
-                              value: resultData.monthlyPmi,
-                            )
-                                : SizedBox(),
-                          ],
+            child: Container(
+              margin: EdgeInsets.all(5),
+              //padding: EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                color: Colors.blueAccent.withOpacity(0.3),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Column(
+                children: [
+                  //SizedBox(height: 10,),
+                  Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                        color: Colors.blueAccent.withOpacity(0.3),
+                      borderRadius: BorderRadius.circular(5)
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              BuildResultItem(
+                                title: 'Monthly payment (PITI)',
+                                value: resultData.monthlyPayment,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Loan payoff date',
+                                value: resultData.lastPayment,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Total interest',
+                                value: resultData.totalInterest,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Monthly property tax',
+                                value: resultData.monthlyTax,
+                              ),
+                              !resultData.monthlyPmi.contains('\$ 0')
+                                  ? Divider(color: Colors.black12)
+                                  : SizedBox(),
+                              !resultData.monthlyPmi.contains('\$ 0')
+                                  ? BuildResultItem(
+                                title: 'Monthly PMI',
+                                value: resultData.monthlyPmi,
+                              )
+                                  : SizedBox(),
+                            ],
+                          ),
                         ),
-                      ),
-                      //Container(height: 100, child: VerticalDivider(color: Colors.white54)),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            BuildResultItem(
-                              title: 'Bi-weekly payment',
-                              value: resultData.biWeeklyPayment,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Bi-weekly payoff date',
-                              value: resultData.biWeeklyLastPayment,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Bi-weekly total interest',
-                              value: resultData.biWeeklyTotalInterest,
-                            ),
-                            Divider(color: Colors.black12),
-                            BuildResultItem(
-                              title: 'Monthly insurance',
-                              value: resultData.monthlyIns,
-                            ),
-                            !resultData.totalPmi.contains('\$ 0')
-                                ? Divider(color: Colors.black12)
-                                : SizedBox(),
-                            !resultData.totalPmi.contains('\$ 0')
-                                ? BuildResultItem(
-                              title: 'Total PMI',
-                              value: resultData.totalPmi,
-                            )
-                                : SizedBox(),
-                          ],
+                        //Container(height: 100, child: VerticalDivider(color: Colors.white54)),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              BuildResultItem(
+                                title: 'Bi-weekly payment',
+                                value: resultData.biWeeklyPayment,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Bi-weekly payoff date',
+                                value: resultData.biWeeklyLastPayment,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Bi-weekly total interest',
+                                value: resultData.biWeeklyTotalInterest,
+                              ),
+                              Divider(color: Colors.black12),
+                              BuildResultItem(
+                                title: 'Monthly insurance',
+                                value: resultData.monthlyIns,
+                              ),
+                              !resultData.totalPmi.contains('\$ 0')
+                                  ? Divider(color: Colors.black12)
+                                  : SizedBox(),
+                              !resultData.totalPmi.contains('\$ 0')
+                                  ? BuildResultItem(
+                                title: 'Total PMI',
+                                value: resultData.totalPmi,
+                              )
+                                  : SizedBox(),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                BuildTableHeader(
-                  backgroundColor: Colors.redAccent.withOpacity(0.3),
-                  padding: EdgeInsets.fromLTRB(8, 15, 8, 15),
-                  textColor: Colors.black,
-                  textSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-                Expanded(
-                    child: CupertinoScrollbar(
-                      child: ListView.builder(
-                          itemCount: _rowData.length,
-                          scrollDirection: Axis.vertical,
-                          physics: BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return BuildTableRow(
-                              backgroundColor: _rowData[index].payment.length == 4
-                                  ? Colors.green.withOpacity(0.1)
-                                  : Colors.blueAccent.withOpacity(0.1),
-                              padding: EdgeInsets.all(8),
-                              textColor: Colors.black,
-                              textSize: 14,
-                              fontWeight: FontWeight.normal,
-                              rowData: _rowData[index],
-                            );
-                          }),
-                    )
-                ),
-                SizedBox(height: 10,),
-              ],
+                  BuildTableHeader(
+                    backgroundColor: Colors.redAccent.withOpacity(0.3),
+                    padding: EdgeInsets.fromLTRB(8, 15, 8, 15),
+                    textColor: Colors.black,
+                    textSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  Expanded(
+                      child: CupertinoScrollbar(
+                        child: ListView.builder(
+                            itemCount: _rowData.length,
+                            scrollDirection: Axis.vertical,
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return BuildTableRow(
+                                backgroundColor: _rowData[index].payment.length == 4
+                                    ? Colors.green.withOpacity(0.1)
+                                    : Colors.blueAccent.withOpacity(0.1),
+                                padding: EdgeInsets.all(8),
+                                textColor: Colors.black,
+                                textSize: 14,
+                                fontWeight: FontWeight.normal,
+                                rowData: _rowData[index],
+                              );
+                            }),
+                      )
+                  ),
+                  //SizedBox(height: 10,),
+                ],
+              ),
             ),
           ),
         ),
