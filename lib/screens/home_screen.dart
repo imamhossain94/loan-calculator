@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
+import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'calculators/loan_calculator/simple_loan.dart';
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             color: Colors.white,
                           ),
                           title: 'Savings Calculator',
-                          onPressed: () {  },
+                          onPressed: ()=> Navigator.pushNamed(context, SavingsCalculator.idScreen),
                           color: Color(0xff1689FC),
                         ),
                         SizedBox(width: 10.0,),
