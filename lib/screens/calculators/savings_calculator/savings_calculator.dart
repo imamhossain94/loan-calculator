@@ -2,8 +2,12 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_action_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/components/build_savings_value_picker.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 
 
 class SavingsCalculator extends StatefulWidget {
@@ -121,71 +125,73 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.9),
-                                blurRadius: 0.5,
-                                spreadRadius: 0.5,
-                                offset: Offset.zero
-                            )
-                          ]
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          savingsResultCard(),
-
-                          SavingsFrequencyPicker(
-                            title: 'Frequency',
-                            frequencyName: frequencies.key,
-                            onPressedAction: () {
-                              pickFrequency(
-                                  context: context,
-                                  valueChanged:(value){
-                                    setState(() {
-                                      frequencies = value;
-                                    });
-                                  }
-                              );
-                            },
-                          ),
-                          BuildTextField(
-                            title: 'Principle',
-                            hint: '0.0',
-                            symbol: '\$',
-                            textController: principalController,
-                          ),
-                          BuildTextField(
-                            title: 'Contribution',
-                            hint: '0.0',
-                            symbol: '\$',
-                            textController: contributionController,
-                          ),
-                          BuildTextField(
-                            title: 'Interest Rate',
-                            hint: '0.0',
-                            symbol: '%',
-                            textController: contributionController,
-                          ),
-                          BuildTextField(
-                            title: 'Time Period (years)',
-                            hint: '0',
-                            symbol: 'y',
-                            textController: contributionController,
-                          ),
-
-                        ],
-                      ),
+                    SizedBox(height: 15,),
+                    savingsResultCard(),
+                    BuildActionTextField(
+                      title: 'Frequency',
+                      hint: frequencies.key,
+                      symbol: '▾',
+                      textController: null,
+                      onActionPressed: () {
+                        pickFrequency(
+                            context: context,
+                            valueChanged:(value){
+                              setState(() {
+                                frequencies = value;
+                              });
+                            }
+                        );
+                      },
+                    ),
+                    BuildTextField(
+                      title: 'Principle',
+                      hint: '0.0',
+                      symbol: '\$',
+                      textController: principalController,
+                    ),
+                    BuildTextField(
+                      title: 'Contribution',
+                      hint: '0.0',
+                      symbol: '\$',
+                      textController: contributionController,
+                    ),
+                    BuildTextField(
+                      title: 'Interest Rate',
+                      hint: '0.0',
+                      symbol: '%',
+                      textController: interestRateController,
+                    ),
+                    BuildTextField(
+                      title: 'Time Period (years)',
+                      hint: '0',
+                      symbol: 'y',
+                      textController: contributionController,
                     ),
 
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: CalculatorActionButton(
+                                  title: "Calculate",
+                                  onPressed: updateResult
+                              )
+                          ),
+                          SizedBox(width: 10,),
+                          Expanded(
+                              flex: 1,
+                              child: CalculatorActionButton(
+                                  title: "Reset",
+                                  onPressed: () => resetPage(context, SavingsCalculator())
+                              )
+                          ),
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
@@ -297,113 +303,120 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
   Widget savingsResultCard() {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
-      padding: EdgeInsets.all(15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.blueAccent.withOpacity(0.3),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                "Frequency",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-              Spacer(),
-              Text(
-                frequencies.key,
-                style: TextStyle(
-                  fontSize: 16,),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Principal",
-                style: TextStyle(
-                  fontSize: 16,),
-              ),
-              Spacer(),
-              Text(
-                "${principal.length == 0?0:principal} \$",
-                style: TextStyle(
-                  fontSize: 16,),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Contribution",
-                style: TextStyle(
-                  fontSize: 16,),
-              ),
-              Spacer(),
-              Text(
-                "${contribution.length == 0?0:contribution } \$",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Interest Rate",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-              Spacer(),
-              Text(
-                "${interestRate.length == 0?0:interestRate} %",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Time Period",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-              Spacer(),
-              Text(
-                "${timePeriod.length == 0?0:timePeriod} y",
-                style: TextStyle(
-                  fontSize: 16, ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-            child: Divider(),
-          ),
-          Row(
-            children: [
-              Text(
-                "Savings Result",
-                style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Spacer(),
-              Text(
-                "${savingsResult.toStringAsFixed(2)} \$",
-                style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
+      child: Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  "Frequency",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+                Spacer(),
+                Text(
+                  frequencies.key,
+                  style: TextStyle(
+                    fontSize: 16,),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Principal",
+                  style: TextStyle(
+                    fontSize: 16,),
+                ),
+                Spacer(),
+                Text(
+                  "${principal.length == 0?0:principal} \$",
+                  style: TextStyle(
+                    fontSize: 16,),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Contribution",
+                  style: TextStyle(
+                    fontSize: 16,),
+                ),
+                Spacer(),
+                Text(
+                  "${contribution.length == 0?0:contribution } \$",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Interest Rate",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+                Spacer(),
+                Text(
+                  "${interestRate.length == 0?0:interestRate} %",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Time Period",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+                Spacer(),
+                Text(
+                  "${timePeriod.length == 0?0:timePeriod} y",
+                  style: TextStyle(
+                    fontSize: 16, ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+              child: Divider(),
+            ),
+            Row(
+              children: [
+                Text(
+                  "Savings Result",
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Text(
+                  "${savingsResult.toStringAsFixed(2)} \$",
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
 

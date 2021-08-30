@@ -201,113 +201,120 @@ class _SimpleLoanState extends State<SimpleLoan> {
   Widget loanResultCard() {
     return Container(
       margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
-      padding: EdgeInsets.all(15),
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Colors.blueAccent.withOpacity(0.3),
+        color: Colors.white,
         borderRadius: BorderRadius.circular(5),
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                "Loan Type",
-                style: TextStyle(
-                    fontSize: 16, ),
-              ),
-              Spacer(),
-              Text(
-                loanType,
-                style: TextStyle(
-                    fontSize: 16,),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Loan Amount",
-                style: TextStyle(
-                    fontSize: 16,),
-              ),
-              Spacer(),
-              Text(
-                "${mortgageAmount.length == 0?0:mortgageAmount} \$",
-                style: TextStyle(
-                    fontSize: 16,),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Interest Rate",
-                style: TextStyle(
-                    fontSize: 16, ),
-              ),
-              Spacer(),
-              Text(
-                "${interestRate.length == 0?0:interestRate} %",
-                style: TextStyle(
-                    fontSize: 16, ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                "Period",
-                style: TextStyle(
-                    fontSize: 16,),
-              ),
-              Spacer(),
-              Text(
-                "${period.length == 0?0:period } m",
-                style: TextStyle(
-                    fontSize: 16, ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 15,
-            child: Divider(),
-          ),
-          Row(
-            children: [
-              Text(
-                "Total Cost",
-                style: TextStyle(
+      child: Container(
+        margin: EdgeInsets.all(5),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  "Loan Type",
+                  style: TextStyle(
+                      fontSize: 16, ),
+                ),
+                Spacer(),
+                Text(
+                  loanType,
+                  style: TextStyle(
+                      fontSize: 16,),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Loan Amount",
+                  style: TextStyle(
+                      fontSize: 16,),
+                ),
+                Spacer(),
+                Text(
+                  "${mortgageAmount.length == 0?0:mortgageAmount} \$",
+                  style: TextStyle(
+                      fontSize: 16,),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Interest Rate",
+                  style: TextStyle(
+                      fontSize: 16, ),
+                ),
+                Spacer(),
+                Text(
+                  "${interestRate.length == 0?0:interestRate} %",
+                  style: TextStyle(
+                      fontSize: 16, ),
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  "Period",
+                  style: TextStyle(
+                      fontSize: 16,),
+                ),
+                Spacer(),
+                Text(
+                  "${period.length == 0?0:period } m",
+                  style: TextStyle(
+                      fontSize: 16, ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 15,
+              child: Divider(),
+            ),
+            Row(
+              children: [
+                Text(
+                  "Total Cost",
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Text(
+                  "${totalCostResult.toStringAsFixed(2)} \$",
+                  style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Spacer(),
-              Text(
-                "${totalCostResult.toStringAsFixed(2)} \$",
-                style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 5,),
-          Row(
-            children: [
-              Text(
-                loanType == 'Monthly Cost'?"Monthly Payment":"You Can Borrow",
-                style: TextStyle(
+                ),
+              ],
+            ),
+            SizedBox(height: 5,),
+            Row(
+              children: [
+                Text(
+                  loanType == 'Monthly Cost'?"Monthly Payment":"You Can Borrow",
+                  style: TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+                Spacer(),
+                Text(
+                  "${loanType == 'Monthly Cost'?monthlyPaymentResult.toStringAsFixed(2): youCouldBorrow.toStringAsFixed(2)} \$",
+                  style: TextStyle(
                     fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              Spacer(),
-              Text(
-                "${loanType == 'Monthly Cost'?monthlyPaymentResult.toStringAsFixed(2): youCouldBorrow.toStringAsFixed(2)} \$",
-                style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ],
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
