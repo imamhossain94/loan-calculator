@@ -630,7 +630,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
             Container(
               margin: EdgeInsets.only(top: responsiveWidth(5)),
               decoration: BoxDecoration(
-                color: Colors.greenAccent.withOpacity(0.2),
+                color: Colors.green.withOpacity(0.5),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Material(
@@ -654,9 +654,10 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                       //width: responsiveWidth(18),
                       alignment: Alignment.center,
                       child: Text(
-                          "--- View Details ---",
+                          "Click here to view details",
                           textAlign: TextAlign.center,
                           style: TextStyle(
+                            color: Colors.black,
                             fontSize: responsiveWidth(12),
                             fontWeight: FontWeight.bold,
                           )
