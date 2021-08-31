@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
+import 'package:loan_calculator/screens/calculators/discount_calculator/discount_calculator.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
@@ -95,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.tags,
                           title: 'Discount Calculator',
-                          onPressed: () {  },
+                          onPressed: ()=> Navigator.pushNamed(context, DiscountCalculator.idScreen),
                           color: Color(0xffFF758A),
                         ),
                         SizedBox(width: 10.0,),

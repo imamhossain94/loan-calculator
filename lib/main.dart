@@ -5,6 +5,7 @@ import 'package:loan_calculator/models/history.dart';
 import 'package:loan_calculator/models/mortgage_data.dart';
 import 'package:loan_calculator/models/result_data.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:loan_calculator/screens/calculators/discount_calculator/discount_calculator.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_history.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result.dart';
@@ -95,6 +96,8 @@ class _MyAppState extends State<MyApp> {
 
         SavingsCalculator.idScreen: (context) => SavingsCalculator(),
         TaxCalculator.idScreen: (context) => TaxCalculator(),
+        DiscountCalculator.idScreen: (context) => DiscountCalculator(),
+
 
 
       },
