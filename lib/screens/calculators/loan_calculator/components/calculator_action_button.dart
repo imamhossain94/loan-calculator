@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class CalculatorActionButton extends StatelessWidget {
   final String title;
@@ -7,6 +8,9 @@ class CalculatorActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    ScreenConfig().init(context);
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.blueAccent.withOpacity(0.3),
@@ -19,15 +23,15 @@ class CalculatorActionButton extends StatelessWidget {
           highlightColor: title == "Reset"? Colors.redAccent:Colors.green,
           onTap: onPressed,
           child: Container(
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-              height: 50,
-              width: 55,
+              padding: EdgeInsets.symmetric(vertical: responsiveWidth(4), horizontal: responsiveWidth(4)),
+              height: responsiveWidth(40),
+              width: responsiveWidth(55),
               alignment: Alignment.center,
               child: Text(
                   title,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 16,
+                      fontSize: responsiveWidth(14),
                       color: Colors.black
                   )
               )
