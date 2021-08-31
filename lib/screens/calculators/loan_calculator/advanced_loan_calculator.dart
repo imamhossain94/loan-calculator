@@ -49,6 +49,12 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
   String _downPaymentSymbol;
   bool showPmi;
 
+  Map<String, dynamic> data;
+  History history = History(
+    mortgageData: MortgageData(homeValue: 0.0, downPayment: 0.0, loanAmount: 0.0, loanTerm: 0.0, homeIns: 0.0, interest: 0.0, propertyTax: 0.0, pmi: 0.0),
+    resultData: ResultData(monthlyPayment: "", biWeeklyPayment: "", lastPayment: "", biWeeklyLastPayment: "", totalInterest: "0 ", biWeeklyTotalInterest: "", monthlyTax: "", monthlyIns: "", monthlyPmi: "", totalPmi: "")
+  );
+
 
   @override
   void initState() {
@@ -143,6 +149,9 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                 child: ListView(
                   physics: BouncingScrollPhysics(),
                   children: [
+
+                    advanceLoanResultCard(history),
+
 
                     BuildTextField(
                       title: 'Home Value/ Property Price',
@@ -250,16 +259,18 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
 
   void startCalculation() async {
     calculateLoanAmount();
-    Map<String, dynamic> data = calculateMortgage();
+    data = calculateMortgage();
 
     DateTime now = new DateTime.now();
     DateTime date = new DateTime(now.year, now.month, now.day, now.hour,
         now.minute, now.second, now.microsecond);
 
-    History history = History(
-        mortgageData: data['mortgageData'],
-        resultData: data['resultData'],
-        calculationDate: DateFormat.yMd().add_jm().format(date));
+    setState(() {
+      history = History(
+          mortgageData: data['mortgageData'],
+          resultData: data['resultData'],
+          calculationDate: DateFormat.yMd().add_jm().format(date));
+    });
 
     final box = await Hive.openBox('history');
     box.add(history);
@@ -268,35 +279,45 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int counter = (prefs.getInt('calculate_button_click') ?? 0);
 
-    if(counter >= 2){
 
-      if(await showRewardedAd()){
-        await prefs.setInt('calculate_button_click', 0);
-        Navigator.pushNamed(context, CalculationResult.idScreen,
-            arguments: {
-              'data': history,
-              'tableData': data['tableData']
-            }
-        );
-      }else{
-        Navigator.pushNamed(context, CalculationResult.idScreen,
-            arguments: {
-              'data': history,
-              'tableData': data['tableData']
-            }
-        );
-      }
 
-    }else{
-      counter++;
-      await prefs.setInt('calculate_button_click', counter);
-      Navigator.pushNamed(context, CalculationResult.idScreen,
-          arguments: {
-            'data': history,
-            'tableData': data['tableData']
-          }
-      );
-    }
+
+    // Navigator.pushNamed(context, CalculationResult.idScreen,
+    //     arguments: {
+    //       'data': history,
+    //       'tableData': data['tableData']
+    //     }
+    // );
+    //
+    // if(counter >= 2){
+    //
+    //   if(await showRewardedAd()){
+    //     await prefs.setInt('calculate_button_click', 0);
+    //     Navigator.pushNamed(context, CalculationResult.idScreen,
+    //         arguments: {
+    //           'data': history,
+    //           'tableData': data['tableData']
+    //         }
+    //     );
+    //   }else{
+    //     Navigator.pushNamed(context, CalculationResult.idScreen,
+    //         arguments: {
+    //           'data': history,
+    //           'tableData': data['tableData']
+    //         }
+    //     );
+    //   }
+    //
+    // }else{
+    //   counter++;
+    //   await prefs.setInt('calculate_button_click', counter);
+    //   Navigator.pushNamed(context, CalculationResult.idScreen,
+    //       arguments: {
+    //         'data': history,
+    //         'tableData': data['tableData']
+    //       }
+    //   );
+    // }
 
   }
 
@@ -563,6 +584,110 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
       'tableData': _rowData
     };
   }
+
+
+
+  Widget advanceLoanResultCard(History history) {
+
+    return Container(
+      margin: EdgeInsets.fromLTRB(responsiveWidth(8), 0, responsiveWidth(8), responsiveWidth(8)),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Container(
+        margin: EdgeInsets.all(responsiveWidth(5)),
+        padding: EdgeInsets.all(responsiveWidth(10)),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            resultRow("Home Value/ Property Price", false, "${history.mortgageData.homeValue} \$"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Money Down/ Equity", false, "${history.mortgageData.downPayment} $_downPaymentSymbol"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Loan Amount", false, "${history.mortgageData.loanAmount} \$"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Interest Rate", false, "${history.mortgageData.interest} %"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Loan Term", false, "${history.mortgageData.loanTerm} m"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Property Tex per year", false, "${history.mortgageData.propertyTax} \$"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Insurance per year", false, "${history.mortgageData.homeIns} \$"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("PMI", false, "${history.mortgageData.pmi} %"),
+            SizedBox(height: responsiveWidth(5),),
+            SizedBox(
+              height: responsiveWidth(14),
+              child: Divider(),
+            ),
+            resultRow("Total Interest", true, "${history.resultData.totalInterest} \$"),
+
+            Container(
+              margin: EdgeInsets.only(top: responsiveWidth(5)),
+              decoration: BoxDecoration(
+                color: Colors.greenAccent.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(5),
+                  highlightColor: Colors.blueAccent,
+                  onTap: (){
+
+                    Navigator.pushNamed(context, CalculationResult.idScreen,
+                        arguments: {
+                          'data': history,
+                          'tableData': data['tableData']
+                        }
+                    );
+
+                  },
+                  child: Container(
+                      //padding: EdgeInsets.symmetric(vertical: responsiveWidth(5), horizontal: responsiveWidth(5)),
+                      height: responsiveWidth(22),
+                      //width: responsiveWidth(18),
+                      alignment: Alignment.center,
+                      child: Text(
+                          "--- View Details ---",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: responsiveWidth(12),
+                            fontWeight: FontWeight.bold,
+                          )
+                      )
+                  ),
+                ),
+              ),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget resultRow(String title, bool result, String value){
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+        ),
+        Spacer(),
+        Text(
+          value,
+          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+        ),
+      ],
+    );
+  }
+
 
 
 }
