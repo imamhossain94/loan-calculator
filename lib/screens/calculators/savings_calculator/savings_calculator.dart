@@ -1,12 +1,9 @@
-import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_action_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
-import 'package:loan_calculator/screens/calculators/savings_calculator/components/build_savings_value_picker.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
