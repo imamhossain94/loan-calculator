@@ -10,7 +10,6 @@ class CalculatorAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     ScreenConfig().init(context);
 
     return Container(
