@@ -11,6 +11,7 @@ import 'package:loan_calculator/models/row_data.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 import 'dart:math';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -84,6 +85,8 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenConfig().init(context);
+
     return SafeArea(
       child: Scaffold(
         key: _key,
@@ -133,7 +136,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
 
         body: Column(
           children: [
-            SizedBox(height: 15,),
+            SizedBox(height: responsiveWidth(14),),
             Expanded(
               child: Container(
                 //margin: EdgeInsets.all(8),
@@ -212,7 +215,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
                       child: Row(
                         children: [
                           Expanded(
@@ -222,7 +225,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                                   onPressed: startCalculation
                               )
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(width: responsiveWidth(8),),
                           Expanded(
                               flex: 1,
                               child: CalculatorActionButton(
