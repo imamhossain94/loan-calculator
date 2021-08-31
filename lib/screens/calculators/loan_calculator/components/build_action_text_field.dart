@@ -53,7 +53,7 @@ class BuildActionTextField extends StatelessWidget {
               flex: 2,
               child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(left: responsiveWidth(18)),
+                padding: EdgeInsets.only(left: responsiveWidth(8)),
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(5),
@@ -64,7 +64,7 @@ class BuildActionTextField extends StatelessWidget {
                       child: TextField(
                           enabled: true,
                           controller: textController,
-                          textAlign: TextAlign.right,
+                          textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             prefix: SizedBox(
                               width: responsiveWidth(8),
