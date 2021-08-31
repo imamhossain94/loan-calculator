@@ -14,17 +14,17 @@ class BuildResultItem extends StatelessWidget {
   Widget build(BuildContext context) {
     ScreenConfig().init(context);
     return Container(
-      margin: EdgeInsets.all(2),
+      margin: EdgeInsets.all(responsiveWidth(2)),
       child: Column(
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: responsiveText(14), color: Colors.black87),
+            style: TextStyle(fontSize: responsiveText(12), color: Colors.black87),
           ),
           SizedBox(height: responsiveText(3),),
           Text(
             '$value',
-            style: TextStyle(fontSize: responsiveText(18), color: Colors.black87),
+            style: TextStyle(fontSize: responsiveText(14), color: Colors.black87),
           ),
         ],
       ),
