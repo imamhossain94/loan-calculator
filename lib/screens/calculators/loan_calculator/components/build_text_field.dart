@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class BuildTextField extends StatelessWidget {
   final String title, hint, symbol;
@@ -13,18 +14,19 @@ class BuildTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenConfig().init(context);
 
     return Container(
-      margin: EdgeInsets.all(8),
-      height: 60,
+      margin: EdgeInsets.all(responsiveWidth(7.0)),
+      height: responsiveWidth(50),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Container(
-        margin: EdgeInsets.all(5),
-        padding: EdgeInsets.only(left: 10,),
+        margin: EdgeInsets.all(responsiveWidth(5)),
+        padding: EdgeInsets.only(left: responsiveWidth(8),),
         //height: 44,
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
@@ -40,16 +42,15 @@ class BuildTextField extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.left,
-                style: TextStyle(
-                    fontSize: 14, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
               ),
             ),
-            SizedBox(width: 10,),
+            SizedBox(width: responsiveWidth(8),),
             Expanded(
               flex: 2,
               child: Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: responsiveWidth(8)),
                 decoration: BoxDecoration(
                   color: Colors.grey.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(5),
@@ -60,10 +61,10 @@ class BuildTextField extends StatelessWidget {
                       child: TextField(
                           enabled: true,
                           controller: textController,
-                          textAlign: TextAlign.right,
+                          textAlign: TextAlign.left,
                           decoration: InputDecoration(
                             prefix: SizedBox(
-                              width: 10,
+                              width: responsiveWidth(8),
                             ),
                             border: InputBorder.none,
                             hintText: hint,
@@ -72,12 +73,12 @@ class BuildTextField extends StatelessWidget {
                           textInputAction: TextInputAction.done,
                           autocorrect: false,
                           obscureText: false,
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          style: TextStyle(fontSize: responsiveWidth(16), fontWeight: FontWeight.bold)),
                     ),
-                    SizedBox(width: 5,),
+                    SizedBox(width: responsiveWidth(5),),
                     Text(
                       symbol,
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: responsiveWidth(16), fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
