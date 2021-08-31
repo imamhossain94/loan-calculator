@@ -7,6 +7,7 @@ import 'package:loan_calculator/components/home_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/discount_calculator/discount_calculator.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
+import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculator.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.wallet,
                           title: 'Tip Calculator',
-                          onPressed: () {  },
+                          onPressed: ()=> Navigator.pushNamed(context, TipCalculator.idScreen),
                           color: Color(0xffC76CF8),
                         ),
                       ],
@@ -114,13 +115,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                     child: Row(
                       children: [
-                        CalculatorCard(
-                          icon: FontAwesomeIcons.balanceScale,
-                          title: 'Unit Price Calculator',
-                          onPressed: () {  },
-                          color: Color(0xff055f90),
-                        ),
-                        SizedBox(width: 10.0,),
                         CalculatorCard(
                           icon: FontAwesomeIcons.notEqual,
                           title: 'Compare Loan',
