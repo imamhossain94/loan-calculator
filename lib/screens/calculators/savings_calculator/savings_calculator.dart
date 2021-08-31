@@ -121,14 +121,15 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
         ),
         body: Column(
           children: [
+            SizedBox(height: 15,),
+            savingsResultCard(),
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(height: 15,),
-                    savingsResultCard(),
+
                     BuildActionTextField(
                       title: 'Frequency',
                       hint: frequencies.key,
