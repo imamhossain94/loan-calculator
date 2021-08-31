@@ -27,7 +27,7 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
   Widget build(BuildContext context) {
 
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -87,9 +87,9 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
           borderRadius: BorderRadius.circular(5),
           onTap: onPressed,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-            height: 50,
-            width: 55,
+            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+            height: 40,
+            width: 40,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.blueAccent.withOpacity(active ? 1 : 0.07),
@@ -99,7 +99,7 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
                   color: active ? Colors.white: Colors.black
                 )
             )

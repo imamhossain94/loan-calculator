@@ -5,6 +5,7 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'calculators/loan_calculator/simple_loan.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //ThemesMode().init(context);
+    ScreenConfig().init(context);
 
 
     return WillPopScope(
@@ -50,20 +51,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.home,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.home,
                           title: 'Simple Loan',
                           onPressed: ()=>Navigator.pushNamed(context, SimpleLoan.idScreen),
                           color: Color(0xff1f577d),
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.handHoldingUsd,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.handHoldingUsd,
                           title: 'Advanced Loan',
                           onPressed: ()=> Navigator.pushNamed(context, AdvancedLoanCalculator.idScreen),
                           color: Color(0xff1eb384),
@@ -77,20 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.piggyBank,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.piggyBank,
                           title: 'Savings Calculator',
                           onPressed: ()=> Navigator.pushNamed(context, SavingsCalculator.idScreen),
                           color: Color(0xff1689FC),
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.fileInvoiceDollar,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.fileInvoiceDollar,
                           title: 'Tax Calculator',
                           onPressed: () {  },
                           color: Color(0xff01B4A9),
@@ -103,20 +92,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.tags,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.tags,
                           title: 'Discount Calculator',
                           onPressed: () {  },
                           color: Color(0xffFF758A),
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.wallet,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.wallet,
                           title: 'Tip Calculator',
                           onPressed: () {  },
                           color: Color(0xffC76CF8),
@@ -130,20 +113,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.balanceScale,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.balanceScale,
                           title: 'Unit Price Calculator',
                           onPressed: () {  },
                           color: Color(0xff055f90),
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.notEqual,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.notEqual,
                           title: 'Compare Loan',
                           onPressed: () {  },
                           color: Color(0xff1689FC),
@@ -162,20 +139,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.comments,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.comments,
                           title: 'Feedback',
                           onPressed: () {  },
                           color: Colors.indigo,
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.solidStar,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.solidStar,
                           title: 'Rate The App',
                           onPressed: () {  },
                           color: Colors.redAccent,
@@ -188,20 +159,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.googlePlay,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.googlePlay,
                           title: 'Other Apps',
                           onPressed: () {  },
                           color: Colors.orange,
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.freeCodeCamp,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.freeCodeCamp,
                           title: 'About Development',
                           onPressed: () {  },
                           color: Colors.pinkAccent,
@@ -215,10 +180,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       children: [
                         CalculatorCard(
-                          icon: FaIcon(
-                            FontAwesomeIcons.codeBranch,
-                            color: Colors.white,
-                          ),
+                          icon: FontAwesomeIcons.codeBranch,
                           title: 'Version',
                           onPressed: () {  },
                           color: Colors.blueAccent,
@@ -229,11 +191,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
 
                   //AppBannerAds()
-
-
-
-
-
 
                 ],
               ),
