@@ -130,73 +130,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
               deleteButtonClick: null,
             )
         ),
-        // appBar: AppBar(
-        //   elevation: 0.0,
-        //   backgroundColor: Colors.transparent,
-        //   iconTheme: IconThemeData(color: Colors.black, size: 30),
-        //   leading: Builder(
-        //     builder: (BuildContext context) {
-        //       return IconButton(
-        //         icon: Icon(Icons.menu_rounded,
-        //             size: 30), // change this size and style
-        //         onPressed: () {
-        //           Scaffold.of(context).openDrawer();
-        //         },
-        //         tooltip:
-        //         MaterialLocalizations.of(context).openAppDrawerTooltip,
-        //       );
-        //     },
-        //   ),
-        //   title: Text(
-        //     AppConstants.appName,
-        //     style: TextStyle(color: Colors.black, fontFamily: 'Audiowide'),
-        //   ),
-        //   actions: [
-        //     IconButton(
-        //         icon: Icon(
-        //           Icons.history_rounded,
-        //           color: Colors.black,
-        //         ),
-        //         tooltip: 'History',
-        //         onPressed: () async {
-        //           dynamic result =
-        //           await Navigator.pushNamed(context, '/history');
-        //           if (result != null) {
-        //             History history = result['data'];
-        //
-        //             Flushbar(
-        //               flushbarPosition: FlushbarPosition.BOTTOM,
-        //               borderRadius: 10,
-        //               margin: EdgeInsets.all(10),
-        //               title: "Edit Calculation",
-        //               message: "Data loaded successfully",
-        //               duration: Duration(seconds: 3),
-        //             )..show(context);
-        //
-        //             print('All ok');
-        //             setState(() {
-        //               homeValueController.text =
-        //                   history.mortgageData.homeValue.toString();
-        //               downPaymentController.text =
-        //                   history.mortgageData.downPayment.toString();
-        //               loanAmountController.text =
-        //                   history.mortgageData.loanAmount.toString();
-        //               homeInsController.text =
-        //                   history.mortgageData.homeIns.toString();
-        //               propertyTaxController.text =
-        //                   history.mortgageData.propertyTax.toString();
-        //               interestController.text =
-        //                   history.mortgageData.interest.toString();
-        //               pmiController.text =
-        //                   history.mortgageData.pmi.toString();
-        //             });
-        //           } else {
-        //             print('No action needed');
-        //           }
-        //         })
-        //   ],
-        // ),
-        //
+
         body: Column(
           children: [
             SizedBox(height: 15,),
