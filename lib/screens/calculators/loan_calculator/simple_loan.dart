@@ -129,24 +129,25 @@ class _SimpleLoanState extends State<SimpleLoan> {
         body: Column(
           children: [
             SizedBox(height: 15,),
+            LoanTypePicker(
+              title: 'Loan Type',
+              valueChanged: (String value) {
+                setState(() {
+                  print(value);
+                  loanType = value;
+                  updateResult();
+                });
+              },
+            ),
+            SizedBox(height: 10,),
+            loanResultCard(),
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    LoanTypePicker(
-                      title: 'Loan Type',
-                      valueChanged: (String value) {
-                        setState(() {
-                          print(value);
-                          loanType = value;
-                          updateResult();
-                        });
-                      },
-                    ),
-                    SizedBox(height: 10,),
-                    loanResultCard(),
+
                     BuildTextField(
                       title: loanType == 'Monthly Cost'?'Loan Amount':'Monthly Payment',
                       hint: '0.0',

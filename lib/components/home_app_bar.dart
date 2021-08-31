@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 import 'app_bar_action_button.dart';
 
@@ -8,6 +9,8 @@ class HomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScreenConfig().init(context);
+
     return
       Container(
         height: 55,
@@ -20,7 +23,7 @@ class HomeAppBar extends StatelessWidget {
                 "Loan\nCalculator",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: responsiveWidth(20),
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.bold
                 ),
