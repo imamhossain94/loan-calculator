@@ -77,14 +77,14 @@ class _CalculationResultState extends State<CalculationResult> {
           ),
 
           body: Container(
-            margin: EdgeInsets.fromLTRB(10, 15, 10, 20),
+            margin: EdgeInsets.fromLTRB(responsiveWidth(8), responsiveWidth(14), responsiveWidth(8), responsiveWidth(20)),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(5),
             ),
             child: Container(
-              margin: EdgeInsets.all(5),
+              margin: EdgeInsets.all(responsiveWidth(5)),
               //padding: EdgeInsets.all(15),
               decoration: BoxDecoration(
                 color: Colors.blueAccent.withOpacity(0.3),
@@ -94,7 +94,7 @@ class _CalculationResultState extends State<CalculationResult> {
                 children: [
                   //SizedBox(height: 10,),
                   Container(
-                    padding: EdgeInsets.all(5),
+                    padding: EdgeInsets.all(responsiveWidth(5)),
                     decoration: BoxDecoration(
                         color: Colors.blueAccent.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(5)
@@ -175,9 +175,9 @@ class _CalculationResultState extends State<CalculationResult> {
                   ),
                   BuildTableHeader(
                     backgroundColor: Colors.redAccent.withOpacity(0.3),
-                    padding: EdgeInsets.fromLTRB(8, 15, 8, 15),
+                    padding: EdgeInsets.all(responsiveWidth(10)),
                     textColor: Colors.black,
-                    textSize: 16,
+                    textSize: responsiveWidth(12),
                     fontWeight: FontWeight.bold,
                   ),
                   Expanded(
@@ -191,9 +191,9 @@ class _CalculationResultState extends State<CalculationResult> {
                                 backgroundColor: _rowData[index].payment.length == 4
                                     ? Colors.green.withOpacity(0.1)
                                     : Colors.blueAccent.withOpacity(0.1),
-                                padding: EdgeInsets.all(8),
+                                padding: EdgeInsets.all(responsiveWidth(8)),
                                 textColor: Colors.black,
-                                textSize: 14,
+                                textSize: responsiveWidth(12),
                                 fontWeight: FontWeight.normal,
                                 rowData: _rowData[index],
                               );
