@@ -71,6 +71,7 @@ class BuildActionTextField extends StatelessWidget {
                             ),
                             border: InputBorder.none,
                             hintText: hint,
+                            hintStyle: TextStyle(color: symbol == '▾'?Colors.black:null),
                           ),
                           keyboardType: TextInputType.number,
                           textInputAction: TextInputAction.done,
