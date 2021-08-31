@@ -11,6 +11,7 @@ import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result_pdf.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
+import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/screens/home_screen.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/service/pref_service.dart';
@@ -93,6 +94,8 @@ class _MyAppState extends State<MyApp> {
         CalculationResultPreview.idScreen: (context) => CalculationResultPreview(),
 
         SavingsCalculator.idScreen: (context) => SavingsCalculator(),
+        TaxCalculator.idScreen: (context) => TaxCalculator(),
+
 
       },
       // builder: (BuildContext context, Widget child) {

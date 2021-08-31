@@ -626,7 +626,6 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
               child: Divider(),
             ),
             resultRow("Total Interest", true, "${history.resultData.totalInterest} \$"),
-
             Container(
               margin: EdgeInsets.only(top: responsiveWidth(5)),
               decoration: BoxDecoration(
@@ -666,7 +665,6 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                 ),
               ),
             ),
-
           ],
         ),
       ),
@@ -688,7 +686,5 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
       ],
     );
   }
-
-
 
 }

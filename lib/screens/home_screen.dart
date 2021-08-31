@@ -5,6 +5,7 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
+import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
@@ -81,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.fileInvoiceDollar,
                           title: 'Tax Calculator',
-                          onPressed: () {  },
+                          onPressed: ()=> Navigator.pushNamed(context, TaxCalculator.idScreen),
                           color: Color(0xff01B4A9),
                         ),
                       ],
