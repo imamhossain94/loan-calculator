@@ -168,7 +168,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                       textController: periodController,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
                       child: Row(
                         children: [
                           Expanded(
@@ -178,7 +178,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                               onPressed: updateResult
                             )
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(width: responsiveWidth(8),),
                           Expanded(
                             flex: 1,
                             child: CalculatorActionButton(

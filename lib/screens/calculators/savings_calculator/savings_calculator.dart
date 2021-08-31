@@ -8,6 +8,7 @@ import 'package:loan_calculator/screens/calculators/loan_calculator/components/c
 import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/components/build_savings_value_picker.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 
 class SavingsCalculator extends StatefulWidget {
@@ -108,6 +109,9 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
 
   @override
   Widget build(BuildContext context) {
+
+    ScreenConfig().init(context);
+
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
@@ -121,7 +125,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
         ),
         body: Column(
           children: [
-            SizedBox(height: 15,),
+            SizedBox(height: responsiveWidth(14),),
             savingsResultCard(),
             Expanded(
               child: SingleChildScrollView(
@@ -172,7 +176,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                     ),
 
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
                       child: Row(
                         children: [
                           Expanded(
@@ -182,7 +186,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                                   onPressed: updateResult
                               )
                           ),
-                          SizedBox(width: 10,),
+                          SizedBox(width: responsiveWidth(8),),
                           Expanded(
                               flex: 1,
                               child: CalculatorActionButton(
@@ -227,7 +231,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
           maxChildSize: 0.97,
           builder: (_, controller) {
             return Container(
-              padding: EdgeInsets.only(top: 5,),
+              padding: EdgeInsets.only(top: responsiveWidth(5),),
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -236,7 +240,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                   ),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.black12.withOpacity(0.9),
+                        color: Colors.black12.withOpacity(0.3),
                         blurRadius: 3,
                         spreadRadius: 3,
                         offset: Offset.zero)
@@ -246,17 +250,23 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: EdgeInsets.only(left: responsiveWidth(14), top: responsiveWidth(8), bottom: responsiveWidth(3),),
                       child: Row(
                         children: [
-                          Text('Select Frequency', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          Text('Select Frequency', style: TextStyle(fontSize: responsiveWidth(16), fontWeight: FontWeight.bold)),
                           Spacer(),
-                          IconButton(icon: Icon(Icons.close), onPressed: (){
-                            Navigator.pop(context, false);
-                          })
+                          // TextButton(
+                          //     onPressed: ()=>Navigator.pop(context, false),
+                          //     style: ButtonStyle(
+                          //       backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent.withOpacity(0.3))
+                          //     ),
+                          //     child: Text("×", style: TextStyle(color:Colors.redAccent, fontSize: responsiveWidth(18)),)
+                          // ),
+                          SizedBox(width: responsiveWidth(5),)
                         ],
                       )
                   ),
+                  Divider(),
                   Expanded(
                       child:
                       ListView.builder(
@@ -272,8 +282,8 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                                 },
                                 child:
                                 Container(
-                                  margin: EdgeInsets.all(8),
-                                  padding: EdgeInsets.fromLTRB(8, 15, 8, 15),
+                                  margin: EdgeInsets.all(responsiveWidth(8)),
+                                  padding: EdgeInsets.fromLTRB(responsiveWidth(8), responsiveWidth(14), responsiveWidth(8), responsiveWidth(14)),
                                   decoration: BoxDecoration(
                                     color: Colors.grey.withOpacity(0.3),
                                     borderRadius: BorderRadius.circular(5),
@@ -281,9 +291,9 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                                   child: Row(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(frequencyList[index].entries.elementAt(0).key, style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                      Text(frequencyList[index].entries.elementAt(0).key, style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold)),
                                       Spacer(),
-                                      Text(frequencyList[index].entries.elementAt(0).value.toString() + ' Days', style: TextStyle()),
+                                      Text(frequencyList[index].entries.elementAt(0).value.toString() + ' Days', style: TextStyle(fontSize: responsiveWidth(14),)),
                                     ],
                                   ),
                                 )
@@ -303,15 +313,15 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
 
   Widget savingsResultCard() {
     return Container(
-      margin: EdgeInsets.fromLTRB(10, 0, 10, 20),
+      margin: EdgeInsets.fromLTRB(responsiveWidth(8), 0, responsiveWidth(8), responsiveWidth(8)),
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Container(
-        margin: EdgeInsets.all(5),
-        padding: EdgeInsets.all(15),
+        margin: EdgeInsets.all(responsiveWidth(5)),
+        padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
           color: Colors.blueAccent.withOpacity(0.3),
           borderRadius: BorderRadius.circular(5),
@@ -322,62 +332,60 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
               children: [
                 Text(
                   "Frequency",
-                  style: TextStyle(
-                    fontSize: 16, ),
+                  style: TextStyle(fontSize: responsiveWidth(14), ),
                 ),
                 Spacer(),
                 Text(
                   frequencies.key,
-                  style: TextStyle(
-                    fontSize: 16,),
+                  style: TextStyle(fontSize: responsiveWidth(14),),
                 ),
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: responsiveWidth(5),),
             Row(
               children: [
                 Text(
                   "Principal",
                   style: TextStyle(
-                    fontSize: 16,),
+                    fontSize: responsiveWidth(14),),
                 ),
                 Spacer(),
                 Text(
                   "${principal.length == 0?0:principal} \$",
                   style: TextStyle(
-                    fontSize: 16,),
+                    fontSize: responsiveWidth(14),),
                 ),
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: responsiveWidth(5),),
             Row(
               children: [
                 Text(
                   "Contribution",
                   style: TextStyle(
-                    fontSize: 16,),
+                    fontSize: responsiveWidth(14),),
                 ),
                 Spacer(),
                 Text(
                   "${contribution.length == 0?0:contribution } \$",
                   style: TextStyle(
-                    fontSize: 16, ),
+                    fontSize: responsiveWidth(14), ),
                 ),
               ],
             ),
-            SizedBox(height: 5,),
+            SizedBox(height: responsiveWidth(5),),
             Row(
               children: [
                 Text(
                   "Interest Rate",
                   style: TextStyle(
-                    fontSize: 16, ),
+                    fontSize: responsiveWidth(14), ),
                 ),
                 Spacer(),
                 Text(
                   "${interestRate.length == 0?0:interestRate} %",
                   style: TextStyle(
-                    fontSize: 16, ),
+                    fontSize: responsiveWidth(14), ),
                 ),
               ],
             ),
@@ -387,18 +395,18 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                 Text(
                   "Time Period",
                   style: TextStyle(
-                    fontSize: 16, ),
+                    fontSize: responsiveWidth(14), ),
                 ),
                 Spacer(),
                 Text(
                   "${timePeriod.length == 0?0:timePeriod} y",
                   style: TextStyle(
-                    fontSize: 16, ),
+                    fontSize: responsiveWidth(14), ),
                 ),
               ],
             ),
             SizedBox(
-              height: 15,
+              height: responsiveWidth(14),
               child: Divider(),
             ),
             Row(
@@ -406,13 +414,13 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                 Text(
                   "Savings Result",
                   style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
                 ),
                 Spacer(),
                 Text(
                   "${savingsResult.toStringAsFixed(2)} \$",
                   style: TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                      fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
                 ),
               ],
             ),
