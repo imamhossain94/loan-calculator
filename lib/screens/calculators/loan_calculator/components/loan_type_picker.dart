@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 
 class LoanTypePicker extends StatefulWidget {
   final String title;
@@ -26,8 +27,10 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
   @override
   Widget build(BuildContext context) {
 
+    ScreenConfig().init(context);
+
     return Container(
-      margin: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0.0),
+      margin: EdgeInsets.fromLTRB(responsiveWidth(8.0), 0, responsiveWidth(8.0), 0.0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -36,14 +39,13 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
               Text(
                 widget.title,
                 style: TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: responsiveWidth(16), fontWeight: FontWeight.bold),
               ),
               //Spacer(),
             ],
           ),
           Container(
-            margin: EdgeInsets.only(
-                top: 8, bottom: 5),
+            margin: EdgeInsets.only(top: responsiveWidth(8.0), bottom: responsiveWidth(5.0)),
             child: Row(
               children: [
                 buildButton(
@@ -58,7 +60,7 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
                   active:isMonthlyCost,
                 ),
                 SizedBox(
-                  width: 10,
+                  width: responsiveWidth(8.0),
                 ),
                 buildButton(
                   title: 'Maximum Loan',
@@ -87,9 +89,9 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
           borderRadius: BorderRadius.circular(5),
           onTap: onPressed,
           child: Container(
-            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-            height: 40,
-            width: 40,
+            padding: EdgeInsets.symmetric(vertical: responsiveWidth(2.0), horizontal: responsiveWidth(5.0)),
+            height: responsiveWidth(40),
+            width: responsiveWidth(40),
             alignment: Alignment.center,
             decoration: BoxDecoration(
               color: Colors.blueAccent.withOpacity(active ? 1 : 0.07),
@@ -99,7 +101,7 @@ class _LoanTypePickerState extends State<LoanTypePicker> {
                 title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: responsiveWidth(16),
                   color: active ? Colors.white: Colors.black
                 )
             )
