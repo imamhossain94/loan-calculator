@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/components/calculator_app_bar.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
 
-class SalesTaxCalcPage extends StatefulWidget {
+class TaxCalculator extends StatefulWidget {
+  static const String idScreen = "TaxCalculator";
   @override
-  _SalesTaxCalcPageState createState() => _SalesTaxCalcPageState();
+  _TaxCalculatorState createState() => _TaxCalculatorState();
 }
 
-class _SalesTaxCalcPageState extends State<SalesTaxCalcPage> {
+class _TaxCalculatorState extends State<TaxCalculator> {
 
 
   TextEditingController taxRateController = TextEditingController();
   TextEditingController originalPriceController = TextEditingController();
 
-  String taxRate, originalPrice;
+  String taxRate = "", originalPrice = "";
   double tax, totalPrice;
 
 
@@ -63,24 +68,14 @@ class _SalesTaxCalcPageState extends State<SalesTaxCalcPage> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('Sales Tax Calculator',
-            style: TextStyle(
-                fontFamily: fontAudioWide,
-                fontSize: responsiveWidth(18)
-            ),
-          ),
-          elevation: 0,
-          actions: [
-            IconButton(
-              onPressed: () async {
-                await showInterstitialAd();
-                resetPage(context, salesTaxCalcPage);
-              },
-              icon: Icon(Icons.refresh),
-              tooltip: 'Refresh',
+        appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(55),
+            child: CalculatorAppBar(
+              title: "Tax\nCalculator",
+              historyButtonClick: null,
+              saveButtonClick: () {  },
+              deleteButtonClick: null,
             )
-          ],
         ),
         body: Column(
           children: [
@@ -88,57 +83,85 @@ class _SalesTaxCalcPageState extends State<SalesTaxCalcPage> {
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
-                      margin: EdgeInsets.all(10),
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                          color: ThemesMode.isDarkMode?Colors.black:textWhite,
-                          borderRadius: BorderRadius.circular(5),
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.grey.withOpacity(0.9),
-                                blurRadius: 0.5,
-                                spreadRadius: 0.5,
-                                offset: Offset.zero
-                            )
-                          ]
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          BuildTextField(
-                            title: 'Tax Rate',
-                            hint: '0.0',
-                            isEnabled: true,
-                            textController: taxRateController,
-                            onPressedAction: null,
-                            widget: Text('%', style: TextStyle(fontWeight: FontWeight.bold, fontSize: responsiveText(16)),),),
-                          BuildTextField(
-                            title: 'Original Price',
-                            hint: '0.0',
-                            isEnabled: true,
-                            textController: originalPriceController,
-                            onPressedAction: null,
-                            widget: Text('\$', style: TextStyle(fontWeight: FontWeight.bold, fontSize: responsiveText(16)),),),
+                    SizedBox(height: responsiveWidth(14),),
 
+                    taxResultCard(),
+
+                    BuildTextField(
+                      title: 'Tax Rate',
+                      hint: '0.0',
+                      symbol: '%',
+                      textController: taxRateController,
+                    ),
+                    BuildTextField(
+                      title: 'Original Price',
+                      hint: '0.0',
+                      symbol: '\$',
+                      textController: originalPriceController,
+                    ),
+
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
+                      child: Row(
+                        children: [
+                          Expanded(
+                              flex: 2,
+                              child: CalculatorActionButton(
+                                  title: "Calculate",
+                                  onPressed: updateResult
+                              )
+                          ),
+                          SizedBox(width: responsiveWidth(8),),
+                          Expanded(
+                              flex: 1,
+                              child: CalculatorActionButton(
+                                  title: "Reset",
+                                  onPressed: () => resetPage(context, TaxCalculator())
+                              )
+                          ),
                         ],
                       ),
-                    ),
-                    //Result
-                    Row(
-                      children: [
-                        BuildResultCard(title: 'Tax', value: tax.toStringAsFixed(2),),
-                        BuildResultCard(title: 'Total Price', value: totalPrice.toStringAsFixed(2),),
-                      ],
-                    ),
+                    )
 
                   ],
                 ),
               ),
             ),
-            BuildBannerAd(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget taxResultCard() {
+    return Container(
+      margin: EdgeInsets.fromLTRB(responsiveWidth(8), 0, responsiveWidth(8), responsiveWidth(8)),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Container(
+        margin: EdgeInsets.all(responsiveWidth(5)),
+        padding: EdgeInsets.all(responsiveWidth(10)),
+        decoration: BoxDecoration(
+          color: Colors.blueAccent.withOpacity(0.3),
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Column(
+          children: [
+            resultRow("Tax Rate", false, "${taxRate.length == 0?0:taxRate} %"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Original Price", false, "${originalPrice.length == 0?0:originalPrice} \$"),
+            SizedBox(height: responsiveWidth(5),),
+            SizedBox(
+              height: responsiveWidth(14),
+              child: Divider(),
+            ),
+            resultRow("Tax", true, "${tax.toStringAsFixed(2)} \$"),
+            resultRow("Total Price", true, "${totalPrice.toStringAsFixed(2)} \$"),
           ],
         ),
       ),
@@ -146,5 +169,19 @@ class _SalesTaxCalcPageState extends State<SalesTaxCalcPage> {
   }
 
 
-
+  Widget resultRow(String title, bool result, String value){
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+        ),
+        Spacer(),
+        Text(
+          value,
+          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+        ),
+      ],
+    );
+  }
 }
