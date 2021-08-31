@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
 import 'app_bar_action_button.dart';
 
 class CalculatorAppBar extends StatelessWidget {
@@ -9,11 +10,13 @@ class CalculatorAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      Container(
+
+    ScreenConfig().init(context);
+
+    return Container(
         height: 55,
         alignment: Alignment.centerLeft,
-        margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
+        margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: responsiveWidth(10.0)),
         child: Row(
           children: [
             AppBarActionButton(
@@ -26,8 +29,8 @@ class CalculatorAppBar extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 20,
-                    letterSpacing: 1.5,
+                    fontSize: responsiveWidth(17),
+                    letterSpacing: responsiveWidth(1.5),
                     fontWeight: FontWeight.bold
                 ),
               ),
@@ -38,14 +41,14 @@ class CalculatorAppBar extends StatelessWidget {
                 onPressed: saveButtonClick
             ),
             if(historyButtonClick!=null)
-            SizedBox(width: 5,),
+            SizedBox(width: responsiveWidth(5),),
             if(historyButtonClick!=null)
             AppBarActionButton(
                 icon: FontAwesomeIcons.history,
                 onPressed: historyButtonClick
             ),
             if(deleteButtonClick!=null)
-            SizedBox(width: 5,),
+            SizedBox(width: responsiveWidth(5),),
             if(deleteButtonClick!=null)
             AppBarActionButton(
                 icon: FontAwesomeIcons.solidTrashAlt,
