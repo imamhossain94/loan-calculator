@@ -18,7 +18,7 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
   TextEditingController addedTaxController = TextEditingController();
   TextEditingController discountPercentageController = TextEditingController();
 
-  String originalAmount, addedTax, discountPercentage;
+  String originalAmount = "", addedTax = "", discountPercentage = "";
   double amountSaved, finalPrice;
 
   @override
@@ -56,11 +56,9 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
     discountPercentage = discountPercentageController.value.text;
     //Make null safety
     setState(() {
-
       double _originalAmount = double.tryParse(originalAmount)??0.0;
       double _addedTax = double.tryParse(addedTax)??0.0;
       double _discountPercentage = double.tryParse(discountPercentage)??0.0;
-
 
       amountSaved = ((_originalAmount * _addedTax / 100) +_originalAmount) * ((_discountPercentage /100));
       finalPrice = ((_originalAmount * (_addedTax / 100)) + _originalAmount) - amountSaved;
