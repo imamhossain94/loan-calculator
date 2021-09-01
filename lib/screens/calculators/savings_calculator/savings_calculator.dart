@@ -326,111 +326,48 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
         margin: EdgeInsets.all(responsiveWidth(5)),
         padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.3),
+          color: Color(0xff1689FC),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Frequency",
-                  style: TextStyle(fontSize: responsiveWidth(14), ),
-                ),
-                Spacer(),
-                Text(
-                  frequencies.key,
-                  style: TextStyle(fontSize: responsiveWidth(14),),
-                ),
-              ],
-            ),
+            resultRow("Frequency", false, frequencies.key),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Principal",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14),),
-                ),
-                Spacer(),
-                Text(
-                  "${principal.length == 0?0:principal} \$",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14),),
-                ),
-              ],
-            ),
+            resultRow("Principal", false, "${principal.length == 0?0:principal} \$"),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Contribution",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14),),
-                ),
-                Spacer(),
-                Text(
-                  "${contribution.length == 0?0:contribution } \$",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14), ),
-                ),
-              ],
-            ),
+            resultRow("Contribution", false, "${contribution.length == 0?0:contribution } \$"),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Interest Rate",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14), ),
-                ),
-                Spacer(),
-                Text(
-                  "${interestRate.length == 0?0:interestRate} %",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14), ),
-                ),
-              ],
-            ),
-            SizedBox(height: 5,),
-            Row(
-              children: [
-                Text(
-                  "Time Period",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14), ),
-                ),
-                Spacer(),
-                Text(
-                  "${timePeriod.length == 0?0:timePeriod} y",
-                  style: TextStyle(
-                    fontSize: responsiveWidth(14), ),
-                ),
-              ],
-            ),
+            resultRow("Interest Rate", false, "${interestRate.length == 0?0:interestRate} %"),
+            SizedBox(height: responsiveWidth(5),),
+            resultRow("Time Period", false, "${timePeriod.length == 0?0:timePeriod} y"),
+
             SizedBox(
               height: responsiveWidth(14),
               child: Divider(),
             ),
-            Row(
-              children: [
-                Text(
-                  "Savings Result",
-                  style: TextStyle(
-                      fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Text(
-                  "${savingsResult.toStringAsFixed(2)} \$",
-                  style: TextStyle(
-                      fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+
+            resultRow("Savings Result", true, "${savingsResult.toStringAsFixed(2)} \$"),
           ],
         ),
       ),
     );
-
   }
+
+
+  Widget resultRow(String title, bool result, String value){
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+        ),
+        Spacer(),
+        Text(
+          value,
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+        ),
+      ],
+    );
+  }
+
 }
