@@ -24,6 +24,7 @@ dependencies:
   share: ^2.0.4
   intl: ^0.17.0
   pdf: ^3.4.2
+  package_info: ^2.0.2
   flutter_pdfview: ^1.0.4
   flutter_email_sender: ^5.0.2
   permission_handler: ^8.1.4+2
