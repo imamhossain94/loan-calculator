@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'constant.dart';
-
 
 void resetPage(BuildContext context, Widget widget) {
   Navigator.pushReplacement(
@@ -28,7 +26,6 @@ void showMessage(BuildContext context, String title, String message){
     duration: Duration(seconds: 3),
   )..show(context);
 }
-
 
 Future<bool> showRatingDialogue(BuildContext context) async {
   return showDialog(
@@ -147,7 +144,7 @@ Widget ratingStar({BuildContext context, int value, Color color}) {
       onPressed: () async {
         if (value <= 3) {
           Navigator.pop(context);
-          showMessage(context, "", "Thank you");
+          showMessage(context, "Rate The App", "Thank you");
         } else if (value <= 5) {
           Navigator.pop(context);
 
