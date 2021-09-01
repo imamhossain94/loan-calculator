@@ -161,7 +161,7 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
         margin: EdgeInsets.all(responsiveWidth(5)),
         padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.3),
+          color: Color(0xffFF758A),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
@@ -190,14 +190,15 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
         Spacer(),
         Text(
           value,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
       ],
     );
   }
+
 }
