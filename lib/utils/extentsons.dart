@@ -1,8 +1,11 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loan_calculator/components/build_rating_view.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'constant.dart';
 
 
 void resetPage(BuildContext context, Widget widget) {
@@ -26,25 +29,27 @@ void showMessage(BuildContext context, String title, String message){
   )..show(context);
 }
 
-Future<bool> onRatingPressed(BuildContext context) async {
+
+Future<bool> showRatingDialogue(BuildContext context) async {
   return showDialog(
-    barrierColor: Colors.white54,
+    //barrierColor: Colors.white54,
     context: context,
+    barrierDismissible: true,
     builder: (context) {
       return Center(
         child: Wrap(children: [
           Container(
             clipBehavior: Clip.none,
-            margin: EdgeInsets.all(8),
-            padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
+            margin: EdgeInsets.all(8.0),
+            padding: EdgeInsets.fromLTRB(15.0, 10.0, 15.0, 15.0),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
+                color: Theme.of(context).backgroundColor,
+                borderRadius: BorderRadius.circular(10.0),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.grey.withOpacity(0.9),
-                      blurRadius: 3,
-                      spreadRadius: 3,
+                      blurRadius: 1,
+                      spreadRadius: 1,
                       offset: Offset.zero)
                 ]),
             child: Column(
@@ -52,24 +57,33 @@ Future<bool> onRatingPressed(BuildContext context) async {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Icon(
-                      Icons.star,
-                      size: 30,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
                     Text(
                       'Rate The App',
                       textAlign: TextAlign.start,
                       style: TextStyle(
-                        fontFamily: 'Audiowide',
-                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         decoration: TextDecoration.none,
-                        color: Colors.black87,
+                        color: Colors.black,
                       ),
                     ),
+                    Spacer(),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: ()=> Navigator.pop(context),
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8.0)
+                          ),
+                          child: FaIcon(FontAwesomeIcons.times, color: Colors.grey[500],),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 Divider(
@@ -78,54 +92,39 @@ Future<bool> onRatingPressed(BuildContext context) async {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  'If you like this app, please take a little bit of time to review it!\n'
-                  'It really help us and it shouldn\'t take you more than one minute',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontFamily: null,
-                    //fontWeight: FontWeight.bold,
-                    decoration: TextDecoration.none,
-                    color: Colors.black.withOpacity(0.7),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
                 SizedBox(
                   height: 30,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      BuildRatingValue(
+                      ratingStar(context:context,
                         value: 1,
                         color: Colors.red.withOpacity(1),
                       ),
                       SizedBox(
                         width: 15,
                       ),
-                      BuildRatingValue(
-                          value: 2, color: Colors.red.withOpacity(0.9),
+                      ratingStar(context:context,
+                        value: 2, color: Colors.red.withOpacity(0.9),
                       ),
                       SizedBox(
                         width: 15,
                       ),
-                      BuildRatingValue(
+                      ratingStar(context:context,
                         value: 3,
                         color: Colors.red.withOpacity(0.7),
                       ),
                       SizedBox(
                         width: 15,
                       ),
-                      BuildRatingValue(
+                      ratingStar(context:context,
                         value: 4,
                         color: Colors.green.withOpacity(0.9),
                       ),
                       SizedBox(
                         width: 15,
                       ),
-                      BuildRatingValue(
+                      ratingStar(context:context,
                         value: 5,
                         color: Colors.green.withOpacity(1),
                       )
@@ -141,115 +140,177 @@ Future<bool> onRatingPressed(BuildContext context) async {
   );
 }
 
-Future<bool> onBackPressed(BuildContext context) async {
-  return showModalBottomSheet(
-    backgroundColor: Colors.white54,
-    barrierColor: Colors.white54,
+Widget ratingStar({BuildContext context, int value, Color color}) {
+
+  return Expanded(
+    child: CupertinoButton(
+      onPressed: () async {
+        if (value <= 3) {
+          Navigator.pop(context);
+          showMessage(context, "", "Thank you");
+        } else if (value <= 5) {
+          Navigator.pop(context);
+
+          String url = appLink;
+
+          if (await canLaunch(url)) {
+            await launch(url);
+          } else {
+            throw 'Could not launch $url';
+          }
+
+        }
+      },
+      padding: EdgeInsets.zero,
+      color: Theme.of(context).scaffoldBackgroundColor,
+      child: Padding(
+          padding: const EdgeInsets.only(left: 5, right: 5),
+          child:
+          FaIcon(FontAwesomeIcons.solidStar, color: color, size: 16,)
+      ),
+    ),
+  );
+}
+
+
+Future<bool> showDevelopmentDialogue(BuildContext context) async {
+
+  ScreenConfig().init(context);
+
+  return showDialog(
+    //barrierColor: Colors.white54,
     context: context,
-    elevation: 0.0,
+    barrierDismissible: true,
     builder: (context) {
-      return Container(
-        clipBehavior: Clip.antiAlias,
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
-        decoration: BoxDecoration(
-            color: Colors.white,
-            //border: Border.all(width: 0.5, color: Colors.black12),
-            borderRadius: BorderRadius.circular(10),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  blurRadius: 3,
-                  spreadRadius: 3,
-                  offset: Offset.zero)
-            ]),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Image.asset(
-                  'assets/images/ic_launcher.png',
-                  height: 20,
-                  width: 20,
+      return Center(
+        child: Wrap(children: [
+          Container(
+            clipBehavior: Clip.none,
+            margin: EdgeInsets.all(responsiveWidth(8.0)),
+            padding: EdgeInsets.fromLTRB(responsiveWidth(14.0), responsiveWidth(8.0), responsiveWidth(14.0), responsiveWidth(14.0)),
+            decoration: BoxDecoration(
+                color: Theme.of(context).backgroundColor,
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      blurRadius: 1,
+                      spreadRadius: 1,
+                      offset: Offset.zero)
+                ]),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      'About Development',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.none,
+                        fontSize: responsiveWidth(16),
+                        color: Colors.black,
+                      ),
+                    ),
+                    Spacer(),
+                    Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: ()=> Navigator.pop(context),
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(8.0)
+                          ),
+                          child: FaIcon(FontAwesomeIcons.times, color: Colors.grey[500],),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                Divider(
+                  thickness: 1,
                 ),
                 SizedBox(
-                  width: 10,
+                  height: 10,
                 ),
-                Text(
-                  'Mortgage Calculator',
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontFamily: 'Audiowide',
-                    fontSize: 20,
-                    decoration: TextDecoration.none,
-                    color: Colors.black87,
+                SizedBox(
+                  height: 30,
+                  child: Row(
+                    children: [
+                      Text(
+                        'App Developer:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                          fontSize: responsiveWidth(14),
+                          color: Colors.black,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        developerName,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                        fontSize: responsiveWidth(12),
+                        color: Colors.black,
+                      ),)
+                    ],
+                  ),
+                ),
+                Divider(),
+                SizedBox(
+                  height: 30,
+                  child: Row(
+                    children: [
+                      Text('Designer Name:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none,
+                      fontSize: responsiveWidth(14),
+                      color: Colors.black,
+                      )),
+                      Spacer(),
+                      Text(designerName,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontSize: responsiveWidth(12),
+                          color: Colors.black,))
+                    ],
+                  ),
+                ),
+                Divider(),
+                SizedBox(
+                  height: 30,
+                  child: Row(
+                    children: [
+                      Text('App Icon:', style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.none,
+                        fontSize: responsiveWidth(14),
+                        color: Colors.black,),),
+                      Spacer(),
+                      Text("fontawesome.com,\nflaticon.com",
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          fontSize: responsiveWidth(12),
+                          color: Colors.black,))
+                    ],
                   ),
                 ),
               ],
             ),
-            Divider(
-              thickness: 1,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              'Are you sure, You want to EXIT?',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                fontSize: 18,
-                //fontWeight: FontWeight.bold,
-                decoration: TextDecoration.none,
-                color: Colors.black.withOpacity(0.7),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            SizedBox(
-              height: 30,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: CupertinoButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(false);
-                      },
-                      padding: EdgeInsets.zero,
-                      color: Colors.blueAccent,
-                      child: Text('No'),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: CupertinoButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      padding: EdgeInsets.zero,
-                      color: Colors.redAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 30, right: 30),
-                        child: Text('Yes'),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+          ),
+        ]),
       );
     },
   );
 }
+
 
 Future<bool> onDeletePressed(BuildContext context) async {
   return showDialog(
@@ -361,8 +422,6 @@ Future<bool> onDeletePressed(BuildContext context) async {
   ).then((value) => value == null?false:value);
 
 }
-
-
 
 Future<bool> onSavePdf(BuildContext context) async {
   return showDialog(
