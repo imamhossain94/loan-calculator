@@ -13,14 +13,14 @@ class CalculatorActionButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: Colors.blueAccent.withOpacity(0.3),
+        color: title == "Reset"? Colors.redAccent:Colors.green,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(5),
-          highlightColor: title == "Reset"? Colors.redAccent:Colors.green,
+          highlightColor: Colors.blueAccent,
           onTap: onPressed,
           child: Container(
               padding: EdgeInsets.symmetric(vertical: responsiveWidth(4), horizontal: responsiveWidth(4)),
@@ -32,7 +32,7 @@ class CalculatorActionButton extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: responsiveWidth(14),
-                      color: Colors.black
+                      color: Colors.white
                   )
               )
           ),

@@ -217,7 +217,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
         margin: EdgeInsets.all(responsiveWidth(5)),
         padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.3),
+          color: Color(0xff1f577d), //Colors.blueAccent.withOpacity(0.3),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
@@ -254,12 +254,12 @@ class _SimpleLoanState extends State<SimpleLoan> {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
         Spacer(),
         Text(
           value,
-          style: TextStyle(fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
       ],
     );
