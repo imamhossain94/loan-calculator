@@ -222,96 +222,48 @@ class _SimpleLoanState extends State<SimpleLoan> {
         ),
         child: Column(
           children: [
-            Row(
-              children: [
-                Text(
-                  "Loan Type",
-                  style: TextStyle(fontSize: responsiveWidth(14), ),
-                ),
-                Spacer(),
-                Text(
-                  loanType,
-                  style: TextStyle(fontSize: responsiveWidth(14),),
-                ),
-              ],
-            ),
+            resultRow("Loan Type", false, loanType),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Loan Amount",
-                  style: TextStyle(fontSize: responsiveWidth(14),),
-                ),
-                Spacer(),
-                Text(
-                  "${mortgageAmount.length == 0?0:mortgageAmount} \$",
-                  style: TextStyle(fontSize: responsiveWidth(14),),
-                ),
-              ],
-            ),
+            resultRow("Loan Amount", false, "${mortgageAmount.length == 0?0:mortgageAmount} \$"),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Interest Rate",
-                  style: TextStyle(fontSize: responsiveWidth(14), ),
-                ),
-                Spacer(),
-                Text(
-                  "${interestRate.length == 0?0:interestRate} %",
-                  style: TextStyle(fontSize: responsiveWidth(14), ),
-                ),
-              ],
-            ),
+            resultRow("Interest Rate", false, "${interestRate.length == 0?0:interestRate} %"),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  "Period",
-                  style: TextStyle(fontSize: responsiveWidth(14),),
-                ),
-                Spacer(),
-                Text(
-                  "${period.length == 0?0:period } m",
-                  style: TextStyle(fontSize: responsiveWidth(14), ),
-                ),
-              ],
-            ),
+            resultRow("Period", false, "${period.length == 0?0:period } m"),
+
             SizedBox(
               height: responsiveWidth(15),
               child: Divider(),
             ),
-            Row(
-              children: [
-                Text(
-                  "Total Cost",
-                  style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Text(
-                  "${totalCostResult.toStringAsFixed(2)} \$",
-                  style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
+
+            resultRow("Total Cost", true, "${totalCostResult.toStringAsFixed(2)} \$"),
             SizedBox(height: responsiveWidth(5),),
-            Row(
-              children: [
-                Text(
-                  loanType == 'Monthly Cost'?"Monthly Payment":"You Can Borrow",
-                  style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-                Spacer(),
-                Text(
-                  "${loanType == 'Monthly Cost'?monthlyPaymentResult.toStringAsFixed(2): youCouldBorrow.toStringAsFixed(2)} \$",
-                  style: TextStyle(fontSize: responsiveWidth(14), fontWeight: FontWeight.bold),
-                ),
-              ],
+            resultRow(
+                loanType == 'Monthly Cost'?"Monthly Payment":"You Can Borrow",
+                true,
+                "${loanType == 'Monthly Cost'?monthlyPaymentResult.toStringAsFixed(2): youCouldBorrow.toStringAsFixed(2)} \$"
             ),
           ],
         ),
       ),
     );
   }
+
+
+  Widget resultRow(String title, bool result, String value){
+    return Row(
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+        ),
+        Spacer(),
+        Text(
+          value,
+          style: TextStyle(fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
+        ),
+      ],
+    );
+  }
+
 
 }
