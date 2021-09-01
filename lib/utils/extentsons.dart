@@ -248,7 +248,7 @@ Future<bool> showDevelopmentDialogue(BuildContext context) async {
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.none,
                           fontSize: responsiveWidth(14),
-                          color: Colors.black,
+                          color: Colors.black54,
                         ),
                       ),
                       Spacer(),
@@ -257,7 +257,7 @@ Future<bool> showDevelopmentDialogue(BuildContext context) async {
                         style: TextStyle(
                           decoration: TextDecoration.none,
                         fontSize: responsiveWidth(12),
-                        color: Colors.black,
+                        color: Colors.black54,
                       ),)
                     ],
                   ),
@@ -272,14 +272,14 @@ Future<bool> showDevelopmentDialogue(BuildContext context) async {
                       fontWeight: FontWeight.bold,
                       decoration: TextDecoration.none,
                       fontSize: responsiveWidth(14),
-                      color: Colors.black,
+                      color: Colors.black54,
                       )),
                       Spacer(),
                       Text(designerName,
                         style: TextStyle(
                           decoration: TextDecoration.none,
                           fontSize: responsiveWidth(12),
-                          color: Colors.black,))
+                          color: Colors.black54,))
                     ],
                   ),
                 ),
@@ -292,13 +292,13 @@ Future<bool> showDevelopmentDialogue(BuildContext context) async {
                         fontWeight: FontWeight.bold,
                         decoration: TextDecoration.none,
                         fontSize: responsiveWidth(14),
-                        color: Colors.black,),),
+                        color: Colors.black54,),),
                       Spacer(),
                       Text("fontawesome.com,\nflaticon.com",
                         style: TextStyle(
                           decoration: TextDecoration.none,
                           fontSize: responsiveWidth(12),
-                          color: Colors.black,))
+                          color: Colors.black54,))
                     ],
                   ),
                 ),
