@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:share/share.dart';
 
 import 'app_bar_action_button.dart';
 
@@ -29,17 +31,17 @@ class HomeAppBar extends StatelessWidget {
                 ),
               ),
             ),
-            AppBarActionButton(
-                icon: FontAwesomeIcons.cog,
-                onPressed: () {
-
-                }
-            ),
-            SizedBox(width: 5,),
+            // AppBarActionButton(
+            //     icon: FontAwesomeIcons.cog,
+            //     onPressed: () {
+            //
+            //     }
+            // ),
+            // SizedBox(width: 5,),
             AppBarActionButton(
                 icon: FontAwesomeIcons.shareAlt,
                 onPressed: () {
-
+                  Share.share('Hey check out this android app $appLink');
                 }
             )
           ],
