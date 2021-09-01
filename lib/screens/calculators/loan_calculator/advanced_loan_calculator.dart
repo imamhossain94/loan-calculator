@@ -589,6 +589,8 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
 
   Widget advanceLoanResultCard(History history) {
 
+    print("lal ${history.resultData.totalInterest}");
+
     return Container(
       margin: EdgeInsets.fromLTRB(responsiveWidth(8), 0, responsiveWidth(8), responsiveWidth(8)),
       alignment: Alignment.center,
@@ -600,7 +602,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
         margin: EdgeInsets.all(responsiveWidth(5)),
         padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.3),
+          color: Color(0xff1eb384),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
@@ -626,17 +628,18 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
               child: Divider(),
             ),
             resultRow("Total Interest", true, "${history.resultData.totalInterest} \$"),
+            if(history.resultData.totalInterest != "0 ")
             Container(
               margin: EdgeInsets.only(top: responsiveWidth(5)),
               decoration: BoxDecoration(
-                color: Colors.green.withOpacity(0.5),
+                color: Colors.white54,
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Material(
                 color: Colors.transparent,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(5),
-                  highlightColor: Colors.blueAccent,
+                  highlightColor: Colors.white,
                   onTap: (){
 
                     Navigator.pushNamed(context, CalculationResult.idScreen,
@@ -656,7 +659,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                           "Click here to view details",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.indigo,
                             fontSize: responsiveWidth(12),
                             fontWeight: FontWeight.bold,
                           )
@@ -676,12 +679,12 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
         Spacer(),
         Text(
           value,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
       ],
     );
