@@ -10,6 +10,7 @@ import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculato
 import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
@@ -199,10 +200,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           icon: FontAwesomeIcons.codeBranch,
                           title: 'Version',
                           onPressed: () async {
-                            // await PackageInfo.fromPlatform().then((PackageInfo packageInfo) async {
-                            //   String version = packageInfo.version;
-                            //   setAppVersion(version);
-                            // });
+                            await PackageInfo.fromPlatform().then((PackageInfo packageInfo) async {
+                              String version = packageInfo.version;
+                              showMessage(context, "App Version", "Version $version");
+                            });
                           },
                           color: Colors.blueAccent,
                         ),
