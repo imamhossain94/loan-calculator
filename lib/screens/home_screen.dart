@@ -121,7 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.notEqual,
                           title: 'Compare Loan',
-                          onPressed: () {  },
+                          onPressed: () {
+                            showMessage(context, "Compare Loan", "Coming soon...");
+                          },
                           color: Color(0xff1689FC),
                         ),
                       ],
