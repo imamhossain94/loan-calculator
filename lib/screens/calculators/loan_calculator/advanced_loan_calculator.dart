@@ -659,9 +659,8 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                           "Click here to view details",
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.indigo,
+                            color: Colors.black,
                             fontSize: responsiveWidth(12),
-                            fontWeight: FontWeight.bold,
                           )
                       )
                   ),
