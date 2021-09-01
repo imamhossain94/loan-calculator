@@ -9,7 +9,7 @@ import 'package:loan_calculator/screens/calculators/discount_calculator/discount
 import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_history.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result_pdf.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result_preview.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';

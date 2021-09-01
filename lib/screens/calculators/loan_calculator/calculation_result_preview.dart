@@ -5,6 +5,7 @@ import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/utils/constant.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:loan_calculator/models/history.dart';
 import 'package:loan_calculator/models/mortgage_data.dart';
@@ -64,6 +65,11 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
               historyButtonClick: null,
               saveButtonClick: null,
               deleteButtonClick: null,
+              shareButtonClick: () async {
+                if(filePath != null) {
+                  await sendEmail('$appName Calculation Result', '');
+                }
+              },
             )
         ),
 
@@ -81,36 +87,30 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
                   margin: EdgeInsets.all(5),
                   //padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.blueAccent.withOpacity(0.3),
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PDFView(
-                        key: GlobalKey<ScaffoldState>(),
-                        filePath: filePath,
-                        enableSwipe: true,
-                        swipeHorizontal: false,
-                        autoSpacing: false,
-                        pageFling: false,
-                        onRender: (_pages) {
-                        },
-                        onError: (error) {
-                          print(error.toString());
-                        },
-                        onPageError: (page, error) {
-                          print('$page: ${error.toString()}');
-                        },
-                        onViewCreated: (PDFViewController pdfViewController) {
+                child: PDFView(
+                  key: GlobalKey<ScaffoldState>(),
+                  filePath: filePath, //"/sdcard/download/LoanCalculator/Loan Calculator 0013.pdf",//filePath,
+                  enableSwipe: true,
+                  swipeHorizontal: false,
+                  autoSpacing: false,
+                  pageFling: false,
+                  onRender: (_pages) {
+                  },
+                  onError: (error) {
+                    print(error.toString());
+                  },
+                  onPageError: (page, error) {
+                    print('$page: ${error.toString()}');
+                  },
+                  onViewCreated: (PDFViewController pdfViewController) {
 
-                        },
-                        onPageChanged: (int page, int total) {
-                          print('page change: $page/$total');
-                        },
-                      ),
-                    ),
-                  ],
+                  },
+                  onPageChanged: (int page, int total) {
+                    print('page change: $page/$total');
+                  },
                 ),
               ),
             ))
@@ -280,32 +280,27 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
                 ? '0'
                 : '';
 
-    String path;
-    var platform = const MethodChannel('flutter.native/helper');
-    try {
 
-      if(await platform.invokeMethod('graterThenQ')) {
-        path = "/storage/emulated/0/Mortgage Calculator/PDF";
-        File file = File('$path/${appName}_$prefix$counter.pdf');
-        await file.writeAsBytes(await pdf.save());
-        await prefs.setInt('file_number', counter);
-      }else{
-        path = '/storage/emulated/0/${appName}/PDF';
-        await Directory(path).create(recursive: true);
-        File file = File('$path/${appName}_$prefix$counter.pdf');
-        await file.writeAsBytes(await pdf.save());
-      }
-    } on PlatformException catch (e) {
-      print("Failed to Invoke: '${e.message}'.");
+    String path = "/sdcard/download/LoanCalculator";
+    final directory = Directory(path);
+
+    if ((await directory.exists())){
+      print("exist");
+    }else{
+      directory.create();
     }
 
-
-
+    File file = File('$path/LoanCalculator_$prefix$counter.pdf');
+    await file.writeAsBytes(await pdf.save());
+    await prefs.setInt('file_number', counter);
 
     setState(() {
-      filePath = '$path/${appName}_$prefix$counter.pdf';
+      filePath = '$path/LoanCalculator_$prefix$counter.pdf';
     });
   }
+
+
+
 
   Future<void> sendEmail(String subject, String body) async {
     final Email email = Email(

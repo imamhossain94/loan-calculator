@@ -5,8 +5,8 @@ import 'app_bar_action_button.dart';
 
 class CalculatorAppBar extends StatelessWidget {
   final String title;
-  final VoidCallback saveButtonClick, historyButtonClick, deleteButtonClick;
-  const CalculatorAppBar({Key key, @required this.title,  @required this.saveButtonClick,  @required this.historyButtonClick, @required this.deleteButtonClick}) : super(key: key);
+  final VoidCallback saveButtonClick, historyButtonClick, deleteButtonClick, shareButtonClick;
+  const CalculatorAppBar({Key key, @required this.title,  @required this.saveButtonClick,  @required this.historyButtonClick, @required this.deleteButtonClick, @required this.shareButtonClick}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,14 @@ class CalculatorAppBar extends StatelessWidget {
             AppBarActionButton(
                 icon: FontAwesomeIcons.solidTrashAlt,
                 onPressed: historyButtonClick
-            )
+            ),
+            if(shareButtonClick!=null)
+            SizedBox(width: responsiveWidth(5),),
+            if(shareButtonClick!=null)
+            AppBarActionButton(
+                icon: FontAwesomeIcons.shareAlt,
+                onPressed: shareButtonClick
+            ),
           ],
         )
       );
