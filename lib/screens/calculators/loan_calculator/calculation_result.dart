@@ -95,8 +95,8 @@ class _CalculationResultState extends State<CalculationResult> {
                   Container(
                     padding: EdgeInsets.all(responsiveWidth(5)),
                     decoration: BoxDecoration(
-                        color: Colors.blueAccent.withOpacity(0.3),
-                      borderRadius: BorderRadius.circular(5)
+                        color: Color(0xff1eb384),//Colors.blueAccent.withOpacity(0.3),
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5), topRight: Radius.circular(5))
                     ),
                     child: Row(
                       children: [

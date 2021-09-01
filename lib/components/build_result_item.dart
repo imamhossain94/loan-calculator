@@ -19,12 +19,12 @@ class BuildResultItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontSize: responsiveText(12), color: Colors.black87),
+            style: TextStyle(fontSize: responsiveText(12), color: Colors.white),
           ),
           SizedBox(height: responsiveText(3),),
           Text(
             '$value',
-            style: TextStyle(fontSize: responsiveText(14), color: Colors.black87),
+            style: TextStyle(fontSize: responsiveText(14), color: Colors.white),
           ),
         ],
       ),
