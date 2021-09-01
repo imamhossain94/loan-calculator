@@ -12,7 +12,7 @@ import 'package:loan_calculator/models/result_data.dart';
 import 'package:loan_calculator/models/row_data.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
-import 'calculation_result_pdf.dart';
+import 'calculation_result_preview.dart';
 
 
 
@@ -211,46 +211,16 @@ class _CalculationResultState extends State<CalculationResult> {
 
   void navigatePage() async{
 
-    await Permission.storage.request();
-    await Permission.manageExternalStorage.request();
-
-    var platform = const MethodChannel('flutter.native/helper');
-    try {
-      var data = {
-        "dirName": "$appName/PDF",
-      };
-
-      if(await platform.invokeMethod('graterThenQ')) {
-        await platform.invokeMethod('createDirectory', data).then((value) async{
-
-          if(value){
-            if(await onSavePdf(context)){
-              Navigator.pushNamed(context, CalculationResultPreview.idScreen,
-                  arguments: {
-                    'data': history,
-                    'tableData': _rowData,
-                  }
-              );
-            }
-          }else{
-            showMessage(context, "Permission Required", "Without external storage permission you can't save file.");
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      await Permission.storage.request();
+    }else{
+      Navigator.pushNamed(context, CalculationResultPreview.idScreen,
+          arguments: {
+            'data': history,
+            'tableData': _rowData,
           }
-
-        });
-      }else{
-        if(await onSavePdf(context)){
-          Navigator.pushNamed(context, '/pdf',
-              arguments: {
-                'data': history,
-                'tableData': _rowData,
-              }
-          );
-        }
-      }
-
-
-    } on PlatformException catch (e) {
-      print("Failed to Invoke: '${e.message}'.");
+      );
     }
 
   }
