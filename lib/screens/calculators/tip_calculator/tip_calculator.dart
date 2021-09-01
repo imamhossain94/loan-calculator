@@ -154,7 +154,7 @@ class _TipCalculatorState extends State<TipCalculator> {
                     BuildTextField(
                       title: 'Number of People',
                       hint: '0.0',
-                      symbol: '👤',
+                      symbol: 'P',
                       textController: numberOfPeopleController,
                     ),
 
@@ -211,14 +211,14 @@ class _TipCalculatorState extends State<TipCalculator> {
         margin: EdgeInsets.all(responsiveWidth(5)),
         padding: EdgeInsets.all(responsiveWidth(10)),
         decoration: BoxDecoration(
-          color: Colors.blueAccent.withOpacity(0.3),
+          color: Color(0xffC76CF8),
           borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
           children: [
             resultRow("Bill Amount", false, "${billAmount.length == 0?0:billAmount} \$"),
             SizedBox(height: responsiveWidth(5),),
-            resultRow("Number of People", false, "${numberOfPeople.length == 0?0:numberOfPeople} 👤"),
+            resultRow("Number of People", false, "${numberOfPeople.length == 0?0:numberOfPeople} P"),
             SizedBox(height: responsiveWidth(5),),
             resultRow("Tip Amount", false, "${tipAmount.length == 0?0:tipAmount} \$"),
             SizedBox(height: responsiveWidth(5),),
@@ -240,14 +240,15 @@ class _TipCalculatorState extends State<TipCalculator> {
       children: [
         Text(
           title,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
         Spacer(),
         Text(
           value,
-          style: TextStyle(fontSize: responsiveWidth(12), fontWeight: result?FontWeight.bold:null),
+          style: TextStyle(color: Colors.white, fontSize: responsiveWidth(14), fontWeight: result?FontWeight.bold:null),
         ),
       ],
     );
   }
+
 }

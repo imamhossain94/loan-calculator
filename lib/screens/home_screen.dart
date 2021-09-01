@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_card.dart';
 import 'package:loan_calculator/components/home_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/discount_calculator/discount_calculator.dart';
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculator.dart';
+import 'package:loan_calculator/utils/constant.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'calculators/loan_calculator/advanced_loan_calculator.dart';
 import 'calculators/loan_calculator/simple_loan.dart';
@@ -137,14 +139,22 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.comments,
                           title: 'Feedback',
-                          onPressed: () {  },
+                          onPressed: () async {
+                            String url = feedbackMail;
+
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            } else {
+                              throw 'Could not launch $url';
+                            }
+                          },
                           color: Colors.indigo,
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
                           icon: FontAwesomeIcons.solidStar,
                           title: 'Rate The App',
-                          onPressed: () {  },
+                          onPressed: () async => showRatingDialogue(context),
                           color: Colors.redAccent,
                         ),
                       ],
@@ -157,14 +167,24 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.googlePlay,
                           title: 'Other Apps',
-                          onPressed: () {  },
+                          onPressed: () async {
+
+                            String url = storeLink;
+
+                            if (await canLaunch(url)) {
+                            await launch(url);
+                            } else {
+                            throw 'Could not launch $url';
+                            }
+
+                          },
                           color: Colors.orange,
                         ),
                         SizedBox(width: 10.0,),
                         CalculatorCard(
                           icon: FontAwesomeIcons.freeCodeCamp,
                           title: 'About Development',
-                          onPressed: () {  },
+                          onPressed: () async => showDevelopmentDialogue(context),
                           color: Colors.pinkAccent,
                         ),
                       ],
@@ -178,7 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         CalculatorCard(
                           icon: FontAwesomeIcons.codeBranch,
                           title: 'Version',
-                          onPressed: () {  },
+                          onPressed: () async {
+                            // await PackageInfo.fromPlatform().then((PackageInfo packageInfo) async {
+                            //   String version = packageInfo.version;
+                            //   setAppVersion(version);
+                            // });
+                          },
                           color: Colors.blueAccent,
                         ),
 

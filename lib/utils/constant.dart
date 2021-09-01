@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-const String appName = 'Loan Routine';
+const String appName = 'Loan Calculator';
 const String appVersion = 'app_version';
 
 const String developerName = 'Md. Imam Hossain';
 const String designerName = 'Md. Imam Hossain';
 
-const String feedbackMail = 'imamagun94@gmail.com'; //'mailto:imamagun94@gmail.com'
+const String feedbackMail = 'mailto:imamagun94@gmail.com'; //'mailto:imamagun94@gmail.com'
 const String contactMail = 'imamagun94@gmail.com'; //'mailto:imamagun94@gmail.com'
 
-const String appLink = 'https://play.google.com/store/apps/details?id=com.newagedevs.smart_notice_bubt_client';
+const String appLink = 'https://play.google.com/store/apps/details?id=com.newagedevs.loan_calculator';
 const String storeLink = 'https://play.google.com/store/apps/developer?id=NewAgeDevs';
 
 // Ads unit id

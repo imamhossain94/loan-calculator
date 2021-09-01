@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
-import 'package:loan_calculator/service/google_ad_service.dart';
-import 'package:loan_calculator/utils/app_constants.dart';
+import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:loan_calculator/models/history.dart';
@@ -218,7 +217,7 @@ class _CalculationResultState extends State<CalculationResult> {
     var platform = const MethodChannel('flutter.native/helper');
     try {
       var data = {
-        "dirName": "${AppConstants.appName}/PDF",
+        "dirName": "$appName/PDF",
       };
 
       if(await platform.invokeMethod('graterThenQ')) {
