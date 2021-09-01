@@ -62,7 +62,7 @@ Future<bool> showRatingDialogue(BuildContext context) async {
                       textAlign: TextAlign.start,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                        fontSize: responsiveWidth(18),
                         decoration: TextDecoration.none,
                         color: Colors.black,
                       ),
@@ -73,8 +73,8 @@ Future<bool> showRatingDialogue(BuildContext context) async {
                       child: InkWell(
                         onTap: ()=> Navigator.pop(context),
                         child: Container(
-                          height: 30,
-                          width: 30,
+                          height: responsiveWidth(30),
+                          width: responsiveWidth(30),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                               color: Colors.grey[200],
@@ -90,10 +90,10 @@ Future<bool> showRatingDialogue(BuildContext context) async {
                   thickness: 1,
                 ),
                 SizedBox(
-                  height: 10,
+                  height: responsiveWidth(10),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: responsiveWidth(40),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -164,14 +164,13 @@ Widget ratingStar({BuildContext context, int value, Color color}) {
       padding: EdgeInsets.zero,
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Padding(
-          padding: const EdgeInsets.only(left: 5, right: 5),
+          padding: EdgeInsets.all(responsiveWidth(5)),
           child:
-          FaIcon(FontAwesomeIcons.solidStar, color: color, size: 16,)
+          FaIcon(FontAwesomeIcons.solidStar, color: color, size: responsiveWidth(16),)
       ),
     ),
   );
 }
-
 
 Future<bool> showDevelopmentDialogue(BuildContext context) async {
 
@@ -310,7 +309,6 @@ Future<bool> showDevelopmentDialogue(BuildContext context) async {
     },
   );
 }
-
 
 Future<bool> onDeletePressed(BuildContext context) async {
   return showDialog(
