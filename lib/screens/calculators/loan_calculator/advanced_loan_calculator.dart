@@ -8,6 +8,7 @@ import 'package:loan_calculator/models/mortgage_data.dart';
 import 'package:loan_calculator/models/result_data.dart';
 import 'package:loan_calculator/models/row_data.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'dart:math';
@@ -64,7 +65,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     interestController.text = '3.5';
     pmiController.text = '0.85';
     loanTermController.text = '360';
-
+    GoogleAdService().init();
     super.initState();
   }
 
@@ -81,6 +82,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     loanTermController.dispose();
     Hive.close();
 
+    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -628,8 +630,9 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(5),
                   highlightColor: Colors.white,
-                  onTap: (){
+                  onTap: () async{
 
+                    await showInterstitialAd();
                     Navigator.pushNamed(context, CalculationResult.idScreen,
                         arguments: {
                           'data': history,

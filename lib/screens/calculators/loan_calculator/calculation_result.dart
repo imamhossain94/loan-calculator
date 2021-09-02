@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -28,24 +29,19 @@ class _CalculationResultState extends State<CalculationResult> {
   ResultData resultData;
   List<RowData> _rowData;
 
+  @override
+  initState() {
+    GoogleAdService().init();
+    super.initState();
+  }
 
+  @override
+  dispose() {
+    disposeGoogleAdService();
+    super.dispose();
+  }
 
   Future<bool> handleBackPress() async{
-
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // int counter = (prefs.getInt('result_back_button_click') ?? 0) + 1;
-    //
-    // if(counter >= 3){
-    //   if (await interstitialAd.isLoaded) {
-    //     interstitialAd.show();
-    //   } else {
-    //     // showSnackBar(
-    //     //     'Interstitial ad is still loading...');
-    //   }
-    //   await prefs.setInt('result_back_button_click', 0);
-    // }else{
-    //   await prefs.setInt('result_back_button_click', counter);
-    // }
     Navigator.of(context).pop();
     return true;
   }
@@ -210,6 +206,7 @@ class _CalculationResultState extends State<CalculationResult> {
   }
 
   void navigatePage() async{
+    await showInterstitialAd();
     Navigator.pushNamed(context, CalculationResultPreview.idScreen,
         arguments: {
           'data': history,
