@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
@@ -37,6 +38,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
     youCouldBorrow = 0.0;
     loanType = 'Monthly Cost';
     calculateLoan();
+    GoogleAdService().init();
     super.initState();
   }
 
@@ -46,6 +48,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
     monthlyPaymentController.dispose();
     interestRateController.dispose();
     periodController.dispose();
+    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -122,7 +125,8 @@ class _SimpleLoanState extends State<SimpleLoan> {
             child: CalculatorAppBar(
               title: "Simple\nLoan",
               historyButtonClick: null,
-              saveButtonClick: () {
+              saveButtonClick: () async{
+                await showInterstitialAd();
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
                   showCapturedWidget(context, capturedImage, SimpleLoan.idScreen);
                 }).catchError((onError) {

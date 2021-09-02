@@ -35,7 +35,6 @@ Future main() async{
   //await Hive.openBox('history');
   await dotenv.load(fileName: ".env");
   await MobileAds.instance.initialize();
-  await GoogleAdService().init();
   await PrefService().init();
 
 

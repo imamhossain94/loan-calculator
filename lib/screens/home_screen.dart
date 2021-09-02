@@ -8,6 +8,7 @@ import 'package:loan_calculator/screens/calculators/discount_calculator/discount
 import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculator.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
@@ -28,6 +29,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
 
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
