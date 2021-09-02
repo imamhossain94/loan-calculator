@@ -5,6 +5,7 @@ import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_action_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
@@ -34,6 +35,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
     savingsResult = 0.0;
     frequencies = MapEntry('Weekly', 7);
     calculateLoan();
+    GoogleAdService().init();
     super.initState();
   }
 
@@ -43,6 +45,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
     contributionController.dispose();
     interestRateController.dispose();
     timePeriodController.dispose();
+    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -120,7 +123,8 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
             child: CalculatorAppBar(
               title: "Savings\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {
+              saveButtonClick: () async{
+                await showInterstitialAd();
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
                   showCapturedWidget(context, capturedImage, SavingsCalculator.idScreen);
                 }).catchError((onError) {
