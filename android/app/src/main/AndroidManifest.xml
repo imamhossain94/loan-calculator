@@ -37,15 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-
-        <!--For external storage folder access in android 11-->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-        </provider>
+        
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
