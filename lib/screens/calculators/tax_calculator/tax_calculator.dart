@@ -3,6 +3,7 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
@@ -29,6 +30,7 @@ class _TaxCalculatorState extends State<TaxCalculator> {
     tax = 0.0;
     totalPrice = 0.0;
     calculateDiscount();
+    GoogleAdService().init();
     super.initState();
   }
 
@@ -36,6 +38,7 @@ class _TaxCalculatorState extends State<TaxCalculator> {
   void dispose() {
     taxRateController.dispose();
     originalPriceController.dispose();
+    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -75,7 +78,8 @@ class _TaxCalculatorState extends State<TaxCalculator> {
             child: CalculatorAppBar(
               title: "Tax\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {
+              saveButtonClick: () async{
+                await showInterstitialAd();
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
                   showCapturedWidget(context, capturedImage, TaxCalculator.idScreen);
                 }).catchError((onError) {
