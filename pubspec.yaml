@@ -16,7 +16,7 @@ dependencies:
   url_launcher: ^6.0.9
   google_mobile_ads: ^0.13.3
   flutter_dotenv: ^5.0.0
-  flutter_inapp_purchase: ^5.0.2
+  #flutter_inapp_purchase: ^5.0.2
   another_flushbar: ^1.10.24
   hive: ^2.0.4
   hive_flutter: ^1.1.0
