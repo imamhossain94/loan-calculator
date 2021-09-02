@@ -3,6 +3,7 @@ import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
@@ -33,6 +34,7 @@ class _TipCalculatorState extends State<TipCalculator> {
     finalAmount = 0.0;
     amountPerPerson = 0.0;
     calculateTip();
+    GoogleAdService().init();
     super.initState();
   }
 
@@ -42,6 +44,7 @@ class _TipCalculatorState extends State<TipCalculator> {
     numberOfPeopleController.dispose();
     tipAmountController.dispose();
     taxAmountController.dispose();
+    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -132,7 +135,8 @@ class _TipCalculatorState extends State<TipCalculator> {
             child: CalculatorAppBar(
               title: "Tip\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {
+              saveButtonClick: () async {
+                await showInterstitialAd();
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
                   showCapturedWidget(context, capturedImage, TipCalculator.idScreen);
                 }).catchError((onError) {
