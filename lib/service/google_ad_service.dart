@@ -16,7 +16,6 @@ class GoogleAdService {
 
   Future init() async {
     createInterstitialAd();
-
   }
 
   static void createInterstitialAd() {
@@ -43,9 +42,8 @@ class GoogleAdService {
 }
 
 
-Future<bool> showInterstitialAd(String url) async{
+Future<bool> showInterstitialAd() async{
   if (GoogleAdService.interstitialAd == null) {
-    //Browser().openBrowser(url);
     return false;
   }
   GoogleAdService.interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
@@ -53,12 +51,10 @@ Future<bool> showInterstitialAd(String url) async{
     onAdDismissedFullScreenContent: (InterstitialAd ad) {
       ad.dispose();
       GoogleAdService.createInterstitialAd();
-      //Browser().openBrowser(url);
     },
     onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
       ad.dispose();
       GoogleAdService.createInterstitialAd();
-      //Browser().openBrowser(url);
     },
   );
   GoogleAdService.interstitialAd.show();
