@@ -277,15 +277,11 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
 
     File file = File('$path/LoanCalculator_${getCounterWithPrefix()}.pdf');
     await file.writeAsBytes(await pdf.save());
-    setCounter(getCounter() + 1);
-
     setState(() {
       filePath = '$path/LoanCalculator_${getCounterWithPrefix()}.pdf';
     });
+    setCounter(getCounter() + 1);
   }
-
-
-
 
   Future<void> sendEmail(String subject, String body) async {
     final Email email = Email(
