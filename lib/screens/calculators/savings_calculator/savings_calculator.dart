@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_action_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
@@ -131,8 +132,6 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
         ),
         body: Column(
           children: [
-            //------
-
             Expanded(
               child: SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
@@ -217,6 +216,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
                 ),
               ),
             ),
+            AppBannerAds(),
           ],
         ),
       ),
