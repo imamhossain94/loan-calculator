@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info/device_info.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,28 @@ void showMessage(BuildContext context, String title, String message){
     message: message,
     duration: Duration(seconds: 3),
   )..show(context);
+}
+
+Future<String> createPath(String subPath) async{
+  String path;
+
+  if (Platform.isAndroid) {
+    var androidInfo = await DeviceInfoPlugin().androidInfo;
+    var release = androidInfo.version.release;
+    if(int.tryParse(release) >= 10){
+      path = "/storage/emulated/0/Download/LoanCalculator$subPath";
+    }else{
+      path = "/sdcard/download/LoanCalculator$subPath";
+    }
+  }
+
+  final directory = Directory(path);
+
+  if (!await directory.exists()){
+    directory.create();
+  }
+
+  return path;
 }
 
 Future<bool> showRatingDialogue(BuildContext context) async {
