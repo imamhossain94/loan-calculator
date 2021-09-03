@@ -127,7 +127,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               historyButtonClick: null,
               saveButtonClick: () {
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
-                  showCapturedWidget(context, capturedImage, 'SimpleLoan');
+                  showCapturedWidget(context, capturedImage, SimpleLoan.idScreen);
                 }).catchError((onError) {
                   print(onError);
                 });

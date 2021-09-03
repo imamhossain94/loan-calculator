@@ -607,6 +607,9 @@ Future<dynamic> showCapturedWidget(BuildContext context, Uint8List capturedImage
 
                           setCounter(getCounter() + 1);
 
+                          Navigator.pop(context);
+                          showMessage(context, "$subPath", "Result saved in $imagePath");
+
                         }
                     )
                 ),
