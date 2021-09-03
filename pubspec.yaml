@@ -33,6 +33,7 @@ dependencies:
   flutter_native_splash: ^1.2.1
   font_awesome_flutter: ^9.1.0
   screenshot: ^1.2.3
+  device_info: ^2.0.2
 
 dev_dependencies:
   flutter_test:

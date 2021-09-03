@@ -1,14 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
-import 'package:url_launcher/url_launcher.dart';
-
-import 'components/build_result_card.dart';
+import 'package:screenshot/screenshot.dart';
 import 'components/calculator_action_button.dart';
 import 'components/loan_type_picker.dart';
 
@@ -21,6 +21,7 @@ class SimpleLoan extends StatefulWidget {
 }
 
 class _SimpleLoanState extends State<SimpleLoan> {
+  ScreenshotController screenshotController = ScreenshotController();
 
   TextEditingController mortgageAmountController = TextEditingController();
   TextEditingController monthlyPaymentController = TextEditingController();
@@ -123,8 +124,17 @@ class _SimpleLoanState extends State<SimpleLoan> {
             child: CalculatorAppBar(
               title: "Simple\nLoan",
               historyButtonClick: null,
-              saveButtonClick: () {  },
+              saveButtonClick: () {
+                screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
+
+                  ShowCapturedWidget(context, capturedImage);
+
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
               deleteButtonClick: null,
+              shareButtonClick: null,
             )
         ),
         body: Column(
@@ -150,7 +160,12 @@ class _SimpleLoanState extends State<SimpleLoan> {
                       },
                     ),
                     SizedBox(height: responsiveWidth(10),),
-                    loanResultCard(),
+
+                    Screenshot(
+                      controller: screenshotController,
+                      child: loanResultCard()
+                    ),
+                    //loanResultCard(),
 
 
                     //------
@@ -265,5 +280,61 @@ class _SimpleLoanState extends State<SimpleLoan> {
     );
   }
 
+  Future<dynamic> ShowCapturedWidget(BuildContext context, Uint8List capturedImage) {
+    return showDialog(
+      useSafeArea: true,
+      context: context,
+      builder: (context) => Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(55),
+            child: CalculatorAppBar(
+              title: "Save\nResult",
+              historyButtonClick: null,
+              saveButtonClick: null,
+              deleteButtonClick: null,
+              shareButtonClick: null,
+            )
+        ),
+        body: Column(
+          children: [
+            SizedBox(height: responsiveWidth(14),),
+            capturedImage != null ? Image.memory(capturedImage) : Container(),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child: CalculatorActionButton(
+                          title: "Save",
+                          onPressed: () async{
+
+                            final path = "/sdcard/download/LoanCalculator/pqr.jpg";
+                            File imageFile = File(path);
+                            if(! await imageFile.exists()){
+                              imageFile.create(recursive: true);
+                            }
+                            imageFile.writeAsBytes(capturedImage);
+
+                          }
+                      )
+                  ),
+                  SizedBox(width: responsiveWidth(8),),
+                  Expanded(
+                      flex: 1,
+                      child: CalculatorActionButton(
+                          title: "Cancel",
+                          onPressed: () => Navigator.pop(context)
+                      )
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+
+      ),
+    );
+  }
 
 }
