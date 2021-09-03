@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:device_info/device_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/utils/constant.dart';
+import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:loan_calculator/models/history.dart';
@@ -281,19 +283,8 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
                 : '';
 
 
+    String path = await createPath();
 
-    String path = "/storage/emulated/0/Download/LoanCalculator"; //"/sdcard/download/LoanCalculator";
-
-    ///storage/emulated/0/Download/
-
-
-    final directory = Directory(path);
-
-    if ((await directory.exists())){
-      print("exist");
-    }else{
-      directory.create();
-    }
 
     File file = File('$path/LoanCalculator_$prefix$counter.pdf');
     await file.writeAsBytes(await pdf.save());
