@@ -210,19 +210,12 @@ class _CalculationResultState extends State<CalculationResult> {
   }
 
   void navigatePage() async{
-
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      await Permission.storage.request();
-    }else{
-      Navigator.pushNamed(context, CalculationResultPreview.idScreen,
-          arguments: {
-            'data': history,
-            'tableData': _rowData,
-          }
-      );
-    }
-
+    Navigator.pushNamed(context, CalculationResultPreview.idScreen,
+        arguments: {
+          'data': history,
+          'tableData': _rowData,
+        }
+    );
   }
 
 }

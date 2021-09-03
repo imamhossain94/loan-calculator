@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
+import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:path_provider/path_provider.dart';
@@ -271,27 +272,15 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
   }
 
   Future<void> savePdf() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    int counter = (prefs.getInt('file_number') ?? 0) + 1;
-    String prefix = counter.toString().length == 1
-        ? '000'
-        : counter.toString().length == 2
-            ? '00'
-            : counter.toString().length == 3
-                ? '0'
-                : '';
+    String path = await createPath('/AdvancedLoan');
 
-
-    String path = await createPath();
-
-
-    File file = File('$path/LoanCalculator_$prefix$counter.pdf');
+    File file = File('$path/LoanCalculator_${getCounterWithPrefix()}.pdf');
     await file.writeAsBytes(await pdf.save());
-    await prefs.setInt('file_number', counter);
+    setCounter(getCounter() + 1);
 
     setState(() {
-      filePath = '$path/LoanCalculator_$prefix$counter.pdf';
+      filePath = '$path/LoanCalculator_${getCounterWithPrefix()}.pdf';
     });
   }
 

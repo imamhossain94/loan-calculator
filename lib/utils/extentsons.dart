@@ -1,11 +1,16 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:device_info/device_info.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:loan_calculator/components/calculator_app_bar.dart';
+import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
+import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'constant.dart';
 
@@ -31,8 +36,13 @@ void showMessage(BuildContext context, String title, String message){
 }
 
 Future<String> createPath(String subPath) async{
-  String path;
 
+  var status = await Permission.storage.status;
+  if (!status.isGranted) {
+    await Permission.storage.request();
+  }
+
+  String path;
   if (Platform.isAndroid) {
     var androidInfo = await DeviceInfoPlugin().androidInfo;
     var release = androidInfo.version.release;
@@ -553,4 +563,66 @@ Future<bool> onSavePdf(BuildContext context) async {
     },
   ).then((value) => value == null?false:value);
 
+}
+
+
+Future<dynamic> showCapturedWidget(BuildContext context, Uint8List capturedImage, String subPath) {
+  return showDialog(
+    useSafeArea: true,
+    context: context,
+    builder: (context) => Scaffold(
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(55),
+          child: CalculatorAppBar(
+            title: "Save\nResult",
+            historyButtonClick: null,
+            saveButtonClick: null,
+            deleteButtonClick: null,
+            shareButtonClick: null,
+          )
+      ),
+      body: Column(
+        children: [
+          SizedBox(height: responsiveWidth(14),),
+          capturedImage != null ? Image.memory(capturedImage) : Container(),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
+            child: Row(
+              children: [
+                Expanded(
+                    flex: 2,
+                    child: CalculatorActionButton(
+                        title: "Save",
+                        onPressed: () async{
+
+
+                          String path = await createPath('/$subPath');
+                          String imagePath = '$path/${subPath}_${getCounterWithPrefix()}.png';
+
+                          File imageFile = File(imagePath);
+                          if(! await imageFile.exists()){
+                            imageFile.create(recursive: true);
+                          }
+                          imageFile.writeAsBytes(capturedImage);
+
+                          setCounter(getCounter() + 1);
+
+                        }
+                    )
+                ),
+                SizedBox(width: responsiveWidth(8),),
+                Expanded(
+                    flex: 1,
+                    child: CalculatorActionButton(
+                        title: "Cancel",
+                        onPressed: () => Navigator.pop(context)
+                    )
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    ),
+  );
 }
