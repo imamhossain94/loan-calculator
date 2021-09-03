@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
-
+import 'package:another_flushbar/flushbar.dart';
 import 'package:device_info/device_info.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,16 +23,20 @@ void resetPage(BuildContext context, Widget widget) {
   );
 }
 
+
+// Create another_flushbar
 void showMessage(BuildContext context, String title, String message){
   Flushbar(
     flushbarPosition: FlushbarPosition.BOTTOM,
-    borderRadius: 10,
+    borderRadius: BorderRadius.circular(10),
     margin: EdgeInsets.all(10),
     title: title,
     message: message,
     duration: Duration(seconds: 3),
   )..show(context);
 }
+
+
 
 Future<String> createPath(String subPath) async{
 

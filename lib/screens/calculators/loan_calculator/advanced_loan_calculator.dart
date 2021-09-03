@@ -1,4 +1,3 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -13,9 +12,7 @@ import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'dart:math';
-
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'calculation_history.dart';
 import 'calculation_result.dart';
 import 'components/build_action_text_field.dart';
@@ -105,16 +102,9 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                 if (result != null) {
                   History history = result['data'];
 
-                  Flushbar(
-                    flushbarPosition: FlushbarPosition.BOTTOM,
-                    borderRadius: 10,
-                    margin: EdgeInsets.all(10),
-                    title: "Edit Calculation",
-                    message: "Data loaded successfully",
-                    duration: Duration(seconds: 3),
-                  )..show(context);
+                  showMessage(context, "Edit Calculation", "Data loaded successfully");
 
-                  print('All ok');
+
                   setState(() {
                     homeValueController.text =
                         history.mortgageData.homeValue.toString();
