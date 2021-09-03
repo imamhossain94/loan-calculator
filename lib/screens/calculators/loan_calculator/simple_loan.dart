@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
+import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
@@ -126,9 +127,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
               historyButtonClick: null,
               saveButtonClick: () {
                 screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
-
-                  ShowCapturedWidget(context, capturedImage);
-
+                  showCapturedWidget(context, capturedImage, 'SimpleLoan');
                 }).catchError((onError) {
                   print(onError);
                 });
@@ -280,61 +279,5 @@ class _SimpleLoanState extends State<SimpleLoan> {
     );
   }
 
-  Future<dynamic> ShowCapturedWidget(BuildContext context, Uint8List capturedImage) {
-    return showDialog(
-      useSafeArea: true,
-      context: context,
-      builder: (context) => Scaffold(
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(55),
-            child: CalculatorAppBar(
-              title: "Save\nResult",
-              historyButtonClick: null,
-              saveButtonClick: null,
-              deleteButtonClick: null,
-              shareButtonClick: null,
-            )
-        ),
-        body: Column(
-          children: [
-            SizedBox(height: responsiveWidth(14),),
-            capturedImage != null ? Image.memory(capturedImage) : Container(),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: responsiveWidth(12), horizontal: responsiveWidth(8)),
-              child: Row(
-                children: [
-                  Expanded(
-                      flex: 2,
-                      child: CalculatorActionButton(
-                          title: "Save",
-                          onPressed: () async{
-
-                            final path = "/sdcard/download/LoanCalculator/pqr.jpg";
-                            File imageFile = File(path);
-                            if(! await imageFile.exists()){
-                              imageFile.create(recursive: true);
-                            }
-                            imageFile.writeAsBytes(capturedImage);
-
-                          }
-                      )
-                  ),
-                  SizedBox(width: responsiveWidth(8),),
-                  Expanded(
-                      flex: 1,
-                      child: CalculatorActionButton(
-                          title: "Cancel",
-                          onPressed: () => Navigator.pop(context)
-                      )
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
-
-      ),
-    );
-  }
 
 }

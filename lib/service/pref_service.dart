@@ -52,3 +52,24 @@ String getProUnlockTime() {
   String result = PrefService.prefs.getString('pro_unlock_time')??'0';
   return result;
 }
+
+String getCounterWithPrefix() {
+  int counter = getCounter() + 1;
+  String prefix = counter.toString().length == 1
+      ? '000'
+      : counter.toString().length == 2
+      ? '00'
+      : counter.toString().length == 3
+      ? '0'
+      : '';
+  return "$prefix$counter";
+}
+
+int getCounter() {
+  int result = PrefService.prefs.getInt('file_number') ?? 0;
+  return result;
+}
+
+void setCounter(int value) {
+  PrefService.prefs.setInt('file_number', value);
+}
