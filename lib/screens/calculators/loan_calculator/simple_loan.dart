@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
+import 'package:loan_calculator/components/app_banner_ads.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/utils/extensions.dart';
@@ -208,6 +209,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
                 ),
               ),
             ),
+            AppBannerAds(),
           ],
         ),
       ),
