@@ -10,7 +10,7 @@ import 'package:loan_calculator/models/result_data.dart';
 import 'package:loan_calculator/models/row_data.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/service/google_ad_service.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'dart:math';
 

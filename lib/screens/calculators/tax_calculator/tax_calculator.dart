@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:screenshot/screenshot.dart';
 
 
 class TaxCalculator extends StatefulWidget {
@@ -13,7 +14,7 @@ class TaxCalculator extends StatefulWidget {
 }
 
 class _TaxCalculatorState extends State<TaxCalculator> {
-
+  ScreenshotController screenshotController = ScreenshotController();
 
   TextEditingController taxRateController = TextEditingController();
   TextEditingController originalPriceController = TextEditingController();
@@ -73,8 +74,15 @@ class _TaxCalculatorState extends State<TaxCalculator> {
             child: CalculatorAppBar(
               title: "Tax\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {  },
+              saveButtonClick: () {
+                screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
+                  showCapturedWidget(context, capturedImage, TaxCalculator.idScreen);
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
               deleteButtonClick: null,
+              shareButtonClick: null,
             )
         ),
         body: Column(
@@ -87,7 +95,10 @@ class _TaxCalculatorState extends State<TaxCalculator> {
                   children: [
                     SizedBox(height: responsiveWidth(14),),
 
-                    taxResultCard(),
+                    Screenshot(
+                        controller: screenshotController,
+                        child: taxResultCard()
+                    ),
 
                     BuildTextField(
                       title: 'Tax Rate',
