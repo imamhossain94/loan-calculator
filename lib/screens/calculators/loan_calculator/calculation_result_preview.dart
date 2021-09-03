@@ -281,7 +281,12 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
                 : '';
 
 
-    String path = "/sdcard/download/LoanCalculator";
+
+    String path = "/storage/emulated/0/Download/LoanCalculator"; //"/sdcard/download/LoanCalculator";
+
+    ///storage/emulated/0/Download/
+
+
     final directory = Directory(path);
 
     if ((await directory.exists())){

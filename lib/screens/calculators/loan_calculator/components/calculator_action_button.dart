@@ -13,7 +13,7 @@ class CalculatorActionButton extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: title == "Reset"? Colors.redAccent:Colors.green,
+        color: title == "Reset" || title == "Cancel"? Colors.redAccent:Colors.green,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Material(
