@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:loan_calculator/components/build_history_card.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/models/history.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 
 class CalculationHistory extends StatefulWidget {

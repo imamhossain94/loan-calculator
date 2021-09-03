@@ -4,7 +4,7 @@ import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_action_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/build_text_field.dart';
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:screenshot/screenshot.dart';
 

@@ -7,7 +7,7 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:loan_calculator/models/history.dart';

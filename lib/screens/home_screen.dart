@@ -8,7 +8,7 @@ import 'package:loan_calculator/screens/calculators/savings_calculator/savings_c
 import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
 import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculator.dart';
 import 'package:loan_calculator/utils/constant.dart';
-import 'package:loan_calculator/utils/extentsons.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
