@@ -6,6 +6,7 @@ import 'package:loan_calculator/screens/calculators/loan_calculator/components/b
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
 import 'package:loan_calculator/utils/extentsons.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:screenshot/screenshot.dart';
 
 
 class SavingsCalculator extends StatefulWidget {
@@ -15,6 +16,8 @@ class SavingsCalculator extends StatefulWidget {
 }
 
 class _SavingsCalculatorState extends State<SavingsCalculator> {
+
+  ScreenshotController screenshotController = ScreenshotController();
 
   TextEditingController principalController = TextEditingController();
   TextEditingController contributionController = TextEditingController();
@@ -116,8 +119,14 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
             child: CalculatorAppBar(
               title: "Savings\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {  },
-              deleteButtonClick: null,
+              saveButtonClick: () {
+                screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
+                  showCapturedWidget(context, capturedImage, SavingsCalculator.idScreen);
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
+              deleteButtonClick: null, shareButtonClick: null,
             )
         ),
         body: Column(
@@ -133,7 +142,11 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
 
 
                     SizedBox(height: responsiveWidth(14),),
-                    savingsResultCard(),
+
+                    Screenshot(
+                        controller: screenshotController,
+                        child: savingsResultCard()
+                    ),
 
 
                     //------
