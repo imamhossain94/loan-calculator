@@ -46,7 +46,9 @@ Future<String> createPath(String subPath) async{
   if (Platform.isAndroid) {
     var androidInfo = await DeviceInfoPlugin().androidInfo;
     var release = androidInfo.version.release;
-    if(int.tryParse(release) >= 10){
+    print("lal: " + double.tryParse(release.substring(0,2)).toString());
+
+    if(double.tryParse(release.substring(0,2)) >= 10){
       path = "/storage/emulated/0/Download/LoanCalculator$subPath";
     }else{
       path = "/sdcard/download/LoanCalculator$subPath";

@@ -4,6 +4,7 @@ import 'package:loan_calculator/screens/calculators/loan_calculator/components/b
 import 'package:loan_calculator/screens/calculators/loan_calculator/components/calculator_action_button.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
+import 'package:screenshot/screenshot.dart';
 
 
 class TipCalculator extends StatefulWidget {
@@ -13,6 +14,8 @@ class TipCalculator extends StatefulWidget {
 }
 
 class _TipCalculatorState extends State<TipCalculator> {
+
+  ScreenshotController screenshotController = ScreenshotController();
 
   TextEditingController billAmountController = TextEditingController();
   TextEditingController numberOfPeopleController = TextEditingController();
@@ -128,8 +131,15 @@ class _TipCalculatorState extends State<TipCalculator> {
             child: CalculatorAppBar(
               title: "Tip\nCalculator",
               historyButtonClick: null,
-              saveButtonClick: () {  },
+              saveButtonClick: () {
+                screenshotController.capture(delay: Duration(milliseconds: 10)).then((capturedImage) async {
+                  showCapturedWidget(context, capturedImage, TipCalculator.idScreen);
+                }).catchError((onError) {
+                  print(onError);
+                });
+              },
               deleteButtonClick: null,
+              shareButtonClick: null,
             )
         ),
         body: Column(
@@ -142,7 +152,10 @@ class _TipCalculatorState extends State<TipCalculator> {
                   children: [
                     SizedBox(height: responsiveWidth(14),),
 
-                    discountResultCard(),
+                    Screenshot(
+                        controller: screenshotController,
+                        child: discountResultCard()
+                    ),
 
                     BuildTextField(
                       title: 'Bill Amount',
