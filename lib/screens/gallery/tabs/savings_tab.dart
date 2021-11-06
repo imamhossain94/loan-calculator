@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-class SimpleLoanTab extends StatelessWidget {
-  const SimpleLoanTab({Key key}) : super(key: key);
+class SavingsTab extends StatelessWidget {
+  const SavingsTab({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     Directory dir = Directory('/storage/emulated/0/Download');
-    final imagesDirectory = Directory(dir.path + "/LoanCalculator/SimpleLoan/");
+    final imagesDirectory = Directory(dir.path + "/LoanCalculator/SavingsCalculator/");
 
     List<String> images = [];
     final _imagesFile = imagesDirectory.listSync(followLinks: false, recursive: true);
