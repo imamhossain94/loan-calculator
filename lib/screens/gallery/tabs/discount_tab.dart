@@ -1,19 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-class SimpleLoanTab extends StatefulWidget {
-  const SimpleLoanTab({Key key}) : super(key: key);
+class DiscountTab extends StatefulWidget {
+  const DiscountTab({Key key}) : super(key: key);
 
   @override
-  State<SimpleLoanTab> createState() => _SimpleLoanTabState();
+  State<DiscountTab> createState() => _DiscountTabState();
 }
 
-class _SimpleLoanTabState extends State<SimpleLoanTab> {
+class _DiscountTabState extends State<DiscountTab> {
+
   List<String> images = [];
 
   void loadImages() async{
     Directory dir = Directory('/storage/emulated/0/Download');
-    final imagesDirectory = Directory(dir.path + "/LoanCalculator/SimpleLoan/");
+    final imagesDirectory = Directory(dir.path + "/LoanCalculator/DiscountCalculator/");
 
     if(!await imagesDirectory.exists()){
       imagesDirectory.create(recursive: true);
@@ -41,7 +42,7 @@ class _SimpleLoanTabState extends State<SimpleLoanTab> {
             Image.file(File(image.replaceAll("'", "").trim()),)
         ],
       ):Center(
-        child: Text('Empty'),
+        child: Text('Empty',),
       ),
     );
   }
