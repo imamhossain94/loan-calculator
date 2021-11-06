@@ -22,6 +22,8 @@ import 'package:loan_calculator/utils/themes.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
+import 'screens/gallery/gallery_screen.dart';
+
 
 Future main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -93,12 +95,11 @@ class _MyAppState extends State<MyApp> {
         CalculationHistory.idScreen: (context) => CalculationHistory(),
         CalculationResult.idScreen: (context) => CalculationResult(),
         CalculationResultPreview.idScreen: (context) => CalculationResultPreview(),
-
         SavingsCalculator.idScreen: (context) => SavingsCalculator(),
         TaxCalculator.idScreen: (context) => TaxCalculator(),
         DiscountCalculator.idScreen: (context) => DiscountCalculator(),
         TipCalculator.idScreen: (context) => TipCalculator(),
-
+        GalleryScreen.idScreen: (context) => GalleryScreen(),
 
       },
       // builder: (BuildContext context, Widget child) {
