@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/screens/gallery/tabs/discount_tab.dart';
+import 'package:loan_calculator/screens/gallery/tabs/tip_tab.dart';
 
 import 'tabs/savings_tab.dart';
 import 'tabs/simple_loan_tab.dart';
@@ -60,7 +62,6 @@ class _GalleryScreenState extends State<GalleryScreen> {
             ),
             body: TabBarView(
               children: <Widget>[
-
                 SimpleLoanTab(),
                 Container(
                   child: Center(
@@ -69,18 +70,8 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 ),
                 SavingsTab(),
                 TaxTab(),
-
-                Container(
-                  child: Center(
-                    child: Text('Tab 5'),
-                  ),
-                ),
-                Container(
-                  child: Center(
-                    child: Text('Tab 6'),
-                  ),
-                ),
-
+                DiscountTab(),
+                TipTab(),
               ],
             )),
       ),
