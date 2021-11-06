@@ -126,7 +126,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
                 }
               },
               saveButtonClick: null,
-              deleteButtonClick: null,
+              deleteButtonClick: null, shareButtonClick: null,
             )
         ),
 
