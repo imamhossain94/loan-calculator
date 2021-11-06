@@ -135,6 +135,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 },
                                 color: Color(0xff1689FC),
                               ),
+                              SizedBox(width: 10.0,),
+                              CalculatorCard(
+                                icon: FontAwesomeIcons.solidImages,
+                                title: 'Gallery',
+                                onPressed: () {
+
+                                },
+                                color: Color(0xff1f577d),
+                              ),
                             ],
                           ),
                         ),
