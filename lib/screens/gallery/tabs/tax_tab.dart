@@ -25,11 +25,9 @@ class _TaxTabState extends State<TaxTab> {
       String imgString = img.toString().substring(
           img.toString().lastIndexOf('/') + 1,
           img.toString().length);
-      setState(() {
         images.add(imagesDirectory.path+imgString);
-      });
     });
-
+    setState(() {});
   }
 
   @override
