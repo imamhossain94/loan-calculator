@@ -11,6 +11,14 @@ class SimpleLoanTab extends StatefulWidget {
 class _SimpleLoanTabState extends State<SimpleLoanTab> {
   List<String> images = [];
 
+
+  @override
+  void initState() {
+    loadImages();
+    super.initState();
+  }
+
+
   void loadImages() async{
     Directory dir = Directory('/storage/emulated/0/Download');
     final imagesDirectory = Directory(dir.path + "/LoanCalculator/SimpleLoan/");
@@ -31,7 +39,7 @@ class _SimpleLoanTabState extends State<SimpleLoanTab> {
 
   @override
   Widget build(BuildContext context) {
-    loadImages();
+
     return Container(
       padding: EdgeInsets.symmetric(vertical: 15),
       child: images.isNotEmpty?ListView(
