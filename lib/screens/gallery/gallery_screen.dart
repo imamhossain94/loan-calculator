@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'tabs/savings_tab.dart';
 import 'tabs/simple_loan_tab.dart';
+import 'tabs/tax_tab.dart';
 
 class GalleryScreen extends StatefulWidget {
   static const String idScreen = "GalleryScreen";
@@ -60,22 +62,14 @@ class _GalleryScreenState extends State<GalleryScreen> {
               children: <Widget>[
 
                 SimpleLoanTab(),
-
-                Container(
-                  child: Center(
-                    child: Text('Tab 2'),
-                  ),
-                ),
                 Container(
                   child: Center(
                     child: Text('Tab 3'),
                   ),
                 ),
-                Container(
-                  child: Center(
-                    child: Text('Tab 4'),
-                  ),
-                ),
+                SavingsTab(),
+                TaxTab(),
+
                 Container(
                   child: Center(
                     child: Text('Tab 5'),
