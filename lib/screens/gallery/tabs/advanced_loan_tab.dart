@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 
+import '../pdf_preview_screen.dart';
+
 class AdvancedLoanTab extends StatefulWidget {
   const AdvancedLoanTab({Key key}) : super(key: key);
 
@@ -72,7 +74,9 @@ class _AdvancedLoanTabState extends State<AdvancedLoanTab> {
         color: Colors.transparent,
         child: InkWell(
           onTap: (){
-
+            Navigator.pushNamed(context, PdfPreviewScreen.idScreen, arguments: {
+              'filePath': file['0'].toString()
+            });
           },
           borderRadius: BorderRadius.circular(8),
           child: Row(

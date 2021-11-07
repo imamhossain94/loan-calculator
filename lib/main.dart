@@ -23,6 +23,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import 'screens/gallery/gallery_screen.dart';
+import 'screens/gallery/pdf_preview_screen.dart';
 
 
 Future main() async{
@@ -100,7 +101,7 @@ class _MyAppState extends State<MyApp> {
         DiscountCalculator.idScreen: (context) => DiscountCalculator(),
         TipCalculator.idScreen: (context) => TipCalculator(),
         GalleryScreen.idScreen: (context) => GalleryScreen(),
-
+        PdfPreviewScreen.idScreen: (context) => PdfPreviewScreen(),
       },
       // builder: (BuildContext context, Widget child) {
       //   return FlutterSmartDialog(child: child);
