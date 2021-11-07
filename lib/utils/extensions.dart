@@ -49,7 +49,6 @@ Future<String> createPath(String subPath) async{
   if (Platform.isAndroid) {
     var androidInfo = await DeviceInfoPlugin().androidInfo;
     var release = androidInfo.version.release;
-    print("lal: " + double.tryParse(release.substring(0,2)).toString());
 
     if(double.tryParse(release.substring(0,2)) >= 10){
       path = "/storage/emulated/0/Download/LoanCalculator$subPath";
@@ -599,7 +598,6 @@ Future<dynamic> showCapturedWidget(BuildContext context, Uint8List capturedImage
                     child: CalculatorActionButton(
                         title: "Save",
                         onPressed: () async{
-
 
                           String path = await createPath('/$subPath');
                           String imagePath = '$path/${subPath}_${getCounterWithPrefix()}.png';

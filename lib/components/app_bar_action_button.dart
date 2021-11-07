@@ -31,8 +31,8 @@ class AppBarActionButton extends StatelessWidget {
         ),
         color: Colors.transparent,
       ),
-      height: responsiveWidth(40),
-      width: responsiveWidth(40),
+      height: 40,
+      width: 40,
       alignment: Alignment.center,
       margin: EdgeInsets.symmetric(vertical: responsiveWidth(8.0), horizontal: 0),
       decoration: BoxDecoration(
