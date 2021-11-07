@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 
 class DiscountTab extends StatefulWidget {
   const DiscountTab({Key key}) : super(key: key);
@@ -18,12 +19,9 @@ class _DiscountTabState extends State<DiscountTab> {
     super.initState();
   }
   void loadImages() async{
-    Directory dir = Directory('/storage/emulated/0/Download');
-    final imagesDirectory = Directory(dir.path + "/LoanCalculator/DiscountCalculator/");
 
-    if(!await imagesDirectory.exists()){
-      imagesDirectory.create(recursive: true);
-    }
+    String path = await createPath('/DiscountCalculator/');
+    final imagesDirectory = Directory(path);
 
     final _imagesFile = imagesDirectory.listSync(followLinks: false, recursive: true);
     _imagesFile.forEach((img) {
