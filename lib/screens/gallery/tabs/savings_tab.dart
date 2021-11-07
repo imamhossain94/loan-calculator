@@ -23,7 +23,7 @@ class _SavingsTabState extends State<SavingsTab> {
 
     String path = await createPath('/SavingsCalculator/');
     final imagesDirectory = Directory(path);
-    
+
     final _imagesFile = imagesDirectory.listSync(followLinks: false, recursive: true);
     _imagesFile.forEach((img) {
       String imgString = img.toString().substring(

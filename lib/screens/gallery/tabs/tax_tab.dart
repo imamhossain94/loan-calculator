@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 
 class TaxTab extends StatefulWidget {
   const TaxTab({Key key}) : super(key: key);
@@ -19,12 +20,9 @@ class _TaxTabState extends State<TaxTab> {
   }
 
   void loadImages() async{
-    Directory dir = Directory('/storage/emulated/0/Download');
-    final imagesDirectory = Directory(dir.path + "/LoanCalculator/TaxCalculator/");
 
-    if(!await imagesDirectory.exists()){
-      imagesDirectory.create(recursive: true);
-    }
+    String path = await createPath('/TaxCalculator/');
+    final imagesDirectory = Directory(path);
 
     final _imagesFile = imagesDirectory.listSync(followLinks: false, recursive: true);
     _imagesFile.forEach((img) {
