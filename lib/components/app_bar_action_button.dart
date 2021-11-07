@@ -18,8 +18,8 @@ class AppBarActionButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(responsiveWidth(8.0)),
           onTap: onPressed,
           child: Container(
-            height: responsiveWidth(40),
-            width: responsiveWidth(40),
+            height: 40,
+            width: 40,
             padding: EdgeInsets.all(responsiveWidth(8.0)),
             alignment: Alignment.center,
             child: FaIcon(

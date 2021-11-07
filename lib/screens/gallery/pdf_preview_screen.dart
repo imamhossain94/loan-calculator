@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:loan_calculator/components/calculator_app_bar.dart';
 import 'package:loan_calculator/utils/constant.dart';
@@ -17,13 +18,13 @@ class _PdfPreviewScreenState extends State<PdfPreviewScreen> {
   String filePath;
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     ScreenConfig().init(context);
+
+    Map data = ModalRoute.of(context).settings.arguments ?? {};
+    setState(() {
+      filePath = data['filePath'];
+    });
 
     return SafeArea(
       child: Scaffold(
@@ -31,13 +32,13 @@ class _PdfPreviewScreenState extends State<PdfPreviewScreen> {
         appBar: PreferredSize(
             preferredSize: const Size.fromHeight(55),
             child: CalculatorAppBar(
-              title: "Result PDF\nPreview",
+              title: "PDF\nPreview",
               historyButtonClick: null,
               saveButtonClick: null,
               deleteButtonClick: null,
               shareButtonClick: () async {
                 if(filePath != null) {
-                  //await sendEmail('$appName Calculation Result', '');
+                  await sendEmail('$appName Calculation Result', '');
                 }
               },
             )
@@ -106,5 +107,20 @@ class _PdfPreviewScreenState extends State<PdfPreviewScreen> {
     );
   }
 
+  Future<void> sendEmail(String subject, String body) async {
+    final Email email = Email(
+      body: body,
+      subject: subject,
+      recipients: ['example@gmail.com'],
+      attachmentPaths: [filePath],
+    );
+
+    try {
+      await FlutterEmailSender.send(email);
+    } catch (error) {
+      print(error);
+    }
+    //if (!mounted) return;
+  }
 }
 
