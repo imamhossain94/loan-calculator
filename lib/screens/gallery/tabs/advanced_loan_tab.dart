@@ -16,13 +16,13 @@ class _AdvancedLoanTabState extends State<AdvancedLoanTab> {
 
   @override
   void initState() {
-    loadImages();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      loadPdfs();
+    });
     super.initState();
   }
 
-
-  void loadImages() async{
-
+  void loadPdfs() async{
     String path = await createPath('/AdvancedLoan/');
     final fileDirectory = Directory(path);
 
@@ -38,8 +38,9 @@ class _AdvancedLoanTabState extends State<AdvancedLoanTab> {
           '0':(fileDirectory.path+imgString).replaceAll("'", "").trim(),
           '1': await getFileSize((fileDirectory.path+imgString).replaceAll("'", "").trim(), 1)
         });
+      setState(() {});
     });
-    setState(() {});
+
   }
 
   @override
@@ -50,10 +51,8 @@ class _AdvancedLoanTabState extends State<AdvancedLoanTab> {
       child: files.isNotEmpty?ListView(
         physics: BouncingScrollPhysics(),
         children: [
-
           for(Map file in files)
             pdfCard(file)
-            // Image.file(File(image.replaceAll("'", "").trim()),)
         ],
       ):Center(
         child: Text('Empty'),
@@ -66,46 +65,55 @@ class _AdvancedLoanTabState extends State<AdvancedLoanTab> {
     return Container(
       margin: EdgeInsets.fromLTRB(8, 0, 8, 8),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.5),
+        color: Colors.red,
         borderRadius: BorderRadius.circular(8)
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            height: 60,
-            width: 60,
-            margin: EdgeInsets.all(8),
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-                color: Colors.red.withOpacity(0.5),
-                borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              FontAwesomeIcons.solidFilePdf,
-              color: Colors.white,
-            ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    file['0'].toString().substring(
-                        file['0'].toString().lastIndexOf('/') + 1,
-                        file['0'].toString().length),
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: (){
+
+          },
+          borderRadius: BorderRadius.circular(8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                height: 60,
+                width: 60,
+                margin: EdgeInsets.all(8),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(8),
                 ),
-                Text(
-                  file['1'].toString(),
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
-            ),
-          )
-        ],
+                child: Icon(
+                  FontAwesomeIcons.solidFilePdf,
+                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        file['0'].toString().substring(
+                            file['0'].toString().lastIndexOf('/') + 1,
+                            file['0'].toString().length),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                    Text(
+                      file['1'].toString(),
+                      style: TextStyle(color: Colors.white),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }
