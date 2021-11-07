@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:loan_calculator/utils/extensions.dart';
 
 class TipTab extends StatefulWidget {
   const TipTab({Key key}) : super(key: key);
@@ -19,12 +20,9 @@ class _TipTabState extends State<TipTab> {
   }
 
   void loadImages() async{
-    Directory dir = Directory('/storage/emulated/0/Download');
-    final imagesDirectory = Directory(dir.path + "/LoanCalculator/TipCalculator/");
 
-    if(!await imagesDirectory.exists()){
-      imagesDirectory.create(recursive: true);
-    }
+    String path = await createPath('/TipCalculator/');
+    final imagesDirectory = Directory(path);
 
     final _imagesFile = imagesDirectory.listSync(followLinks: false, recursive: true);
     _imagesFile.forEach((img) {
