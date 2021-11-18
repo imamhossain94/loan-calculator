@@ -32,7 +32,7 @@ class _AppBannerAdsState extends State<AppBannerAds> {
 
   void initBannerAds() {
     _bannerAd = BannerAd(
-      adUnitId: bannerAdUnit,
+      adUnitId: id_banner,
       request: AdRequest(),
       size: AdSize.banner,
       listener: BannerAdListener(

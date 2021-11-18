@@ -13,8 +13,8 @@ const String appLink = 'https://play.google.com/store/apps/details?id=com.newage
 const String storeLink = 'https://play.google.com/store/apps/developer?id=NewAgeDevs';
 
 // Ads unit id
-const String bannerAdUnit = "ca-app-pub-3940256099942544/6300978111"; //ca-app-pub-3940256099942544/6300978111
-const String interstitialAdUnit = "ca-app-pub-3940256099942544/1033173712"; //ca-app-pub-3940256099942544/1033173712
+const String id_banner = "ca-app-pub-3940256099942544/6300978111"; //ca-app-pub-3940256099942544/6300978111
+const String id_interstitial = "ca-app-pub-3940256099942544/1033173712"; //ca-app-pub-3940256099942544/1033173712
 //const String rewardAdUnit = "ca-app-pub-3940256099942544/5224354917"; //ca-app-pub-3940256099942544/5224354917
 
 
