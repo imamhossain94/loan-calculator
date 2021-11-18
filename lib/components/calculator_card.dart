@@ -26,30 +26,28 @@ class CalculatorCard extends StatelessWidget {
       child: new Material(
         child: new InkWell(
           highlightColor: Colors.blueAccent.withOpacity(0.4),
-          borderRadius: BorderRadius.circular(responsiveWidth(8.0)),
+          borderRadius: BorderRadius.circular(8),
           onTap: onPressed,
           child: Container(
-            width: MediaQuery.of(context).size.width/2 - responsiveWidth(16),
-            padding: EdgeInsets.all(responsiveWidth(8.0)),
+            padding: EdgeInsets.all(8),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                    height: responsiveWidth(40),
-                    width: responsiveWidth(40),
+                    height: 40,
+                    width: 40,
                     alignment: Alignment.center,
-                    decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(responsiveWidth(8.0))),
+                    decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
                     child: FaIcon(
                       icon,
                       color: Colors.white,
-                      size: responsiveWidth(18.0),
+                      size: 18,
                     ),
                 ),
-                SizedBox(width: responsiveWidth(8.0),),
+                SizedBox(width: 8,),
                 Container(
-                  width: MediaQuery.of(context).size.width/2 - responsiveWidth(91.3),
-                  height: responsiveWidth(40),
+                  height: 40,
                   alignment: Alignment.centerLeft,
                   child: Text(
                     title,
@@ -58,7 +56,7 @@ class CalculatorCard extends StatelessWidget {
                     style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.bold,
-                      fontSize: responsiveWidth(16.0),
+                      fontSize: 16,
                     ),
                   ),
                 ),
@@ -69,10 +67,9 @@ class CalculatorCard extends StatelessWidget {
         color: Colors.transparent,
       ),
       //height: 120,
-      width: MediaQuery.of(context).size.width/2 - 16,
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(responsiveWidth(8.0)),
+        borderRadius: BorderRadius.circular(8),
         color: Colors.white,
       ),
     );

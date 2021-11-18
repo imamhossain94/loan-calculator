@@ -65,11 +65,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.home,
-                                title: 'Simple Loan',
-                                onPressed: ()=>Navigator.pushNamed(context, SimpleLoan.idScreen),
-                                color: Color(0xff1f577d),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.home,
+                                  title: 'Simple Loan',
+                                  onPressed: ()=>Navigator.pushNamed(context, SimpleLoan.idScreen),
+                                  color: Color(0xff1f577d),
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               CalculatorCard(
@@ -93,11 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Color(0xff1689FC),
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.fileInvoiceDollar,
-                                title: 'Tax Calculator',
-                                onPressed: ()=> Navigator.pushNamed(context, TaxCalculator.idScreen),
-                                color: Color(0xff01B4A9),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.fileInvoiceDollar,
+                                  title: 'Tax Calculator',
+                                  onPressed: ()=> Navigator.pushNamed(context, TaxCalculator.idScreen),
+                                  color: Color(0xff01B4A9),
+                                ),
                               ),
                             ],
                           ),
@@ -106,11 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.tags,
-                                title: 'Discount Calculator',
-                                onPressed: ()=> Navigator.pushNamed(context, DiscountCalculator.idScreen),
-                                color: Color(0xffFF758A),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.tags,
+                                  title: 'Discount Calculator',
+                                  onPressed: ()=> Navigator.pushNamed(context, DiscountCalculator.idScreen),
+                                  color: Color(0xffFF758A),
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               CalculatorCard(
@@ -136,11 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Color(0xff1689FC),
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.solidImages,
-                                title: 'Gallery',
-                                onPressed: ()=>Navigator.pushNamed(context, GalleryScreen.idScreen),
-                                color: Color(0xff1f577d),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.solidImages,
+                                  title: 'Gallery',
+                                  onPressed: ()=>Navigator.pushNamed(context, GalleryScreen.idScreen),
+                                  color: Color(0xff1f577d),
+                                ),
                               ),
                             ],
                           ),
@@ -155,19 +163,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.comments,
-                                title: 'Feedback',
-                                onPressed: () async {
-                                  String url = feedbackMail;
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.comments,
+                                  title: 'Feedback',
+                                  onPressed: () async {
+                                    String url = feedbackMail;
 
-                                  if (await canLaunch(url)) {
-                                    await launch(url);
-                                  } else {
-                                    throw 'Could not launch $url';
-                                  }
-                                },
-                                color: Colors.indigo,
+                                    if (await canLaunch(url)) {
+                                      await launch(url);
+                                    } else {
+                                      throw 'Could not launch $url';
+                                    }
+                                  },
+                                  color: Colors.indigo,
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               CalculatorCard(
@@ -200,11 +210,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: Colors.orange,
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.freeCodeCamp,
-                                title: 'About Development',
-                                onPressed: () async => showDevelopmentDialogue(context),
-                                color: Colors.pinkAccent,
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.freeCodeCamp,
+                                  title: 'About Development',
+                                  onPressed: () async => showDevelopmentDialogue(context),
+                                  color: Colors.pinkAccent,
+                                ),
                               ),
                             ],
                           ),
@@ -214,16 +226,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.codeBranch,
-                                title: 'Version',
-                                onPressed: () async {
-                                  await PackageInfo.fromPlatform().then((PackageInfo packageInfo) async {
-                                    String version = packageInfo.version;
-                                    showMessage(context, "App Version", "Version $version");
-                                  });
-                                },
-                                color: Colors.blueAccent,
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.codeBranch,
+                                  title: 'Version',
+                                  onPressed: () async {
+                                    await PackageInfo.fromPlatform().then((PackageInfo packageInfo) async {
+                                      String version = packageInfo.version;
+                                      showMessage(context, "App Version", "Version $version");
+                                    });
+                                  },
+                                  color: Colors.blueAccent,
+                                ),
                               ),
 
                             ],

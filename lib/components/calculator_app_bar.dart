@@ -28,7 +28,7 @@ class CalculatorAppBar extends StatelessWidget {
                 title,
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: responsiveWidth(17),
+                    fontSize: 17,
                     letterSpacing: responsiveWidth(1.5),
                     fontWeight: FontWeight.bold
                 ),
