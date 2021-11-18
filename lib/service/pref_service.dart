@@ -79,7 +79,7 @@ bool setCardClick() {
   if(counter>=3) counter = 0;
   else counter ++;
   PrefService.prefs.setInt('itemClick', counter);
-  print(counter);
+  print("counter: "+ counter.toString());
   return getAppPurchase()?false:counter==0?true:false;
 }
 
