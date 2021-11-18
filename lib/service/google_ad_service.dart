@@ -27,6 +27,7 @@ class GoogleAdService {
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
             interstitialAd = ad;
+            print("interstitial loaded");
             numInterstitialLoadAttempts = 0;
           },
           onAdFailedToLoad: (LoadAdError error) {
@@ -44,11 +45,10 @@ class GoogleAdService {
 
 
 Future<bool> showInterstitialAd() async{
-  if (GoogleAdService.interstitialAd == null) {
-    return false;
-  }
-
   if(setCardClick()){
+    if (GoogleAdService.interstitialAd == null) {
+      return false;
+    }
     GoogleAdService.interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
       onAdShowedFullScreenContent: (InterstitialAd ad) {},
       onAdDismissedFullScreenContent: (InterstitialAd ad) {
