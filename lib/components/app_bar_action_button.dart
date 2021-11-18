@@ -12,33 +12,28 @@ class AppBarActionButton extends StatelessWidget {
     ScreenConfig().init(context);
 
     return Container(
-      child: new Material(
-        child: new InkWell(
-          highlightColor: Colors.blueAccent,
-          borderRadius: BorderRadius.circular(responsiveWidth(8.0)),
-          onTap: onPressed,
-          child: Container(
-            height: 40,
-            width: 40,
-            padding: EdgeInsets.all(responsiveWidth(8.0)),
-            alignment: Alignment.center,
-            child: FaIcon(
-              icon,
-              size: responsiveWidth(18),
-              color: Colors.black,
+        width: 45,
+        margin: EdgeInsets.fromLTRB(0, 5, 0, 5),
+        decoration: BoxDecoration(
+          color: Theme.of(context).backgroundColor,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8.0),
+            onTap: onPressed,
+            child: Container(
+              alignment: Alignment.center,
+              child: FaIcon(
+                icon,
+                size: 16,
+                color: Colors.black,
+              ),
             ),
           ),
-        ),
-        color: Colors.transparent,
-      ),
-      height: 40,
-      width: 40,
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(vertical: responsiveWidth(8.0), horizontal: 0),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(responsiveWidth(8.0)),
-        color: Theme.of(context).backgroundColor,
-      ),
+        )
     );
+
   }
 }
