@@ -30,7 +30,7 @@ class _PdfPreviewScreenState extends State<PdfPreviewScreen> {
       child: Scaffold(
         resizeToAvoidBottomInset : true,
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "PDF\nPreview",
               historyButtonClick: null,

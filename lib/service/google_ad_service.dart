@@ -1,4 +1,5 @@
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:loan_calculator/service/pref_service.dart';
 import 'package:loan_calculator/utils/constant.dart';
 
 class GoogleAdService {
@@ -46,21 +47,25 @@ Future<bool> showInterstitialAd() async{
   if (GoogleAdService.interstitialAd == null) {
     return false;
   }
-  GoogleAdService.interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
-    onAdShowedFullScreenContent: (InterstitialAd ad) {},
-    onAdDismissedFullScreenContent: (InterstitialAd ad) {
-      ad.dispose();
-      GoogleAdService.createInterstitialAd();
-    },
-    onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
-      ad.dispose();
-      GoogleAdService.createInterstitialAd();
-    },
-  );
-  GoogleAdService.interstitialAd.show();
-  GoogleAdService.interstitialAd = null;
 
-  return true;
+  if(setCardClick()){
+    GoogleAdService.interstitialAd.fullScreenContentCallback = FullScreenContentCallback(
+      onAdShowedFullScreenContent: (InterstitialAd ad) {},
+      onAdDismissedFullScreenContent: (InterstitialAd ad) {
+        ad.dispose();
+        GoogleAdService.createInterstitialAd();
+      },
+      onAdFailedToShowFullScreenContent: (InterstitialAd ad, AdError error) {
+        ad.dispose();
+        GoogleAdService.createInterstitialAd();
+      },
+    );
+    GoogleAdService.interstitialAd.show();
+    GoogleAdService.interstitialAd = null;
+    return true;
+  }else{
+    return false;
+  }
 }
 
 

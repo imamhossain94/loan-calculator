@@ -31,7 +31,6 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
     amountSaved = 0.0;
     finalPrice = 0.0;
     calculateDiscount();
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -40,7 +39,6 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
     originalAmountController.dispose();
     addedTaxController.dispose();
     discountPercentageController.dispose();
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -81,7 +79,7 @@ class _DiscountCalculatorState extends State<DiscountCalculator> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Discount\nCalculator",
               historyButtonClick: null,

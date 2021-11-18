@@ -46,17 +46,19 @@ class CalculatorCard extends StatelessWidget {
                     ),
                 ),
                 SizedBox(width: 8,),
-                Container(
-                  height: 40,
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+                Expanded(
+                  child: Container(
+                    height: 40,
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),

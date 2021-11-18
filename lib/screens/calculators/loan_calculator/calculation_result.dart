@@ -29,17 +29,6 @@ class _CalculationResultState extends State<CalculationResult> {
   ResultData resultData;
   List<RowData> _rowData;
 
-  @override
-  initState() {
-    GoogleAdService().init();
-    super.initState();
-  }
-
-  @override
-  dispose() {
-    disposeGoogleAdService();
-    super.dispose();
-  }
 
   Future<bool> handleBackPress() async{
     Navigator.of(context).pop();
@@ -62,12 +51,12 @@ class _CalculationResultState extends State<CalculationResult> {
       child: SafeArea(
         child: Scaffold(
           appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(55),
+              preferredSize: const Size.fromHeight(60),
               child: CalculatorAppBar(
                 title: "Calculation\nResult",
                 historyButtonClick: null,
                 saveButtonClick: navigatePage,
-                deleteButtonClick: null,
+                deleteButtonClick: null, shareButtonClick: null,
               )
           ),
 
