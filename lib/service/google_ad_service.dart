@@ -22,7 +22,7 @@ class GoogleAdService {
   static void createInterstitialAd() {
     int numInterstitialLoadAttempts = 0;
     InterstitialAd.load(
-        adUnitId: interstitialAdUnit,
+        adUnitId: id_interstitial,
         request: request,
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
