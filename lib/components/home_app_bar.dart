@@ -15,7 +15,7 @@ class HomeAppBar extends StatelessWidget {
 
     return
       Container(
-        height: 55,
+        height: 45,
         alignment: Alignment.centerLeft,
         margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10.0),
         child: Row(

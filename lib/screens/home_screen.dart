@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: PreferredSize(
-              preferredSize: Size.fromHeight(responsiveHeight(55)), //Size.fromHeight(100)
+              preferredSize: Size.fromHeight(45), //Size.fromHeight(100)
               child: HomeAppBar()
           ),
           body: Container(
