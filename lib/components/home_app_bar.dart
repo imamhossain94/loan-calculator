@@ -25,7 +25,7 @@ class HomeAppBar extends StatelessWidget {
                 "Loan\nCalculator",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: responsiveWidth(20),
+                    fontSize: 20,
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.bold
                 ),
