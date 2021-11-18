@@ -30,7 +30,6 @@ class _TaxCalculatorState extends State<TaxCalculator> {
     tax = 0.0;
     totalPrice = 0.0;
     calculateDiscount();
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -38,7 +37,6 @@ class _TaxCalculatorState extends State<TaxCalculator> {
   void dispose() {
     taxRateController.dispose();
     originalPriceController.dispose();
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -74,7 +72,7 @@ class _TaxCalculatorState extends State<TaxCalculator> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Tax\nCalculator",
               historyButtonClick: null,

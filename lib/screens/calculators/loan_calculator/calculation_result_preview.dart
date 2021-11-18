@@ -58,7 +58,7 @@ class _CalculationResultPreviewState extends State<CalculationResultPreview> {
       child: Scaffold(
         resizeToAvoidBottomInset : true,
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Result PDF\nPreview",
               historyButtonClick: null,

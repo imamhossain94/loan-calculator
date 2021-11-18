@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: PreferredSize(
-              preferredSize: Size.fromHeight(45), //Size.fromHeight(100)
+              preferredSize: Size.fromHeight(60), //Size.fromHeight(100)
               child: HomeAppBar()
           ),
           body: Container(
@@ -74,11 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.handHoldingUsd,
-                                title: 'Advanced Loan',
-                                onPressed: ()=> Navigator.pushNamed(context, AdvancedLoanCalculator.idScreen),
-                                color: Color(0xff1eb384),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.handHoldingUsd,
+                                  title: 'Advanced Loan',
+                                  onPressed: ()=> Navigator.pushNamed(context, AdvancedLoanCalculator.idScreen),
+                                  color: Color(0xff1eb384),
+                                ),
                               ),
                             ],
                           ),
@@ -88,11 +90,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.piggyBank,
-                                title: 'Savings Calculator',
-                                onPressed: ()=> Navigator.pushNamed(context, SavingsCalculator.idScreen),
-                                color: Color(0xff1689FC),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.piggyBank,
+                                  title: 'Savings Calculator',
+                                  onPressed: ()=> Navigator.pushNamed(context, SavingsCalculator.idScreen),
+                                  color: Color(0xff1689FC),
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               Expanded(
@@ -119,11 +123,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.wallet,
-                                title: 'Tip Calculator',
-                                onPressed: ()=> Navigator.pushNamed(context, TipCalculator.idScreen),
-                                color: Color(0xffC76CF8),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.wallet,
+                                  title: 'Tip Calculator',
+                                  onPressed: ()=> Navigator.pushNamed(context, TipCalculator.idScreen),
+                                  color: Color(0xffC76CF8),
+                                ),
                               ),
                             ],
                           ),
@@ -133,13 +139,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.notEqual,
-                                title: 'Compare Loan',
-                                onPressed: () {
-                                  showMessage(context, "Compare Loan", "Coming soon...");
-                                },
-                                color: Color(0xff1689FC),
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.notEqual,
+                                  title: 'Compare Loan',
+                                  onPressed: () {
+                                    showMessage(context, "Compare Loan", "Coming soon...");
+                                  },
+                                  color: Color(0xff1689FC),
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               Expanded(
@@ -180,11 +188,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               SizedBox(width: 10.0,),
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.solidStar,
-                                title: 'Rate The App',
-                                onPressed: () async => showRatingDialogue(context),
-                                color: Colors.redAccent,
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.solidStar,
+                                  title: 'Rate The App',
+                                  onPressed: () async => showRatingDialogue(context),
+                                  color: Colors.redAccent,
+                                ),
                               ),
                             ],
                           ),
@@ -193,21 +203,23 @@ class _HomeScreenState extends State<HomeScreen> {
                           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                           child: Row(
                             children: [
-                              CalculatorCard(
-                                icon: FontAwesomeIcons.googlePlay,
-                                title: 'Other Apps',
-                                onPressed: () async {
+                              Expanded(
+                                child: CalculatorCard(
+                                  icon: FontAwesomeIcons.googlePlay,
+                                  title: 'Other Apps',
+                                  onPressed: () async {
 
-                                  String url = storeLink;
+                                    String url = storeLink;
 
-                                  if (await canLaunch(url)) {
-                                  await launch(url);
-                                  } else {
-                                  throw 'Could not launch $url';
-                                  }
+                                    if (await canLaunch(url)) {
+                                    await launch(url);
+                                    } else {
+                                    throw 'Could not launch $url';
+                                    }
 
-                                },
-                                color: Colors.orange,
+                                  },
+                                  color: Colors.orange,
+                                ),
                               ),
                               SizedBox(width: 10.0,),
                               Expanded(

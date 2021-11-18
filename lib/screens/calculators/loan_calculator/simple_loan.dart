@@ -38,7 +38,6 @@ class _SimpleLoanState extends State<SimpleLoan> {
     youCouldBorrow = 0.0;
     loanType = 'Monthly Cost';
     calculateLoan();
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -48,7 +47,6 @@ class _SimpleLoanState extends State<SimpleLoan> {
     monthlyPaymentController.dispose();
     interestRateController.dispose();
     periodController.dispose();
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -121,7 +119,7 @@ class _SimpleLoanState extends State<SimpleLoan> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(55),
+          preferredSize: Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Simple\nLoan",
               historyButtonClick: null,

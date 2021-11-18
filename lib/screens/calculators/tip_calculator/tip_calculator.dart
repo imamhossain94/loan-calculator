@@ -34,7 +34,6 @@ class _TipCalculatorState extends State<TipCalculator> {
     finalAmount = 0.0;
     amountPerPerson = 0.0;
     calculateTip();
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -44,7 +43,6 @@ class _TipCalculatorState extends State<TipCalculator> {
     numberOfPeopleController.dispose();
     tipAmountController.dispose();
     taxAmountController.dispose();
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -131,7 +129,7 @@ class _TipCalculatorState extends State<TipCalculator> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Tip\nCalculator",
               historyButtonClick: null,

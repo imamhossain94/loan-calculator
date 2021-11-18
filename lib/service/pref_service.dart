@@ -73,3 +73,17 @@ int getCounter() {
 void setCounter(int value) {
   PrefService.prefs.setInt('file_number', value);
 }
+
+bool setCardClick() {
+  int counter = getCardClick();
+  if(counter>=3) counter = 0;
+  else counter ++;
+  PrefService.prefs.setInt('itemClick', counter);
+  print(counter);
+  return getAppPurchase()?false:counter==0?true:false;
+}
+
+int getCardClick() {
+  int result = PrefService.prefs.getInt('itemClick',)??0;
+  return result;
+}

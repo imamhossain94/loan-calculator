@@ -35,7 +35,6 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
     savingsResult = 0.0;
     frequencies = MapEntry('Weekly', 7);
     calculateLoan();
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -45,7 +44,6 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
     contributionController.dispose();
     interestRateController.dispose();
     timePeriodController.dispose();
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -119,7 +117,7 @@ class _SavingsCalculatorState extends State<SavingsCalculator> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Savings\nCalculator",
               historyButtonClick: null,

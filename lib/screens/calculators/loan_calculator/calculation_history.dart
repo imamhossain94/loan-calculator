@@ -49,7 +49,7 @@ class _CalculationHistoryState extends State<CalculationHistory> {
     return SafeArea(
       child: Scaffold(
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Calculation\nHistory",
               historyButtonClick: null,
@@ -62,7 +62,7 @@ class _CalculationHistoryState extends State<CalculationHistory> {
                     _history.clear();
                   });
                 }
-              },
+              }, shareButtonClick: null,
             )
         ),
 

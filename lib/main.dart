@@ -39,6 +39,7 @@ Future main() async{
   await dotenv.load(fileName: ".env");
   await MobileAds.instance.initialize();
   await PrefService().init();
+  GoogleAdService().init();
 
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -75,6 +76,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void dispose() {
     //closeHive();
+    disposeGoogleAdService();
     super.dispose();
   }
 

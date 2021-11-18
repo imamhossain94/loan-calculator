@@ -12,7 +12,6 @@ import 'package:loan_calculator/service/google_ad_service.dart';
 import 'package:loan_calculator/utils/extensions.dart';
 import 'package:loan_calculator/utils/screen_config.dart';
 import 'dart:math';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'calculation_history.dart';
 import 'calculation_result.dart';
 import 'components/build_action_text_field.dart';
@@ -65,7 +64,6 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     interestController.text = '3.5';
     pmiController.text = '0.85';
     loanTermController.text = '360';
-    GoogleAdService().init();
     super.initState();
   }
 
@@ -82,7 +80,6 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     loanTermController.dispose();
     Hive.close();
 
-    disposeGoogleAdService();
     super.dispose();
   }
 
@@ -94,7 +91,7 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
       child: Scaffold(
         key: _key,
         appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(55),
+            preferredSize: const Size.fromHeight(60),
             child: CalculatorAppBar(
               title: "Advanced\nLoan",
               historyButtonClick: () async{
@@ -266,10 +263,10 @@ class _AdvancedLoanCalculatorState extends State<AdvancedLoanCalculator> {
     box.add(history);
     Hive.close();
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('calculate_button_click') ?? 0);
-
-
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // int counter = (prefs.getInt('calculate_button_click') ?? 0);
+    //
+    //
 
 
     // Navigator.pushNamed(context, CalculationResult.idScreen,

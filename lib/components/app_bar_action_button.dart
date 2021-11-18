@@ -12,8 +12,8 @@ class AppBarActionButton extends StatelessWidget {
     ScreenConfig().init(context);
 
     return Container(
-        width: 40,
-        margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
+        width: 50,
+        height: 50,
         decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
           borderRadius: BorderRadius.circular(8.0),
