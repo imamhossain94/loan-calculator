@@ -13,9 +13,9 @@ class CalculatorAppBar extends StatelessWidget {
     ScreenConfig().init(context);
 
     return Container(
-        height: 55,
+        height: 45,
         alignment: Alignment.centerLeft,
-        margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: responsiveWidth(10.0)),
+        margin: EdgeInsets.symmetric(vertical: 0.0,horizontal: 10),
         child: Row(
           children: [
             AppBarActionButton(
