@@ -14,7 +14,7 @@ const String storeLink = 'https://play.google.com/store/apps/developer?id=NewAge
 
 // Ads unit id
 const String id_banner = "ca-app-pub-4061500537427923/9440175122"; //ca-app-pub-3940256099942544/6300978111
-const String id_interstitial = "ca-app-pub-3940256099942544/1033173712"; //ca-app-pub-3940256099942544/1033173712
+const String id_interstitial = "ca-app-pub-4061500537427923/1853846060"; //ca-app-pub-3940256099942544/1033173712
 
 
 const String appTheme = "Theme";
