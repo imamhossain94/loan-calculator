@@ -1,118 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive/hive.dart';
-import 'package:loan_calculator/models/history.dart';
-import 'package:loan_calculator/models/mortgage_data.dart';
-import 'package:loan_calculator/models/result_data.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:loan_calculator/screens/calculators/discount_calculator/discount_calculator.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/advanced_loan_calculator.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_history.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/calculation_result_preview.dart';
-import 'package:loan_calculator/screens/calculators/loan_calculator/simple_loan.dart';
-import 'package:loan_calculator/screens/calculators/savings_calculator/savings_calculator.dart';
-import 'package:loan_calculator/screens/calculators/tax_calculator/tax_calculator.dart';
-import 'package:loan_calculator/screens/calculators/tip_calculator/tip_calculator.dart';
+import 'package:hive_ce_flutter/hive_flutter.dart';
+import 'package:loan_calculator/hive_registrar.g.dart';
+import 'package:loan_calculator/screens/calculators/advanced_loan_screen.dart';
+import 'package:loan_calculator/screens/calculators/compare_loan_screen.dart';
+import 'package:loan_calculator/screens/calculators/discount_screen.dart';
+import 'package:loan_calculator/screens/calculators/savings_screen.dart';
+import 'package:loan_calculator/screens/calculators/simple_loan_screen.dart';
+import 'package:loan_calculator/screens/calculators/tax_screen.dart';
+import 'package:loan_calculator/screens/calculators/tip_screen.dart';
+import 'package:loan_calculator/screens/history_screen.dart';
 import 'package:loan_calculator/screens/home_screen.dart';
-import 'package:loan_calculator/service/google_ad_service.dart';
-import 'package:loan_calculator/service/pref_service.dart';
+import 'package:loan_calculator/screens/result_screen.dart';
+import 'package:loan_calculator/screens/result_pdf_screen.dart';
+import 'package:loan_calculator/service/share_service.dart';
+import 'package:loan_calculator/theme/app_theme.dart';
 import 'package:loan_calculator/utils/constant.dart';
-import 'package:loan_calculator/utils/themes.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
-import 'screens/gallery/gallery_screen.dart';
-import 'screens/gallery/pdf_preview_screen.dart';
+/// Name of the Hive box holding saved calculations. Opened once at startup and
+/// kept open for the process lifetime -- calling Hive.close() mid-session
+/// clears Hive's home path and breaks every later openBox().
+const String historyBox = 'history';
 
-
-Future main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final appDocDir = await getApplicationDocumentsDirectory();
-  Hive..init(appDocDir.path)
-    ..registerAdapter(HistoryAdapter())
-    ..registerAdapter(MortgageDataAdapter())
-    ..registerAdapter(ResultDataAdapter());
+  // Hive lives in the app's own documents directory: no permission needed.
+  await Hive.initFlutter();
+  Hive.registerAdapters();
+  await Hive.openBox(historyBox);
 
-  //await Hive.openBox('history');
-  await dotenv.load(fileName: ".env");
-  await MobileAds.instance.initialize();
-  await PrefService().init();
-  GoogleAdService().init();
+  // Draw behind the status and navigation bars. From Android 15 the system
+  // enforces edge-to-edge and ignores bar colours, so the app only declares
+  // icon brightness (see AppTheme) and pads content with SafeArea.
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
+  // Clear anything a previous session left in the share cache.
+  ShareService.clearExports();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    systemNavigationBarColor: scaffoldBackgroundLight,
-    systemNavigationBarIconBrightness: Brightness.dark,
-    statusBarColor: scaffoldBackgroundLight,//appBarColorLight,
-    statusBarBrightness: Brightness.dark,
-    statusBarIconBrightness: Brightness.dark,
-  ));
-
-  // return runApp(MultiProvider(
-  //     providers: [
-  //
-  //     ],
-  //     child: MyApp()//OurApp()//MyApp(),
-  // ));
-
-  return runApp(MyApp());
+  runApp(const LoanCalculatorApp());
 }
 
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    //closeHive();
-    disposeGoogleAdService();
-    super.dispose();
-  }
+class LoanCalculatorApp extends StatelessWidget {
+  const LoanCalculatorApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
-
     return MaterialApp(
-      theme: AppTheme().lightTheme(),
-      initialRoute: HomeScreen.idScreen,
-      routes: {
-        HomeScreen.idScreen: (context) => HomeScreen(),
-        SimpleLoan.idScreen: (context) => SimpleLoan(),
-        AdvancedLoanCalculator.idScreen: (context) => AdvancedLoanCalculator(),
-        CalculationHistory.idScreen: (context) => CalculationHistory(),
-        CalculationResult.idScreen: (context) => CalculationResult(),
-        CalculationResultPreview.idScreen: (context) => CalculationResultPreview(),
-        SavingsCalculator.idScreen: (context) => SavingsCalculator(),
-        TaxCalculator.idScreen: (context) => TaxCalculator(),
-        DiscountCalculator.idScreen: (context) => DiscountCalculator(),
-        TipCalculator.idScreen: (context) => TipCalculator(),
-        GalleryScreen.idScreen: (context) => GalleryScreen(),
-        PdfPreviewScreen.idScreen: (context) => PdfPreviewScreen(),
-      },
-      // builder: (BuildContext context, Widget child) {
-      //   return FlutterSmartDialog(child: child);
-      // },
+      title: appName,
       debugShowCheckedModeBanner: false,
+      theme: AppTheme.light(),
+      darkTheme: AppTheme.dark(),
+      themeMode: ThemeMode.system,
+      initialRoute: HomeScreen.route,
+      routes: {
+        HomeScreen.route: (_) => const HomeScreen(),
+        SimpleLoanScreen.route: (_) => const SimpleLoanScreen(),
+        AdvancedLoanScreen.route: (_) => const AdvancedLoanScreen(),
+        CompareLoanScreen.route: (_) => const CompareLoanScreen(),
+        SavingsScreen.route: (_) => const SavingsScreen(),
+        TaxScreen.route: (_) => const TaxScreen(),
+        DiscountScreen.route: (_) => const DiscountScreen(),
+        TipScreen.route: (_) => const TipScreen(),
+        HistoryScreen.route: (_) => const HistoryScreen(),
+        ResultScreen.route: (_) => const ResultScreen(),
+        ResultPdfScreen.route: (_) => const ResultPdfScreen(),
+      },
     );
-
   }
-
-
 }
-

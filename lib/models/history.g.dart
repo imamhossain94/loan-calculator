@@ -8,7 +8,7 @@ part of 'history.dart';
 
 class HistoryAdapter extends TypeAdapter<History> {
   @override
-  final int typeId = 1;
+  final typeId = 1;
 
   @override
   History read(BinaryReader reader) {
@@ -17,9 +17,9 @@ class HistoryAdapter extends TypeAdapter<History> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return History(
-      mortgageData: fields[0] as MortgageData,
-      resultData: fields[1] as ResultData,
-      calculationDate: fields[2] as String,
+      mortgageData: fields[0] as MortgageData?,
+      resultData: fields[1] as ResultData?,
+      calculationDate: fields[2] as String?,
     );
   }
 

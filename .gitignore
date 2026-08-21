@@ -39,3 +39,11 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+# Signing key material — NEVER commit.
+# Losing this file means you can no longer sign updates for the published app.
+# Keep an offline backup (password manager / encrypted drive).
+key-store/
+*.jks
+*.keystore
+android/key.properties
