@@ -8,7 +8,7 @@ part of 'result_data.dart';
 
 class ResultDataAdapter extends TypeAdapter<ResultData> {
   @override
-  final int typeId = 3;
+  final typeId = 3;
 
   @override
   ResultData read(BinaryReader reader) {
@@ -17,16 +17,16 @@ class ResultDataAdapter extends TypeAdapter<ResultData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ResultData(
-      monthlyPayment: fields[0] as String,
-      biWeeklyPayment: fields[1] as String,
-      lastPayment: fields[2] as String,
-      biWeeklyLastPayment: fields[3] as String,
-      totalInterest: fields[4] as String,
-      biWeeklyTotalInterest: fields[5] as String,
-      monthlyTax: fields[6] as String,
-      monthlyIns: fields[7] as String,
-      monthlyPmi: fields[8] as String,
-      totalPmi: fields[9] as String,
+      monthlyPayment: fields[0] as String?,
+      biWeeklyPayment: fields[1] as String?,
+      lastPayment: fields[2] as String?,
+      biWeeklyLastPayment: fields[3] as String?,
+      totalInterest: fields[4] as String?,
+      biWeeklyTotalInterest: fields[5] as String?,
+      monthlyTax: fields[6] as String?,
+      monthlyIns: fields[7] as String?,
+      monthlyPmi: fields[8] as String?,
+      totalPmi: fields[9] as String?,
     );
   }
 
