@@ -8,7 +8,7 @@ part of 'mortgage_data.dart';
 
 class MortgageDataAdapter extends TypeAdapter<MortgageData> {
   @override
-  final int typeId = 2;
+  final typeId = 2;
 
   @override
   MortgageData read(BinaryReader reader) {
@@ -17,14 +17,14 @@ class MortgageDataAdapter extends TypeAdapter<MortgageData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return MortgageData(
-      homeValue: fields[0] as double,
-      downPayment: fields[1] as double,
-      loanAmount: fields[2] as double,
-      loanTerm: fields[3] as double,
-      homeIns: fields[5] as double,
-      interest: fields[6] as double,
-      propertyTax: fields[7] as double,
-      pmi: fields[8] as double,
+      homeValue: (fields[0] as num?)?.toDouble(),
+      downPayment: (fields[1] as num?)?.toDouble(),
+      loanAmount: (fields[2] as num?)?.toDouble(),
+      loanTerm: (fields[3] as num?)?.toDouble(),
+      homeIns: (fields[5] as num?)?.toDouble(),
+      interest: (fields[6] as num?)?.toDouble(),
+      propertyTax: (fields[7] as num?)?.toDouble(),
+      pmi: (fields[8] as num?)?.toDouble(),
     );
   }
 
