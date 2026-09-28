@@ -47,3 +47,22 @@ key-store/
 *.jks
 *.keystore
 android/key.properties
+
+# Android & Gradle local/build caches
+.gradle/
+**/.gradle/
+local.properties
+**/local.properties
+*.aab
+*.apk
+
+# iOS ephemeral & CocoaPods
+**/ios/Flutter/ephemeral/
+**/ios/Pods/
+**/ios/.symlinks/
+
+# Environment & secrets
+.env
+*.env
+*.env.*
+
